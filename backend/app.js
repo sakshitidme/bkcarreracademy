@@ -1,4 +1,5 @@
 const express = require('express');
+console.log('>>> APP.JS LOADING...');
 const cors = require('cors');
 const path = require('path');
 const errorHandler = require('./middleware/errorHandler');
@@ -16,13 +17,21 @@ app.use(express.json());
 // Version identification & Logger
 app.use((req, res, next) => {
   res.setHeader('X-Server-Version', '2.0.1-mongoose');
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log(`[DEBUG] ${req.method} ${req.url} (Content-Type: ${req.headers['content-type']})`);
   next();
 });
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ success: true, version: '2.0.1-mongoose', timestamp: new Date() });
+});
+
+app.get('/api/ping', (req, res) => {
+  res.json({ success: true, message: 'Backend is ALIVE' });
+});
+
+app.post('/api/post-ping', (req, res) => {
+  res.json({ success: true, message: 'POST PING ALIVE' });
 });
 
 // Lightweight inquiry endpoint used by the website modal.
@@ -89,15 +98,15 @@ const contentRoutes = require('./routes/content');
 const bookRoutes = require('./routes/book');
 
 // Mount Routes
+app.use('/api', systemRoutes); 
 app.use('/api/registration', registrationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/books', bookRoutes);
-app.use('/api', systemRoutes); 
-
 
 // Serve static uploads
 app.use('/uploads', express.static(path.join(__dirname, '../frontend/public/uploads')));
+
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
