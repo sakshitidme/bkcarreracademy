@@ -1,0 +1,44 @@
+name: Deploy to Hostinger VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute Deployment Commands on VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USER }}
+          password: ${{ secrets.HOST_PASSWORD }}
+          script: |
+            # 1. Setup Folder (Agar nahi hai toh banayega)
+            mkdir -p /var/www/bkcarreracademy
+            cd /var/www/bkcarreracademy
+
+            # 2. Pull Latest Code
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/sakshitidme/bkcarreracademy-deplyment-.git .
+            else
+              git reset --hard HEAD
+              git pull origin main
+            fi
+
+            # 3. Build Frontend
+            echo "Building Frontend..."
+            cd frontend
+            npm install --legacy-peer-deps
+            npm run build
+
+            # 4. Setup Backend
+            echo "Setting up Backend..."
+            cd ../backend
+            npm install
+
+            # 5. Restart PM2 Server
+            echo "Restarting Server..."
+            pm2 restart bkacademy-backend || pm2 start server.js --name "bkacademy-backend"
