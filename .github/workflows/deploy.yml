@@ -1,44 +1,55 @@
-name: Deploy to Hostinger VPS
+name: Continuous Deployment (CI/CD) to VPS
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Execute Deployment Commands on VPS
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST_IP }}
-          username: ${{ secrets.HOST_USER }}
-          password: ${{ secrets.HOST_PASSWORD }}
-          script: |
-            # 1. Setup Folder (Agar nahi hai toh banayega)
-            mkdir -p /var/www/bkcarreracademy
+    - name: Executing Remote SSH Commands to Deploy
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USERNAME }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        port: 22
+        script: |
+          echo "=== Starting Automated VPS Deployment ==="
+          
+          # Detect Project Directory
+          if [ -d "/var/www/bkcarreracademy" ]; then
             cd /var/www/bkcarreracademy
+          elif [ -d "/root/BK-Career-Academy" ]; then
+            cd /root/BK-Career-Academy
+          elif [ -d "/var/www/html" ]; then
+            cd /var/www/html
+          elif [ -d "/root/bkcarreracademy" ]; then
+            cd /root/bkcarreracademy
+          else
+            echo "❌ Project directory not found!"
+            exit 1
+          fi
 
-            # 2. Pull Latest Code
-            if [ ! -d ".git" ]; then
-              git clone https://github.com/sakshitidme/bkcarreracademy-deplyment-.git .
-            else
-              git reset --hard HEAD
-              git pull origin main
-            fi
+          echo "📂 Current Directory: $(pwd)"
 
-            # 3. Build Frontend
-            echo "Building Frontend..."
-            cd frontend
-            npm install --legacy-peer-deps
-            npm run build
+          echo "📥 Pulling latest code from GitHub..."
+          git fetch --all
+          git reset --hard origin/main
 
-            # 4. Setup Backend
-            echo "Setting up Backend..."
-            cd ../backend
-            npm install
+          echo "📦 Installing Frontend Dependencies & Building Vite Bundle..."
+          cd frontend
+          npm install
+          npm run build
 
-            # 5. Restart PM2 Server
-            echo "Restarting Server..."
-            pm2 restart bkacademy-backend || pm2 start server.js --name "bkacademy-backend"
+          echo "⚙️ Installing Backend Dependencies & Restarting PM2 Server..."
+          cd ../backend
+          npm install
+          pm2 restart all --update-env
+          pm2 save
+
+          echo "🌐 Restarting Nginx Web Server..."
+          sudo systemctl restart nginx
+
+          echo "✅ Deployment Completed Successfully!"
