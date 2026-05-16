@@ -90,24 +90,24 @@ export const Courses: React.FC<CoursesProps> = ({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-dark"
+      className="min-h-screen bg-white"
     >
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full" />
         <div className="section-container relative z-10">
           <header className="mb-16 text-center max-w-4xl mx-auto">
             <p className="text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">Our Curriculum</p>
-            <h2 className="text-5xl md:text-8xl font-display font-black text-white uppercase tracking-tighter leading-none mb-8">
+            <h2 className="text-5xl md:text-8xl font-display font-black text-dark uppercase tracking-tighter leading-none mb-8">
               Explore Our <span className="text-primary">Programs</span>
             </h2>
-            <p className="text-gray-400 font-medium text-lg md:text-xl leading-relaxed">
+            <p className="text-gray-600 font-medium text-lg md:text-xl leading-relaxed">
               Achieve your administrative goals with our systematically structured courses. 
               From UPSC to MPSC, we provide verified guidance for every milestone.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-12">
                <button 
                  onClick={() => onSelectCategory(null)}
-                 className={`px-8 py-4 rounded-2xl font-display font-bold uppercase tracking-widest transition-all duration-300 ${!selectedCategory ? 'bg-primary text-dark shadow-xl shadow-primary/20' : 'bg-gray-800 text-white border border-gray-700 hover:bg-gray-700'}`}
+                 className={`px-8 py-4 rounded-2xl font-display font-bold uppercase tracking-widest transition-all duration-300 ${!selectedCategory ? 'bg-primary text-dark shadow-xl shadow-primary/20' : 'bg-gray-100 text-dark border border-gray-200 hover:bg-gray-200'}`}
                >
                  All Exams
                </button>

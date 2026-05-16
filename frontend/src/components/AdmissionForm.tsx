@@ -116,11 +116,10 @@ const FileField = ({ label, name, onChange, fileName, icon: Icon, description }:
   );
 };
 
-// --- Institutional Header Component ---
 const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
-  <div className="p-6 md:p-8 pb-4 grid grid-cols-1 md:grid-cols-3 items-start gap-6 relative">
+  <div className="p-6 pr-16 md:p-8 md:pr-20 pb-4 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 items-start gap-6 relative">
     {/* Left Branding */}
-    <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-3">
+    <div className="flex flex-col items-center md:items-start print:items-start text-center md:text-left print:text-left space-y-3">
       <div>
         <h1 className="text-2xl md:text-4xl font-serif font-black text-[#800000] leading-tight uppercase tracking-tight">
           BK Educational & Welfare Society
@@ -137,7 +136,7 @@ const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
     </div>
 
     {/* Center Branding / Logo */}
-    <div className="flex flex-col items-center text-center order-first md:order-none">
+    <div className="flex flex-col items-center text-center order-first md:order-none print:order-none">
       <p className="text-[10px] md:text-xs font-serif italic text-brand-dark/80 mb-2">
         ॥ न हि ज्ञानेन सदृशं पवित्रमिह विद्यते ॥
       </p>
@@ -150,7 +149,7 @@ const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
     </div>
 
     {/* Right Address & Reg No */}
-    <div className="flex flex-col items-center md:items-end text-center md:text-right md:ml-auto gap-3">
+    <div className="flex flex-col items-center md:items-end print:items-end text-center md:text-right print:text-right md:ml-auto print:ml-auto gap-3">
       {regNo && (
         <div className="bg-brand-red/5 border border-brand-red/20 px-3 py-1.5 rounded-lg text-center">
           <p className="text-[8px] font-black text-brand-red uppercase tracking-tighter leading-none mb-0.5">Registration No</p>
@@ -234,8 +233,23 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
   };
 
   const handleDownload = () => {
-    // Basic implementation: use browser print to save as PDF
-    window.print();
+    // Save original title
+    const originalTitle = document.title;
+    
+    // Create new title with student name and reg no
+    const studentName = `${formData.firstName} ${formData.surname}`.trim() || 'Student';
+    const regNo = isSuccess ? submittedRegNo : nextRegNo;
+    const fileName = `Admission_Form_${studentName.replace(/\s+/g, '_')}${regNo ? `_${regNo}` : ''}`;
+    
+    // Set new title
+    document.title = fileName;
+    
+    // Slight delay to ensure browser registers the title change for the save dialog
+    setTimeout(() => {
+      window.print();
+      // Revert title after printing
+      document.title = originalTitle;
+    }, 100);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -360,28 +374,20 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
 
   if (isSuccess || isPreview) {
     return (
-      <div className="min-h-screen bg-[#F0F2F5] py-12 px-4 md:px-6 print:p-0 print:bg-white">
+      <div className="min-h-screen bg-[#F0F2F5] py-12 px-4 md:px-6 print:py-0 print:px-0 print:bg-white">
         <style dangerouslySetInnerHTML={{ __html: `
           @media print {
-            body { background: white !important; }
+            html, body { height: auto !important; overflow: visible !important; background: white !important; }
             .print\\:hidden { display: none !important; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            @page { margin: 1cm; size: auto; }
-            .print-document { 
-              box-shadow: none !important; 
-              border: 1px solid #eee !important;
-              border-radius: 0 !important;
-              width: 100% !important;
-              max-width: 100% !important;
-              margin: 0 !important;
-            }
+            @page { margin: 0; size: A4 portrait; }
           }
         `}} />
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto print:max-w-none print:w-full">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-[40px] shadow-2xl overflow-hidden print-document border border-white"
+            className="bg-white rounded-[40px] shadow-2xl overflow-hidden border border-white print:rounded-none print:shadow-none print:border-none print:p-8"
           >
             {/* Header in PDF */}
             <div className="border-b-2 border-brand-red/10 relative pt-16 md:pt-10">
@@ -389,8 +395,8 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
             </div>
 
             <div className="p-6 md:p-10 relative">
-              <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 mb-12">
-                <div className="print:hidden flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="flex flex-col md:flex-row print:flex-row items-center md:items-start print:items-start justify-between gap-8 mb-12">
+                <div className="flex flex-col items-center md:items-start print:items-start text-center md:text-left print:text-left">
                   <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mb-4">
                     <CheckCircle2 size={24} className="text-green-500" />
                   </div>
@@ -416,7 +422,7 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
 
               {/* Data Summary Grid */}
               <div className="space-y-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-x-16 gap-y-10">
                   {/* Column 1: Candidate Info */}
                   <div className="space-y-6">
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-brand-dark border-b-2 border-brand-dark/10 pb-2">Candidate Information</h4>
@@ -443,7 +449,7 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-8 rounded-[30px] print:bg-white print:border print:p-6 mt-12">
+                <div className="bg-gray-50 p-8 rounded-[30px] mt-12">
                   <p className="text-[10px] font-bold text-gray-500 leading-relaxed italic text-center">
                     "I hereby declare that all information provided is true to the best of my knowledge. I agree to abide by the rules and regulations of BK Career Academy."
                   </p>
@@ -518,7 +524,7 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
           {onBackHome && (
             <button 
               onClick={onBackHome}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-brand-red hover:text-white transition-all z-50 print:hidden"
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-brand-red hover:text-white transition-all z-50 print:hidden shadow-sm"
             >
               <X size={20} />
             </button>
