@@ -11,22 +11,22 @@ const OrganizationCard = ({ name, url, logo }: { name: string; url: string; logo
       href={isAvailable ? fullUrl : '#'} 
       target={isAvailable ? "_blank" : undefined}
       rel={isAvailable ? "noopener noreferrer" : undefined}
-      className={`group bg-white rounded-3xl p-8 border border-gray-100 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col justify-between h-full ${!isAvailable ? 'cursor-default' : 'cursor-pointer'}`}
+      className={`group bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 border border-gray-100 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col justify-between h-full ${!isAvailable ? 'cursor-default' : 'cursor-pointer'}`}
     >
       <div>
-        <div className="w-24 h-24 bg-gray-50 rounded-2xl mb-6 flex items-center justify-center group-hover:bg-primary/10 transition-colors overflow-hidden border border-gray-100">
+        <div className="w-16 h-16 md:w-24 md:h-24 bg-gray-50 rounded-xl md:rounded-2xl mb-4 md:mb-6 flex items-center justify-center group-hover:bg-primary/10 transition-colors overflow-hidden border border-gray-100">
           {typeof logo === 'string' ? (
             <img src={logo} alt={`${name} Logo`} className="w-full h-full object-contain p-1" />
           ) : (
             <Shield size={40} className="text-primary" />
           )}
         </div>
-        <h3 className="text-xl font-display font-black text-dark uppercase tracking-tight leading-tight mb-2 group-hover:text-primary transition-colors">{name}</h3>
-        <p className="text-[10px] font-bold text-muted uppercase tracking-widest">{url.replace('https://', '').replace('www.', '')}</p>
+        <h3 className="text-base md:text-xl font-display font-black text-dark uppercase tracking-tight leading-tight mb-1 md:mb-2 group-hover:text-primary transition-colors line-clamp-2">{name}</h3>
+        <p className="text-[9px] md:text-[10px] font-bold text-muted uppercase tracking-widest truncate">{url.replace('https://', '').replace('www.', '')}</p>
       </div>
       {isAvailable && (
-        <div className="mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-primary group-hover:gap-3 transition-all">
-          Explore Academy <ArrowRight size={14} />
+        <div className="mt-4 md:mt-8 flex items-center gap-1.5 md:gap-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-primary group-hover:gap-2 md:group-hover:gap-3 transition-all whitespace-nowrap">
+          Explore Academy <ArrowRight size={14} className="shrink-0" />
         </div>
       )}
     </a>
@@ -118,7 +118,7 @@ export const AboutUs = () => {
             </p>
           </header>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {networks.map((org, i) => (
               <OrganizationCard key={i} {...org} />
             ))}

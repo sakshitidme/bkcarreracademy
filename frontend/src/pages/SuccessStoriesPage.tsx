@@ -14,7 +14,7 @@ export const SuccessStoriesPage: React.FC<SuccessStoriesPageProps> = ({ stories,
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-bg min-h-screen pt-12 pb-1"
+      className="bg-bg min-h-screen pt-20 pb-12"
     >
       <div className="section-container">
         {/* Header */}

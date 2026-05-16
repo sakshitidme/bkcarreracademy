@@ -191,17 +191,19 @@ export const Home: React.FC<HomeProps> = ({
             </div>
             
             {/* Pill-Shaped Segmented Control */}
-            <div className="inline-flex bg-white p-1.5 rounded-full border border-gray-100 shadow-sm relative overflow-hidden">
+            <div className="inline-flex flex-wrap justify-center bg-white p-1.5 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden gap-1">
               {[
                 { id: 'upsc', title: 'UPSC (IAS, IPS, IFS)' },
                 { id: 'mpsc', title: 'MPSC (MAHARASHTRA SERVICES)' },
+                { id: 'banking', title: 'BANKING (IBPS, SBI, RBI)' },
                 { id: 'tet', title: 'TEACHING & EDUCATION' },
+                { id: 'mbacet', title: 'MBA CET & MANAGEMENT' },
                 { id: 'police', title: 'POLICE BHARTI 2026' }
               ].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setSelectedTab(tab.id)}
-                  className={`px-8 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 relative z-10 ${
+                  className={`px-6 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 relative z-10 ${
                     selectedTab === tab.id ? 'text-[#FFB800]' : 'text-gray-400 hover:text-gray-600'
                   }`}
                 >
@@ -238,13 +240,17 @@ export const Home: React.FC<HomeProps> = ({
                       <h3 className="text-3xl md:text-5xl font-display font-black text-[#1A1A1A] uppercase tracking-tighter leading-none mb-4">
                         {selectedTab === 'upsc' ? 'UPSC (IAS, IPS, IFS)' : 
                          selectedTab === 'mpsc' ? 'MPSC (MAHARASHTRA SERVICES)' : 
-                         selectedTab === 'tet' ? 'MAHA TET / CTET 2026' : 'POLICE BHARTI 2026'}
+                         selectedTab === 'banking' ? 'BANKING & FINANCIAL SERVICES' :
+                         selectedTab === 'tet' ? 'MAHA TET / CTET 2026' : 
+                         selectedTab === 'mbacet' ? 'MBA CET & MANAGEMENT EXAMS' : 'POLICE BHARTI 2026'}
                       </h3>
                       <div className="flex items-center flex-wrap gap-4">
                         <span className="px-4 py-1.5 bg-[#FFF9E6] rounded-lg text-[10px] font-black text-[#FFB800] uppercase tracking-widest">
                           {selectedTab === 'upsc' ? 'Civil Services Examination' : 
                            selectedTab === 'mpsc' ? 'Group B & C Services' : 
-                           selectedTab === 'tet' ? 'Teacher Eligibility' : 'HSC Level Recruitment'}
+                           selectedTab === 'banking' ? 'IBPS, SBI & RBI Examinations' :
+                           selectedTab === 'tet' ? 'Teacher Eligibility' : 
+                           selectedTab === 'mbacet' ? 'Management Entrance' : 'HSC Level Recruitment'}
                         </span>
                         <div className="w-1.5 h-1.5 bg-gray-200 rounded-full" />
                         <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Strategic Roadmap 2026</span>
@@ -254,9 +260,15 @@ export const Home: React.FC<HomeProps> = ({
                   
                   <button 
                     onClick={() => {
-                      if (selectedTab === 'mpsc') setView('courseDetailMPSC');
+                      if (selectedTab === 'upsc') setView('courseDetailUPSC');
+                      else if (selectedTab === 'mpsc') setView('courseDetailMPSC');
+                      else if (selectedTab === 'banking') setView('courseDetailBANKING');
                       else if (selectedTab === 'police') setView('courseDetailPolice');
                       else if (selectedTab === 'tet') setView('courseDetailMAHATET');
+                      else if (selectedTab === 'mbacet') {
+                        setSelectedExamName('MBA CET & Management Exams');
+                        setView('dynamicExamDetail');
+                      }
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     className="group flex items-center gap-4 px-8 py-4 bg-[#1A1A1A] text-[#FFB800] rounded-xl text-[11px] font-black uppercase tracking-[0.2em] hover:bg-[#FFB800] hover:text-[#1A1A1A] transition-all duration-500 shadow-xl"
@@ -290,11 +302,21 @@ export const Home: React.FC<HomeProps> = ({
                         "Age: 19 - 31 (PSI), 19 - 38 (Others)",
                         "Height (PSI): 165cm (M), 157cm (F)",
                         "Proficiency in Marathi language is mandatory"
+                      ] : selectedTab === 'banking' ? [
+                        "Any Graduate Degree from recognized University",
+                        "Age: 20 - 30 (PO), 20 - 28 (Clerk) for General",
+                        "IBPS, SBI, RRB & RBI specific eligibility criteria",
+                        "Final year students eligible subject to notification"
                       ] : selectedTab === 'tet' ? [
                         "Paper I: D.T.Ed / D.Ed (Primary)",
                         "Paper II: Graduation + B.Ed (Upper Primary)",
                         "Valid for Life-time Certification",
                         "Qualifying: 60% for General Candidates"
+                      ] : selectedTab === 'mbacet' ? [
+                        "Any Graduate Degree (Min 50% Gen, 45% Reserved)",
+                        "Age Limit: No upper age limit",
+                        "Attempts: Unlimited attempts allowed",
+                        "Final year appearing candidates are eligible"
                       ] : [
                         "12th Pass (HSC) in any stream",
                         "Age: 18 - 28 Years (General)",
@@ -328,16 +350,26 @@ export const Home: React.FC<HomeProps> = ({
                         "Mains: 400 Marks (Descriptive Pattern)",
                         "Physical Test & Interview (Only for PSI post)",
                         "Common Combined Prelims for Group B & C"
+                      ] : selectedTab === 'banking' ? [
+                        "Prelims: 100 Marks (English, Quant, Reasoning)",
+                        "Mains: Objective + Descriptive (PO exams)",
+                        "Interview: 100 Marks (Only for Officer Cadre)",
+                        "Sectional Timing and Sectional Cut-offs apply"
                       ] : selectedTab === 'tet' ? [
                         "Total Marks: 150 (Objective Type)",
                         "Duration: 150 Minutes (2.5 Hours)",
                         "No Negative Marking for any paper",
                         "Paper I & II conducted in separate sessions"
+                      ] : selectedTab === 'mbacet' ? [
+                        "Total Marks: 200 Marks (Objective Type)",
+                        "Duration: 150 Minutes (2.5 Hours)",
+                        "No Negative Marking for wrong answers",
+                        "Sections: Logical, Abstract, Quant, Verbal"
                       ] : [
                         "Physical Ground Test (50 Marks)",
                         "Written Examination (100 Marks)",
                         "Subjects: Maths, Marathi, GK, Reasoning",
-                        "Total selection based on Combined Merit"
+                        "Total selection merit based on Combined Score"
                       ]).map((item, idx) => (
                         <li key={idx} className="flex items-start gap-4 text-gray-500 font-bold text-sm md:text-base leading-relaxed group">
                           <div className="w-1.5 h-1.5 bg-[#FFB800] rounded-full mt-2.5 shrink-0 group-hover:scale-150 transition-transform" />
@@ -357,7 +389,7 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* Staff Section */}
-      <section id="faculty-section" className="pt-12 pb-12 bg-dark w-full overflow-hidden relative">
+      <section id="faculty-section" className="pt-8 pb-6 bg-dark w-full overflow-hidden relative">
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 blur-[120px] rounded-full" />
         <div className="max-w-[1600px] mx-auto relative z-10">
           <header className="mb-4 text-center px-6">
@@ -371,14 +403,14 @@ export const Home: React.FC<HomeProps> = ({
               Learn from the best. Our faculty includes former officers and industry veterans with years of experience.
             </p>
           </header>
-          <div className="mt-8">
+          <div className="mt-2">
             <StaffCarousel staff={STAFF} />
           </div>
         </div>
       </section>
 
       {/* Resources */}
-      <section className="pt-16 pb-0 bg-white relative">
+      <section className="pt-12 pb-8 md:pb-10 bg-white relative">
         <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto">
           <header className="mb-0 text-center max-w-3xl mx-auto">
             <p className="label-text mb-1">Learning Hub</p>
@@ -429,7 +461,7 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* FAQ */}
-      <section className="pt-16 pb-0 bg-bg">
+      <section className="pt-16 pb-8 md:pb-12 bg-bg">
         <div className="section-container max-w-4xl">
           <header className="mb-0 text-center">
             <h2 className="section-heading">

@@ -25,22 +25,22 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, index, onClick }
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.6 }}
       onClick={onClick}
-      className="group bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col h-full"
+      className="group bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col h-full"
     >
       {/* Badge & Rating */}
-      <div className="flex justify-between items-center mb-6">
-        <span className="bg-primary/10 text-dark text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest">
+      <div className="flex justify-between items-center mb-3">
+        <span className="bg-primary/10 text-dark text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest truncate max-w-[75%]">
           {course.category}
         </span>
-        <div className="flex items-center gap-1 text-primary">
+        <div className="flex items-center gap-1 text-primary shrink-0">
           <Star size={12} fill="currentColor" />
           <span className="text-[10px] font-black text-dark">4.9</span>
         </div>
       </div>
 
       {/* Image/Logo */}
-      <div className="flex justify-center mb-8">
-        <div className="w-24 h-24 rounded-2xl bg-gray-50 flex items-center justify-center p-4 group-hover:bg-primary/10 transition-colors">
+      <div className="flex justify-center mb-3">
+        <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center p-1.5 group-hover:bg-primary/10 transition-colors">
           <img 
             src={course.image} 
             alt={course.title}
@@ -50,10 +50,10 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, index, onClick }
       </div>
 
       {/* Info */}
-      <h3 className="sub-heading mb-2 group-hover:text-primary transition-colors line-clamp-2">
+      <h3 className="sub-heading text-base mb-1 group-hover:text-primary transition-colors line-clamp-2">
         {course.title}
       </h3>
-      <p className="body-text text-sm mb-8">
+      <p className="body-text text-xs mb-4 line-clamp-2">
         Learn with {course.instructor || "Expert Mentors"} in our comprehensive batch designed for success.
       </p>
 

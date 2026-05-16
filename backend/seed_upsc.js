@@ -96,6 +96,38 @@ const upscData = [
       }
     ],
     status: 'published'
+  },
+  {
+    section: 'upsc_hub',
+    category: 'MBA CET & Management Exams',
+    subCategory: 'Management Entrance',
+    title: 'MBA CET & Management Exams',
+    instructor: 'Management Department',
+    examDate: new Date('2026-03-15'),
+    dynamicSections: [
+      {
+        title: 'Eligibility (पात्रता)',
+        content: `• Any Graduate Degree (Min 50% Gen, 45% Reserved)
+• Final year appearing candidates are eligible
+• Valid Domicile of Maharashtra for MS Seats`
+      },
+      {
+        title: 'Exam Pattern (स्वरूप)',
+        content: `• Logical Reasoning: 75 Marks
+• Abstract Reasoning: 25 Marks
+• Quantitative Aptitude: 50 Marks
+• Verbal Ability / Reading Comprehension: 50 Marks
+• Total: 200 Marks | 150 Minutes | No Negative Marking`
+      },
+      {
+        title: 'Age Limit & Attempts (वयोमर्यादा व संधी)',
+        content: `• Age Limit: No upper age limit
+• Minimum Age: 21 years (as per graduation norms)
+• Number of Attempts: Unlimited
+• Note: Must fulfill basic graduation eligibility criteria.`
+      }
+    ],
+    status: 'published'
   }
 ];
 

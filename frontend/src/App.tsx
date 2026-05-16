@@ -30,6 +30,7 @@ const UPSCDetailsPage = lazy(() => import('./pages/UPSCDetailsPage'));
 const GeneralExamDetailsPage = lazy(() => import('./pages/GeneralExamDetailsPage'));
 const AdminPortal = lazy(() => import('./components/AdminPortal'));
 const LeadLogin = lazy(() => import('./components/LeadLogin'));
+const PoliciesPage = lazy(() => import('./pages/PoliciesPage'));
 
 // Data
 import { INITIAL_STORIES, Story } from './data/stories';
@@ -506,6 +507,9 @@ export default function App() {
                             />
                           </>
                         } />
+                        <Route path="/privacy" element={<PoliciesPage initialTab="privacy" />} />
+                        <Route path="/terms" element={<PoliciesPage initialTab="terms" />} />
+                        <Route path="/refund" element={<PoliciesPage initialTab="refund" />} />
                       </Routes>
                     </AnimatePresence>
                   </Suspense>

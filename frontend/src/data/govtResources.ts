@@ -292,7 +292,7 @@ export const GOVT_RESOURCES: ExamResource[] = [
     id: 'insurance',
     name: 'Insurance Exams',
     category: 'INSURANCE',
-    logo: '/book/Insurance.png',
+    logo: '/wentyseven.png',
     description: 'Official recruitment portals for LIC, GIC, NIACL, and other public sector insurance companies.',
     officialWebsite: 'https://licindia.in',
     resources: [
@@ -314,7 +314,7 @@ export const GOVT_RESOURCES: ExamResource[] = [
     id: 'medical',
     name: 'Medical & Nursing',
     category: 'MEDICAL',
-    logo: '/book/Medical.png',
+    logo: '/Enhance.jpg',
     description: 'National and state level medical entrance and recruitment portals including NEET, AIIMS, and ESIC.',
     officialWebsite: 'https://exams.nta.ac.in/NEET/',
     resources: [
@@ -333,7 +333,7 @@ export const GOVT_RESOURCES: ExamResource[] = [
     id: 'engineering',
     name: 'Engineering & PSU',
     category: 'ENGINEERING',
-    logo: '/book/Engineering.png',
+    logo: '/seventeen.jpeg',
     description: 'Gateways for GATE, IES, and technical recruitment in PSUs like ONGC, BHEL, and NTPC.',
     officialWebsite: 'https://gate2024.iisc.ac.in',
     resources: [
@@ -352,7 +352,7 @@ export const GOVT_RESOURCES: ExamResource[] = [
     id: 'law',
     name: 'Law & Judiciary',
     category: 'LAW',
-    logo: '/book/Law.png',
+    logo: '/fourteeen.jpeg',
     description: 'Official portals for CLAT, AILET, and Judicial Services recruitment at state and national levels.',
     officialWebsite: 'https://consortiumofnlus.ac.in',
     resources: [
@@ -363,6 +363,42 @@ export const GOVT_RESOURCES: ExamResource[] = [
           { title: 'Supreme Court Recruitment', url: 'https://main.sci.gov.in/recruitment' },
           { title: 'High Court of Bombay', url: 'https://bombayhighcourt.nic.in/recruitment.php' },
           { title: 'Bar Council of India', url: 'http://www.barcouncilofindia.org' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'mbacet',
+    name: 'MBA CET',
+    category: 'MANAGEMENT',
+    logo: '/CET MBA.png',
+    description: 'State Common Entrance Test Cell, Maharashtra official portal for MBA/MMS CET notifications, syllabus, hall tickets, and CAP counseling rounds.',
+    officialWebsite: 'https://cetcell.mahacet.org/',
+    resources: [
+      {
+        title: 'CET CELL RESOURCES',
+        items: [
+          { title: 'Notices', url: 'https://cetcell.mahacet.org/notices/' },
+          { title: 'Time-Table', url: 'https://cetcell.mahacet.org/time-table/' },
+          { title: 'Government Resolutions', url: 'https://cetcell.mahacet.org/government-resolutions/' },
+          { 
+            title: 'Information Brochure', 
+            isSubmenu: true,
+            children: [
+              { title: 'CET Information Brochure', url: 'https://cetcell.mahacet.org/cet-3/' },
+              { title: 'CAP Information Brochure', url: 'https://cetcell.mahacet.org/cap-2/' }
+            ]
+          },
+          { title: 'Syllabus and Marking Scheme', url: 'https://cetcell.mahacet.org/syllabus-and-marking-scheme/' },
+          { title: 'Tenders/Quotations', url: 'https://cetcell.mahacet.org/tenders/' },
+          { 
+            title: 'Institute', 
+            isSubmenu: true,
+            children: [
+              { title: 'Admission Portal A.Y.2025-26', url: 'https://cetcell.mahacet.org/cap-_2025-26/' },
+              { title: 'Helpdesk', url: 'https://cetcell.mahacet.org/helpline/' }
+            ]
+          }
         ]
       }
     ]

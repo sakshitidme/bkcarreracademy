@@ -35,7 +35,7 @@ export const ScrollToTop: React.FC = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.8 }}
           transition={{ duration: 0.4 }}
-          className="fixed bottom-8 left-8 z-[80] cursor-pointer"
+          className="fixed bottom-24 md:bottom-28 right-4 md:right-8 z-[80] cursor-pointer"
           onClick={scrollToTop}
         >
           {/* Base Container */}

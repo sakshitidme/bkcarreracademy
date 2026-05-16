@@ -67,12 +67,12 @@ const XIcon = ({ size = 18 }: { size?: number }) => (
 
 export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, setIsRegistrationModalOpen, setSelectedExamName }) => {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-12 pb-12">
-      <div className="section-container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-10">
+    <footer className="bg-white border-t border-gray-100 pt-4 pb-12">
+      <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 pt-4 pb-12 md:py-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 lg:gap-y-12 mb-10 items-start">
           
           {/* Brand Info */}
-          <div className="lg:col-span-1">
+          <div className="col-span-2 lg:col-span-1 order-1">
             <Link to="/" className="flex items-center gap-3 mb-8" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
                 <span className="font-display font-black text-xl text-red-600">BK</span>
@@ -93,33 +93,33 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
           </div>
 
           {/* Programs */}
-          <div>
+          <div className="col-span-1 order-2">
             <h4 className="sub-heading text-sm mb-8 uppercase tracking-widest text-muted">Exams We Cover</h4>
             <ul className="space-y-4 text-sm font-medium text-body">
-              <li><Link to="/exam/UPSC" className="hover:text-primary transition-colors">UPSC Civil Services</Link></li>
-              <li><Link to="/mpsc" className="hover:text-primary transition-colors">MPSC State Services</Link></li>
-              <li><Link to="/exam/SSC" className="hover:text-primary transition-colors">SSC & Banking</Link></li>
-              <li><Link to="/police" className="hover:text-primary transition-colors">Police Bharti</Link></li>
-              <li><Link to="/exam/TET" className="hover:text-primary transition-colors">Teaching Exams</Link></li>
+              <li><Link to="/exam/UPSC" className="hover:text-primary transition-colors block py-0.5">UPSC Civil Services</Link></li>
+              <li><Link to="/mpsc" className="hover:text-primary transition-colors block py-0.5">MPSC State Services</Link></li>
+              <li><Link to="/exam/SSC" className="hover:text-primary transition-colors block py-0.5">SSC & Banking</Link></li>
+              <li><Link to="/police" className="hover:text-primary transition-colors block py-0.5">Police Bharti</Link></li>
+              <li><Link to="/exam/TET" className="hover:text-primary transition-colors block py-0.5">Teaching Exams</Link></li>
             </ul>
           </div>
 
-          {/* Quick Links */}
-          <div>
+          {/* Quick Links (Support) */}
+          <div className="col-span-2 lg:col-span-1 order-4 lg:order-3 pt-4 lg:pt-0 border-t border-gray-100 lg:border-t-0">
             <h4 className="sub-heading text-sm mb-8 uppercase tracking-widest text-muted">Support</h4>
             <ul className="space-y-4 text-sm font-medium text-body">
-              <li><a href="https://wa.me/918080195558" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Contact Support</a></li>
-              <li><button onClick={() => setIsRegistrationModalOpen(true)} className="hover:text-primary transition-colors">Book a Demo</button></li>
-              <li><Link to="/#success-stories" onClick={() => { if(window.location.pathname === '/') document.getElementById('success-stories')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-primary transition-colors">Our Success Stories</Link></li>
+              <li><a href="https://wa.me/918080195558" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors block py-0.5">Contact Support</a></li>
+              <li><button onClick={() => setIsRegistrationModalOpen(true)} className="hover:text-primary transition-colors block py-0.5 text-left">Book a Demo</button></li>
+              <li><Link to="/#success-stories" onClick={() => { if(window.location.pathname === '/') document.getElementById('success-stories')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-primary transition-colors block py-0.5">Our Success Stories</Link></li>
             </ul>
           </div>
 
           {/* Office */}
-          <div>
+          <div className="col-span-1 order-3 lg:order-4">
             <h4 className="sub-heading text-sm mb-8 uppercase tracking-widest text-muted">Corporate Office</h4>
             <div className="space-y-6">
-              <div className="flex gap-3">
-                <MapPin size={18} className="text-primary shrink-0" />
+              <div className="flex gap-3 items-start">
+                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
                 <p className="text-sm text-body leading-relaxed">
                   2nd Floor, Gajanan Plaza,<br />
                   Gharpura Ghat Rd, Nashik,<br />
@@ -127,17 +127,17 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
                 </p>
               </div>
               <div className="flex flex-col gap-3">
-                <a href="tel:9890633962" className="flex items-center gap-3 text-dark font-bold hover:text-primary transition-colors">
-                  <Phone size={18} className="text-primary" />
-                  9890633962
+                <a href="tel:9890633962" className="flex items-center gap-3 text-dark font-bold hover:text-primary transition-colors py-0.5">
+                  <Phone size={18} className="text-primary shrink-0" />
+                  <span>9890633962</span>
                 </a>
-                <a href="tel:02532313962" className="flex items-center gap-3 text-dark font-bold hover:text-primary transition-colors">
-                  <Phone size={18} className="text-primary" />
-                  0253-2313962
+                <a href="tel:02532313962" className="flex items-center gap-3 text-dark font-bold hover:text-primary transition-colors py-0.5">
+                  <Phone size={18} className="text-primary shrink-0" />
+                  <span>0253-2313962</span>
                 </a>
-                <a href="mailto:bkgroupofeducation@gmail.com" className="flex items-center gap-3 text-sm text-body hover:text-primary transition-colors">
-                  <Mail size={18} className="text-primary" />
-                  bkgroupofeducation@gmail.com
+                <a href="mailto:bkgroupofeducation@gmail.com" className="flex items-center gap-3 text-sm text-body hover:text-primary transition-colors py-0.5 break-all">
+                  <Mail size={18} className="text-primary shrink-0" />
+                  <span>bkgroupofeducation@gmail.com</span>
                 </a>
               </div>
             </div>
@@ -150,9 +150,9 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
             © 2026 BK Career Academy. All rights reserved.
           </p>
           <div className="flex gap-8 text-[10px] font-bold text-muted uppercase tracking-widest">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Use</a>
-            <a href="#" className="hover:text-primary transition-colors">Refund Policy</a>
+            <Link to="/privacy" className="hover:text-primary transition-colors py-0.5 block">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors py-0.5 block">Terms of Use</Link>
+            <Link to="/refund" className="hover:text-primary transition-colors py-0.5 block">Refund Policy</Link>
           </div>
         </div>
       </div>

@@ -35,10 +35,20 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
     return 85; // mobile: 1 card + peek
   };
 
+  const getCenterOffset = () => {
+    if (typeof window === 'undefined') return 0;
+    if (window.innerWidth >= 768) return 5; // md: (100 - 45*2) / 2 = 5%
+    return 7.5; // mobile: (100 - 85) / 2 = 7.5%
+  };
+
   const [cardWidth, setCardWidth] = useState(getCardWidth());
+  const [centerOffset, setCenterOffset] = useState(getCenterOffset());
 
   useEffect(() => {
-    const handleResize = () => setCardWidth(getCardWidth());
+    const handleResize = () => {
+      setCardWidth(getCardWidth());
+      setCenterOffset(getCenterOffset());
+    };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -77,16 +87,16 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden group/carousel py-12">
+    <div className="relative w-full overflow-hidden group/carousel py-2">
       {/* Navigation Controls */}
       <div className="absolute top-1/2 -translate-y-1/2 left-4 z-20 opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300">
         <button 
           onClick={(e) => { 
             e.stopPropagation();
             if(!isTransitioning) {
-              setIsTransitioning(true);
-              handlePrev(); 
-              resetAutoplay(); 
+               setIsTransitioning(true);
+               handlePrev(); 
+               resetAutoplay(); 
             }
           }}
           className="w-12 h-12 rounded-full bg-white/90 shadow-lg border border-ink/5 flex items-center justify-center text-ink hover:bg-brand hover:text-ink transition-colors"
@@ -100,9 +110,9 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
           onClick={(e) => { 
             e.stopPropagation();
             if(!isTransitioning) {
-              setIsTransitioning(true);
-              handleNext(); 
-              resetAutoplay(); 
+               setIsTransitioning(true);
+               handleNext(); 
+               resetAutoplay(); 
             }
           }}
           className="w-12 h-12 rounded-full bg-white/90 shadow-lg border border-ink/5 flex items-center justify-center text-ink hover:bg-brand hover:text-ink transition-colors"
@@ -113,10 +123,10 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
 
       {/* Carousel Track */}
       <motion.div
-        className="flex gap-6 px-6"
+        className="flex gap-6 px-0"
         initial={false}
         animate={{
-          x: `calc(-${currentIndex * (cardWidth)}% - ${currentIndex * 24}px)` 
+          x: `calc(-${currentIndex * cardWidth}% - ${currentIndex * 24}px + ${centerOffset}%)` 
         }}
         transition={isTransitioning ? {
           type: "spring",
@@ -153,7 +163,7 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
       </motion.div>
 
       {/* Progress Indicators */}
-      <div className="flex justify-center gap-2 mt-12">
+      <div className="flex justify-center gap-2 mt-6">
         {staff.map((_, idx) => (
           <button
             key={idx}

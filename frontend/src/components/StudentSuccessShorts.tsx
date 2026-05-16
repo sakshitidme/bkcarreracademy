@@ -132,6 +132,7 @@ export const StudentSuccessShorts: React.FC<StudentSuccessShortsProps> = ({ medi
                   src={`https://www.youtube.com/embed/${item.id}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&loop=1&playlist=${item.id}`}
                   title={item.title}
                   className="w-full h-full pointer-events-none"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 />
                 

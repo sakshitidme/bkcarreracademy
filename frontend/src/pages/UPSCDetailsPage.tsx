@@ -85,7 +85,7 @@ export const UPSCDetailsPage: React.FC<UPSCDetailsPageProps> = ({
       className="bg-bg min-h-screen"
     >
       {/* Premium Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100 h-20">
+      <nav className="fixed top-0 left-0 md:left-64 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100 h-20 pl-16 md:pl-0">
         <div className="section-container h-full flex items-center justify-between">
           <div 
             className="flex items-center gap-3 cursor-pointer group"

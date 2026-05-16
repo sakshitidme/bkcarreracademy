@@ -92,7 +92,7 @@ export const SyllabusPortal: React.FC<SyllabusPortalProps> = ({
       {/* Premium Navbar Offset Adjustment handled by App.tsx pt-12 */}
       
       {/* Header Section */}
-      <header className="bg-white border-b border-gray-100 py-8 md:py-12 relative overflow-hidden">
+      <header className="bg-white border-b border-gray-100 pt-20 pb-8 md:pt-24 md:pb-12 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 skew-x-[-20deg] origin-top translate-x-20 pointer-events-none" />
         
         <div className="section-container relative z-10">
@@ -174,7 +174,7 @@ export const SyllabusPortal: React.FC<SyllabusPortalProps> = ({
         {/* Results Grid */}
         <div className="section-container">
           {filteredExams.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
               <AnimatePresence mode="popLayout">
                 {filteredExams.map((exam) => (
                   <motion.div
@@ -183,39 +183,42 @@ export const SyllabusPortal: React.FC<SyllabusPortalProps> = ({
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    className="bg-white rounded-[2.5rem] p-8 border-2 border-gray-50 hover:border-primary/30 hover:shadow-xl transition-all duration-300 group flex flex-col relative"
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="bg-white rounded-2xl md:rounded-[2.5rem] p-4 md:p-8 border border-gray-100 shadow-md hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/40 transition-all duration-300 group flex flex-col relative"
                   >
                     {/* Pin Button */}
                     <button 
                       onClick={(e) => togglePin(e, exam.id)}
-                      className={`absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 ${
+                      className={`absolute top-3 right-3 md:top-6 md:right-6 w-7 h-7 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                         pinnedExams.includes(exam.id) 
-                          ? 'bg-primary text-dark shadow-lg' 
-                          : 'bg-gray-50 text-muted hover:bg-primary/20'
+                          ? 'bg-primary text-dark shadow-lg shadow-primary/20' 
+                          : 'bg-gray-50 text-muted hover:bg-primary/20 hover:text-dark'
                       }`}
                     >
-                      <Pin size={16} className={pinnedExams.includes(exam.id) ? 'fill-current' : ''} />
+                      <Pin size={12} className={`md:w-4 md:h-4 transition-transform group-hover:scale-110 ${pinnedExams.includes(exam.id) ? 'fill-current' : ''}`} />
                     </button>
 
-                    <div className="w-16 h-16 bg-gray-50 rounded-2xl p-4 flex items-center justify-center mb-6 group-hover:bg-primary transition-all">
-                      <img src={exam.logo} alt={exam.name} className="w-full h-full object-contain" />
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl md:rounded-2xl p-2 md:p-4 flex items-center justify-center mb-3 md:mb-6 group-hover:from-primary/10 group-hover:to-primary/20 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-500">
+                      <img src={exam.logo} alt={exam.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
                     </div>
 
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="h-[1px] w-4 bg-primary"></div>
-                        <span className="text-[9px] font-black text-primary uppercase tracking-[0.2em]">{exam.category}</span>
+                      <div className="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-2">
+                        <div className="h-[1px] w-3 md:w-4 bg-primary transition-all duration-300 group-hover:w-6"></div>
+                        <span className="text-[8px] md:text-[9px] font-black text-primary uppercase tracking-[0.2em] truncate">{exam.category}</span>
                       </div>
-                      <h3 className="text-2xl font-display font-black text-dark uppercase mb-4 tracking-tight leading-none group-hover:text-primary transition-colors">{exam.name}</h3>
+                      <h3 className="text-sm md:text-2xl font-display font-black text-dark uppercase mb-2 md:mb-4 tracking-tight leading-none group-hover:text-primary transition-colors line-clamp-2">{exam.name}</h3>
                       {/* Description removed for cleaner UI */}
                     </div>
 
                     <button 
                       onClick={() => setSelectedResource(exam)}
-                      className="w-full bg-white text-dark border-2 border-gray-100 py-4 rounded-xl font-display font-black uppercase text-[10px] tracking-widest flex items-center justify-center gap-3 hover:border-primary hover:bg-primary/5 transition-all duration-300 group/btn shadow-sm"
+                      className="w-full bg-white text-dark border-2 border-gray-100 py-2 md:py-4 rounded-lg md:rounded-xl font-display font-black uppercase text-[8px] md:text-[10px] tracking-widest flex items-center justify-center gap-1 md:gap-3 hover:border-primary hover:bg-primary/10 hover:text-primary hover:shadow-md transition-all duration-300 group/btn shadow-sm whitespace-nowrap"
                     >
                       View Hub 
-                      <ChevronRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                      <ChevronRight size={12} className="md:w-3.5 md:h-3.5 group-hover/btn:translate-x-1 transition-transform shrink-0" />
                     </button>
                   </motion.div>
                 ))}

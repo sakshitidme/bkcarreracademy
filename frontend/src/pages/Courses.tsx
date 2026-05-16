@@ -92,10 +92,10 @@ export const Courses: React.FC<CoursesProps> = ({
       animate={{ opacity: 1 }}
       className="min-h-screen bg-white"
     >
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-24 pb-4 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full" />
-        <div className="section-container relative z-10">
-          <header className="mb-16 text-center max-w-4xl mx-auto">
+        <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 pt-12 pb-4 relative z-10">
+          <header className="mb-12 text-center max-w-4xl mx-auto">
             <p className="text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">Our Curriculum</p>
             <h2 className="text-5xl md:text-8xl font-display font-black text-dark uppercase tracking-tighter leading-none mb-8">
               Explore Our <span className="text-primary">Programs</span>
@@ -104,7 +104,7 @@ export const Courses: React.FC<CoursesProps> = ({
               Achieve your administrative goals with our systematically structured courses. 
               From UPSC to MPSC, we provide verified guidance for every milestone.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 mt-12">
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
                <button 
                  onClick={() => onSelectCategory(null)}
                  className={`px-8 py-4 rounded-2xl font-display font-bold uppercase tracking-widest transition-all duration-300 ${!selectedCategory ? 'bg-primary text-dark shadow-xl shadow-primary/20' : 'bg-gray-100 text-dark border border-gray-200 hover:bg-gray-200'}`}
@@ -114,7 +114,7 @@ export const Courses: React.FC<CoursesProps> = ({
             </div>
           </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-start mb-0">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-8 items-start mb-0">
             {EXAM_CATEGORIES.map((category, idx) => {
               const cleanKey = category.title.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
               const examDate = examDates[cleanKey] || null;
@@ -154,7 +154,7 @@ export const Courses: React.FC<CoursesProps> = ({
       {/* Dynamic Courses Section */}
       {dynamicCourses.length > 0 && !selectedCategory && (
         <section className="py-0 bg-white border-t border-gray-100">
-          <div className="section-container">
+          <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 pt-8 pb-4">
             <div className="flex flex-col mb-1">
               <p className="label-text mb-1">Special Batches</p>
               <h2 className="section-heading">
