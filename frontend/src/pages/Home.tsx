@@ -540,16 +540,14 @@ export const Home: React.FC<HomeProps> = ({
               </div>
             </div>
 
-            {/* Right Content - Phone Mockup / Floating Panels */}
             <div className="relative flex justify-center items-center lg:col-span-6 xl:col-span-7 h-[650px] w-full mt-12 lg:mt-0 select-none">
-              
               {/* --- BACKGROUND FLOATING IMAGE PANELS --- */}
               
               {/* 1. Classic Administrative University Building (Top-Left) */}
               <motion.div 
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[6%] left-[2%] md:left-[8%] lg:left-[10%] xl:left-[12%] w-[170px] md:w-[220px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-10 -rotate-6 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+                className="hidden lg:block absolute top-[6%] left-[2%] md:left-[8%] lg:left-[10%] xl:left-[12%] w-[170px] md:w-[220px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-10 -rotate-6 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
               >
                 <img 
                   src="/app-promo/admin_university.png" 
@@ -565,7 +563,7 @@ export const Home: React.FC<HomeProps> = ({
               <motion.div 
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-[2%] right-[2%] md:right-[8%] lg:right-[10%] xl:right-[12%] w-[180px] md:w-[230px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-10 rotate-3 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+                className="hidden lg:block absolute top-[2%] right-[2%] md:right-[8%] lg:right-[10%] xl:right-[12%] w-[180px] md:w-[230px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-10 rotate-3 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
               >
                 <img 
                   src="/app-promo/motivated_students.png" 
@@ -581,7 +579,7 @@ export const Home: React.FC<HomeProps> = ({
               <motion.div 
                 animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-[10%] left-[0%] md:left-[5%] lg:left-[7%] xl:left-[9%] w-[180px] md:w-[230px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-20 rotate-6 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+                className="hidden lg:block absolute bottom-[10%] left-[0%] md:left-[5%] lg:left-[7%] xl:left-[9%] w-[180px] md:w-[230px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-20 rotate-6 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
               >
                 <img 
                   src="/app-promo/police_marching.png" 
@@ -597,7 +595,7 @@ export const Home: React.FC<HomeProps> = ({
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-[8%] right-[0%] md:right-[5%] lg:right-[7%] xl:right-[9%] w-[170px] md:w-[220px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-20 -rotate-3 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+                className="hidden lg:block absolute bottom-[8%] right-[0%] md:right-[5%] lg:right-[7%] xl:right-[9%] w-[170px] md:w-[220px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-20 -rotate-3 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
               >
                 <img 
                   src="/app-promo/india_map.png" 
@@ -609,7 +607,7 @@ export const Home: React.FC<HomeProps> = ({
                 </div>
               </motion.div>
 
-              {/* --- VERTICAL SMARTPHONE MOCKUP --- */}
+              {/* --- VERTICAL SMARTPHONE MOCKUP --- */}      {/* --- VERTICAL SMARTPHONE MOCKUP --- */}
               <div className="relative z-25 w-[290px] md:w-[320px] aspect-[9/18.5] bg-[#111111] rounded-[50px] p-[10px] shadow-[0_32px_64px_rgba(0,0,0,0.22)] border-[10px] border-[#1A1A1A] flex flex-col overflow-hidden hover:scale-[1.02] transition-transform duration-500">
                 {/* Dynamic Island / Notch */}
                 <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-45 flex items-center justify-between px-3">
