@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import ExamCategoryCard from '../components/features/ExamCategoryCard';
 import CourseCard from '../components/CourseCard';
+import SkeletonCard from '../components/SkeletonCard';
 import { EXAM_CATEGORIES } from '../data/constants';
 
 interface CoursesProps {
@@ -76,7 +77,7 @@ export const Courses: React.FC<CoursesProps> = ({
           if (item.examDate && item.category) {
             const cleanKey = item.category.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
             if (!map[cleanKey]) {
-              map[cleanKey] = item.examDate;
+               map[cleanKey] = item.examDate;
             }
           }
         });
@@ -152,7 +153,7 @@ export const Courses: React.FC<CoursesProps> = ({
       </section>
 
       {/* Dynamic Courses Section */}
-      {dynamicCourses.length > 0 && !selectedCategory && (
+      {!selectedCategory && (
         <section className="py-0 bg-white border-t border-gray-100">
           <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 pt-8 pb-4">
             <div className="flex flex-col mb-1">
@@ -166,18 +167,26 @@ export const Courses: React.FC<CoursesProps> = ({
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-8 px-2 md:px-0">
-              {dynamicCourses.map((course, index) => (
-                <CourseCard 
-                  key={course._id || course.id} 
-                  course={course} 
-                  index={index} 
-                  onClick={() => {
-                    if (course.subCategory || course.title) {
-                      onViewDynamicExam && onViewDynamicExam(course.subCategory || course.title);
-                    }
-                  }}
-                />
-              ))}
+              {!dynamicCourses || dynamicCourses.length === 0 ? (
+                /* Skeleton Loading State */
+                [1, 2, 3, 4].map((i) => (
+                  <SkeletonCard key={i} className="h-full bg-gray-50/50 border-gray-100" />
+                ))
+              ) : (
+                /* Actual Dynamic Courses */
+                dynamicCourses.map((course, index) => (
+                  <CourseCard 
+                    key={course._id || course.id} 
+                    course={course} 
+                    index={index} 
+                    onClick={() => {
+                      if (course.subCategory || course.title) {
+                        onViewDynamicExam && onViewDynamicExam(course.subCategory || course.title);
+                      }
+                    }}
+                  />
+                ))
+              )}
             </div>
           </div>
         </section>

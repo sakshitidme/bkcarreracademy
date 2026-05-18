@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { GraduationCap, Star, Globe, ChevronDown, CheckCircle, Clock, Ruler, Target, ExternalLink, ArrowRight, BookOpen, Users, Trophy, Shield } from 'lucide-react';
 import HomeHero from '../components/HomeHero';
 import CourseCard from '../components/CourseCard';
+import SkeletonCard from '../components/SkeletonCard';
 import StaffCarousel from '../components/StaffCarousel';
 import { STAFF } from '../data/constants';
 import { Story } from '../data/stories';
@@ -110,22 +111,30 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* Popular Courses */}
-      {dynamicCourses && dynamicCourses.length > 0 && (
-        <section className="pt-12 pb-8 bg-dark relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[120px] rounded-full" />
-          <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto relative z-10">
-            <header className="mb-8 text-center max-w-3xl mx-auto">
-              <p className="text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">Our Curriculum</p>
-              <h2 className="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tighter leading-none mb-4">
-                Popular <span className="text-primary">Learning Paths</span>
-              </h2>
-              <p className="text-gray-400 font-medium text-sm md:text-base">
-                Structured for success, our courses are designed by experts who have been through the journey themselves. Choose your goal and start today.
-              </p>
-            </header>
+      <section className="pt-12 pb-8 bg-dark relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[120px] rounded-full" />
+        <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto relative z-10">
+          <header className="mb-8 text-center max-w-3xl mx-auto">
+            <p className="text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">Our Curriculum</p>
+            <h2 className="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tighter leading-none mb-4">
+              Popular <span className="text-primary">Learning Paths</span>
+            </h2>
+            <p className="text-gray-400 font-medium text-sm md:text-base">
+              Structured for success, our courses are designed by experts who have been through the journey themselves. Choose your goal and start today.
+            </p>
+          </header>
 
-            <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-2 md:px-0">
-              {[...dynamicCourses, {
+          <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-2 md:px-0">
+            {!dynamicCourses || dynamicCourses.length === 0 ? (
+              /* Skeleton Loading State */
+              [1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-[calc(50%-0.375rem)] md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]">
+                  <SkeletonCard className="h-full bg-white/5 border-white/10" />
+                </div>
+              ))
+            ) : (
+              /* Actual Dynamic Courses */
+              [...dynamicCourses, {
                 id: 'fallback-banking',
                 title: 'Banking & Financial Services',
                 category: 'Banking (IBPS/SBI)',
@@ -161,20 +170,20 @@ export const Home: React.FC<HomeProps> = ({
                     }}
                   />
                 </div>
-              ))}
-            </div>
-
-            <div className="mt-10 text-center">
-              <button 
-                onClick={() => setView('courses')}
-                className="btn-outline-new px-10 py-4 text-white border-primary/40 hover:text-primary hover:border-primary"
-              >
-                View All Programs
-              </button>
-            </div>
+              ))
+            )}
           </div>
-        </section>
-      )}
+
+          <div className="mt-10 text-center">
+            <button 
+              onClick={() => setView('courses')}
+              className="btn-outline-new px-10 py-4 text-white border-primary/40 hover:text-primary hover:border-primary"
+            >
+              View All Programs
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* Strategic Insights Section - Senior UI/UX Implementation */}
       <section className="py-16 bg-[#F9F9F9] relative overflow-hidden">
