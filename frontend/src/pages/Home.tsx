@@ -461,7 +461,7 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* App Promotion Section */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-[#FCF9F2] via-[#FAF6EE] to-white relative overflow-hidden border-none">
+      <section className="pt-20 md:pt-28 pb-6 md:pb-8 bg-gradient-to-br from-[#FCF9F2] via-[#FAF6EE] to-white relative overflow-hidden border-none">
         {/* Decorative background glows */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-[#E12C2C]/5 blur-[140px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-1/4 h-full bg-[#FFB800]/5 blur-[120px] rounded-full pointer-events-none" />
@@ -766,7 +766,7 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* FAQ */}
-      <section className="pt-16 pb-8 md:pb-12 bg-bg">
+      <section className="pt-6 pb-8 md:pb-12 bg-bg">
         <div className="section-container max-w-4xl">
           <header className="mb-0 text-center">
             <h2 className="section-heading">
