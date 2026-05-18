@@ -53,6 +53,7 @@ export const ScrollToTop: React.FC = () => {
                 stroke="#F5A623"
                 strokeWidth="2"
                 strokeDasharray={2 * Math.PI * 30}
+                initial={{ strokeDashoffset: 2 * Math.PI * 30 }}
                 animate={{ strokeDashoffset: (1 - scrollProgress) * (2 * Math.PI * 30) }}
                 transition={{ duration: 0.1 }}
                 className="opacity-40"
