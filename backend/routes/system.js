@@ -26,4 +26,28 @@ router.post('/counseling-submit', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+router.get('/settings', async (req, res, next) => {
+  const SystemSetting = require('../models/SystemSetting');
+  try {
+    const settings = await SystemSetting.find();
+    const map = {};
+    settings.forEach(s => { map[s.key] = s.value; });
+    res.json({ success: true, settings: map });
+  } catch (err) { next(err); }
+});
+
+router.post('/settings', async (req, res, next) => {
+  const SystemSetting = require('../models/SystemSetting');
+  try {
+    const { key, value } = req.body;
+    if (!key) return res.status(400).json({ success: false, message: 'Key required' });
+    await SystemSetting.findOneAndUpdate(
+      { key },
+      { value, updatedAt: new Date() },
+      { upsert: true, new: true }
+    );
+    res.json({ success: true, message: 'Setting updated successfully' });
+  } catch (err) { next(err); }
+});
+
 module.exports = router;

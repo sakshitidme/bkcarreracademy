@@ -6,6 +6,7 @@ import HomeHero from '../components/HomeHero';
 import CourseCard from '../components/CourseCard';
 import SkeletonCard from '../components/SkeletonCard';
 import StaffCarousel from '../components/StaffCarousel';
+import SettingsPanel from '../components/SettingsPanel';
 import { STAFF } from '../data/constants';
 import { Story } from '../data/stories';
 
@@ -771,6 +772,13 @@ export const Home: React.FC<HomeProps> = ({
               
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* System Preferences / Settings Panel */}
+      <section className="py-12 bg-bg border-t border-gray-100 dark:border-white/5">
+        <div className="section-container max-w-4xl">
+          <SettingsPanel />
         </div>
       </section>
 
