@@ -104,7 +104,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               Prepare for UPSC, PSI, STI, and other competitive exams with Nashik's most experienced mentors. We don't just teach subjects; we shape futures.
             </motion.p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-8 w-full">
+            <div className="flex flex-col sm:flex-row items-end gap-8 w-full">
               <motion.ul
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
