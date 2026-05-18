@@ -104,19 +104,41 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               Prepare for UPSC, PSI, STI, and other competitive exams with Nashik's most experienced mentors. We don't just teach subjects; we shape futures.
             </motion.p>
 
-            <motion.ul
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="space-y-3"
-            >
-              {["Expert Faculty from Delhi & Pune", "Comprehensive Study Material", "Regular Mock Test Series"].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-body font-medium">
-                  <CheckCircle size={18} className="text-primary" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </motion.ul>
+            <div className="flex flex-col sm:flex-row items-start gap-8 w-full">
+              <motion.ul
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="space-y-3 flex-1"
+              >
+                {["Expert Faculty from Delhi & Pune", "Comprehensive Study Material", "Regular Mock Test Series"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-body font-medium">
+                    <CheckCircle size={18} className="text-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </motion.ul>
+
+              <motion.a
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+                href="https://play.google.com/store/apps"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-4 p-4 bg-white border border-gray-100 rounded-3xl shadow-xl hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group min-w-[200px]"
+              >
+                <div className="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-dark group-hover:bg-primary group-hover:text-dark transition-colors shrink-0">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M5 2.5v19l15-9.5-15-9.5z" />
+                   </svg>
+                </div>
+                <div className="text-left">
+                  <span className="block text-[9px] font-bold text-muted uppercase tracking-widest mb-0.5">Download Our</span>
+                  <span className="block text-sm font-display font-black text-dark uppercase leading-tight group-hover:text-primary transition-colors">Mobile App</span>
+                </div>
+              </motion.a>
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
