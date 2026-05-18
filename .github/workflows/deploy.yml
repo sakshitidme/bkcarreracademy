@@ -1,55 +1,41 @@
-name: Continuous Deployment (CI/CD) to VPS
+name: Continuous Deployment
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Executing Remote SSH Commands to Deploy
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        port: 22
-        script: |
-          echo "=== Starting Automated VPS Deployment ==="
-          
-          # Detect Project Directory
-          if [ -d "/var/www/bkcarreracademy" ]; then
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+
+          script: |
             cd /var/www/bkcarreracademy
-          elif [ -d "/root/BK-Career-Academy" ]; then
-            cd /root/BK-Career-Academy
-          elif [ -d "/var/www/html" ]; then
-            cd /var/www/html
-          elif [ -d "/root/bkcarreracademy" ]; then
-            cd /root/bkcarreracademy
-          else
-            echo "❌ Project directory not found!"
-            exit 1
-          fi
 
-          echo "📂 Current Directory: $(pwd)"
+            git pull origin main
 
-          echo "📥 Pulling latest code from GitHub..."
-          git fetch --all
-          git reset --hard origin/main
+            echo "=== BUILDING FRONTEND ==="
+            cd frontend
+            npm install
+            npm run build
 
-          echo "📦 Installing Frontend Dependencies & Building Vite Bundle..."
-          cd frontend
-          npm install
-          npm run build
+            echo "=== RESTARTING BACKEND ==="
+            cd ../backend
+            npm install
+            pm2 restart all
+            pm2 save
 
-          echo "⚙️ Installing Backend Dependencies & Restarting PM2 Server..."
-          cd ../backend
-          npm install
-          pm2 restart all --update-env
-          pm2 save
-
-          echo "🌐 Restarting Nginx Web Server..."
-          sudo systemctl restart nginx
-
-          echo "✅ Deployment Completed Successfully!"
+            sudo systemctl restart nginx
