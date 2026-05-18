@@ -46,7 +46,7 @@ export const EXAM_CATEGORIES = [
     id: 15,
     title: "MBA CET & Management Exams",
     icon: "💼",
-    thumb: "/CET MBA.png",
+    thumb: "/CET.png",
     description: "State and National level entrance examinations for top MBA, PGDM, and MMS programs.",
     subcategories: [
       {
