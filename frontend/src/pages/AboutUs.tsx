@@ -50,7 +50,7 @@ export const AboutUs = () => {
       className="bg-bg"
     >
       {/* Founder Section */}
-      <section className="pt-20 pb-1">
+      <section className="pt-20 pb-20">
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="relative group">
@@ -106,7 +106,7 @@ export const AboutUs = () => {
       </section>
 
       {/* Network Section */}
-      <section className="py-1 bg-white">
+      <section className="py-16 bg-white">
         <div className="section-container">
           <header className="mb-1 text-center max-w-3xl mx-auto">
             <p className="label-text mb-4">Our Ecosystem</p>
