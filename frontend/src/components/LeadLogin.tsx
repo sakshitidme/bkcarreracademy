@@ -85,9 +85,10 @@ const LeadLogin: React.FC<LeadLoginProps> = ({ onLogin, showSkip = true, onCance
                 </div>
                 <input 
                   type="text" 
+                  maxLength={10}
                   placeholder="Phone Number (Optional)"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value.slice(0, 15)})}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10)})}
                   className="w-full bg-void border-2 border-ink py-2.5 pl-10 pr-4 text-sm text-ink font-bold focus:outline-none focus:bg-white transition-all shadow-[3px_3px_0_0_#1A1A1A] group-focus-within:shadow-[4px_4px_0_0_#F7931A]"
                 />
               </div>
