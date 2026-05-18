@@ -67,8 +67,8 @@ const XIcon = ({ size = 18 }: { size?: number }) => (
 
 export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, setIsRegistrationModalOpen, setSelectedExamName }) => {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-4 pb-12">
-      <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 pt-4 pb-12 md:py-20">
+    <footer className="bg-white border-t border-gray-100 pt-0 pb-12">
+      <div className="max-w-[1600px] w-full mx-auto px-6 md:px-12 lg:px-16 pt-6 pb-12 md:pt-8 md:pb-20">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 lg:gap-y-12 mb-10 items-start">
           
           {/* Brand Info */}
