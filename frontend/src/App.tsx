@@ -192,7 +192,7 @@ export default function App() {
     // Trigger Image Popup after refresh/load
     const timer = setTimeout(() => {
       setIsImagePopupOpen(true);
-    }, 2000); // 2 second delay for better UX
+    }, 3500); // 3.5 second delay (between 3 to 4 seconds)
     
     return () => clearTimeout(timer);
   }, []);
