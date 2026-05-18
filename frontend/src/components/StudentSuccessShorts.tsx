@@ -31,9 +31,7 @@ export const StudentSuccessShorts: React.FC<StudentSuccessShortsProps> = ({ medi
   const getYouTubeId = (url: string) => {
     if (!url) return '';
     if (url.length === 11) return url;
-    const match = url.match(
-      /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([^?&"'>]+)/
-    );
+    const match = url.match(/(?:https?:\/\/)?(?:www\.|m\.)?(?:youtu\.be\/|youtube\.com\/(?:shorts\/|embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/i);
     return (match && match[1]) ? match[1] : url;
   };
 
