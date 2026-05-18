@@ -410,7 +410,7 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* Resources */}
-      <section className="pt-12 pb-8 md:pb-10 bg-white relative">
+      <section className="pt-12 pb-4 md:pb-6 bg-white relative">
         <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto">
           <header className="mb-0 text-center max-w-3xl mx-auto">
             <p className="label-text mb-1">Learning Hub</p>
@@ -461,7 +461,7 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* App Promotion Section */}
-      <section className="pt-20 md:pt-28 pb-6 md:pb-8 bg-gradient-to-br from-[#FCF9F2] via-[#FAF6EE] to-white relative overflow-hidden border-none">
+      <section className="pt-8 md:pt-10 pb-6 md:pb-8 bg-gradient-to-br from-[#FCF9F2] via-[#FAF6EE] to-white relative overflow-hidden border-none">
         {/* Decorative background glows */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-[#E12C2C]/5 blur-[140px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-1/4 h-full bg-[#FFB800]/5 blur-[120px] rounded-full pointer-events-none" />
