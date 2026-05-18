@@ -118,11 +118,11 @@ export function ExamCategoryCard({
       onClick={() => onToggle()}
       className={`group flex flex-col bg-white rounded-2xl border border-gray-100 transition-all duration-300 relative cursor-pointer overflow-hidden ${isOpen ? 'shadow-2xl ring-2 ring-primary -translate-y-2' : 'hover:shadow-lg hover:-translate-y-1'}`}
     >
-      <div className="relative h-36 md:h-48 overflow-hidden">
+      <div className={`relative h-36 md:h-48 overflow-hidden ${category.id === 15 ? 'bg-[#f8f9fa]' : ''}`}>
         <img 
           src={category.thumb} 
           alt={`${category.title} Coaching`}
-          className={`w-full h-full transition-transform duration-700 group-hover:scale-110 ${category.id === 15 ? 'object-contain bg-[#f8f9fa] p-2 md:p-4' : 'object-cover'}`}
+          className={`w-full h-full transition-transform duration-700 group-hover:scale-110 ${category.id === 15 ? 'object-contain p-2 md:p-4 mix-blend-multiply' : 'object-cover'}`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
         
