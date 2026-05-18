@@ -3,7 +3,13 @@ const { Client } = require('ssh2');
 const conn = new Client();
 conn.on('ready', () => {
   console.log('Client :: ready');
-  conn.exec('cd /var/www/bkcarreracademy && echo "=== GIT REMOTE ===" && git remote -v && echo "=== GIT BRANCH ===" && git branch -vv && echo "=== GIT LOG ===" && git log -n 5 --oneline', (err, stream) => {
+  const script = `
+    echo "=== BKGURUKUL ===" &&
+    cat /etc/nginx/sites-available/bkgurukul &&
+    echo "=== BKGROUPOFEDUCATION ===" &&
+    cat /etc/nginx/sites-available/bkgroupofeducation
+  `;
+  conn.exec(script, (err, stream) => {
     if (err) throw err;
     let out = '';
     stream.on('close', (code, signal) => {
@@ -11,6 +17,7 @@ conn.on('ready', () => {
       conn.end();
     }).on('data', (data) => {
       out += data;
+      process.stdout.write(data);
     }).stderr.on('data', (data) => {
       console.error('STDERR: ' + data);
     });
