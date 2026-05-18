@@ -201,7 +201,7 @@ export const SyllabusPortal: React.FC<SyllabusPortalProps> = ({
                     </button>
 
                     <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl md:rounded-2xl p-2 md:p-4 flex items-center justify-center mb-3 md:mb-6 group-hover:from-primary/10 group-hover:to-primary/20 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-500">
-                      <img src={exam.logo} alt={exam.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" />
+                      <img src={exam.logo} alt={exam.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 mix-blend-multiply" />
                     </div>
 
                     <div className="flex-1">
