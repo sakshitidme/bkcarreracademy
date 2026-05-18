@@ -88,8 +88,8 @@ export const Home: React.FC<HomeProps> = ({
       />
 
       {/* Stats Section */}
-      <section className="pt-4 pb-12 bg-white border-y border-gray-100">
-        <div className="section-container">
+      <section className="pt-4 pb-12 bg-white border-t border-gray-100 relative">
+        <div className="section-container relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { label: 'Successful Aspirants', value: '10K+', icon: Users },
@@ -461,90 +461,307 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* App Promotion Section */}
-      <section className="py-10 md:py-16 bg-gradient-to-br from-[#FFF9E6] to-white relative overflow-hidden border-y border-gray-100">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="section-container relative z-10 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <section className="py-20 md:py-28 bg-gradient-to-br from-[#FCF9F2] via-[#FAF6EE] to-white relative overflow-hidden border-none">
+        {/* Decorative background glows */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#E12C2C]/5 blur-[140px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-1/4 h-full bg-[#FFB800]/5 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="section-container relative z-10 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center">
             
             {/* Left Content */}
-            <div className="space-y-6 max-w-lg mx-auto lg:mx-0">
-              <div className="inline-flex px-4 py-1.5 bg-[#E12C2C] rounded-full shadow-md">
-                <span className="text-[9px] font-black text-white uppercase tracking-widest">BK CAREER ACADEMY APP</span>
+            <div className="space-y-8 max-w-xl mx-auto lg:mx-0 lg:col-span-6 xl:col-span-5">
+              <div className="inline-flex px-4 py-1.5 bg-[#E12C2C] rounded-full shadow-[0_4px_12px_rgba(225,44,44,0.15)]">
+                <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">BK CAREER ACADEMY APP</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-[#1A1A1A] leading-[1.1] tracking-tighter">
+              <h2 className="text-5xl md:text-6xl lg:text-[4.5rem] font-display font-black text-[#1A1A1A] leading-[0.95] tracking-tight uppercase">
                 BEST EXAM PREP <br />
-                <span className="text-[#E12C2C] text-glow">APP FOR</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E12C2C] to-[#FF4D4D]">APP FOR</span>
               </h2>
 
-              <div className="flex flex-wrap gap-2">
-                {['UPSC', 'MPSC', 'SSC', 'BANKING', 'POLICE'].map((pill) => (
-                  <span key={pill} className="px-4 py-1.5 bg-white rounded-full text-[9px] font-black text-dark uppercase tracking-widest shadow-sm">
-                    {pill}
-                  </span>
+              {/* Interactive Pills */}
+              <div className="flex flex-wrap gap-2.5">
+                {[
+                  { name: 'UPSC', view: 'courseDetailUPSC' },
+                  { name: 'MPSC', view: 'courseDetailMPSC' },
+                  { name: 'SSC', view: 'courses' },
+                  { name: 'Banking', view: 'courseDetailBANKING' },
+                  { name: 'Police', view: 'courseDetailPolice' }
+                ].map((pill) => (
+                  <button 
+                    key={pill.name}
+                    onClick={() => {
+                      setView(pill.view);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="px-5 py-2.5 bg-white rounded-full text-xs font-black text-gray-900 uppercase tracking-wider shadow-[0_4px_12px_rgba(0,0,0,0.03)] border border-gray-100/50 hover:bg-[#E12C2C] hover:text-white hover:border-[#E12C2C] hover:shadow-[0_6px_20px_rgba(225,44,44,0.2)] transition-all duration-300 cursor-pointer animate-none"
+                  >
+                    {pill.name}
+                  </button>
                 ))}
               </div>
 
-              <p className="text-gray-500 font-bold text-xs md:text-sm leading-relaxed max-w-md">
+              <p className="text-gray-600 font-bold text-sm md:text-base leading-relaxed">
                 Download the BK Career Academy App & enhance your exam preparation anytime, anywhere! Get access to live and recorded lectures on your fingertips.
               </p>
 
-              <a 
-                href="https://play.google.com/store/apps/details?id=co.lazarus.qzrty&pcampaignid=web_share"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 bg-[#1A1A1A] text-white rounded-2xl hover:bg-primary hover:text-dark transition-all duration-300 shadow-lg group"
-              >
-                <div className="w-8 h-8 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-lg flex items-center justify-center p-1.5 group-hover:scale-110 transition-transform">
-                  <svg viewBox="0 0 24 24" fill="white" className="w-full h-full">
-                    <path d="M5 2.5v19l15-9.5-15-9.5z" />
+              {/* Interactive Dual CTA Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <button 
+                  onClick={() => {
+                    setView('courses');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#E12C2C] to-[#FF4D4D] text-white rounded-2xl transition-all duration-300 shadow-[0_12px_24px_rgba(225,44,44,0.2)] hover:shadow-[0_16px_32px_rgba(225,44,44,0.35)] hover:-translate-y-0.5 group border border-red-500/20 font-black tracking-wider text-xs uppercase cursor-pointer"
+                >
+                  Explore All Courses
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
-                </div>
-                <div className="text-left">
-                  <span className="block text-[7px] font-bold text-gray-400 group-hover:text-dark/70 uppercase tracking-widest mb-0.5">Get it on</span>
-                  <span className="block text-lg font-display font-black uppercase leading-none text-white group-hover:text-dark transition-colors">Play Store</span>
-                </div>
-              </a>
+                </button>
+
+                <a 
+                  href="https://play.google.com/store/apps/details?id=co.lazarus.qzrty&pcampaignid=web_share"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-4 px-6 py-4 bg-[#111111] hover:bg-[#222222] text-white rounded-2xl transition-all duration-300 shadow-[0_12px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 group border border-white/5"
+                >
+                  <div className="w-7 h-7 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-lg flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform shadow-inner">
+                    <svg viewBox="0 0 24 24" fill="white" className="w-full h-full filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]">
+                      <path d="M5 2.5v19l15-9.5-15-9.5z" />
+                    </svg>
+                  </div>
+                  <div className="text-left leading-none">
+                    <span className="block text-[6px] font-bold text-gray-400 group-hover:text-gray-300 uppercase tracking-[0.2em] mb-0.5">GET IT ON</span>
+                    <span className="block text-sm font-display font-black uppercase tracking-tight text-white">Play Store</span>
+                  </div>
+                </a>
+              </div>
             </div>
 
-            {/* Right Content - Phone Mockup */}
-            <div className="relative flex justify-center lg:justify-end mt-10 lg:mt-0">
-              <div className="w-[260px] h-[520px] bg-[#1A1A1A] rounded-[2.5rem] p-2.5 shadow-2xl relative border-[3px] border-gray-800">
-                {/* Phone Notch */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-6 bg-[#1A1A1A] rounded-b-2xl z-20 flex justify-center items-center pb-1">
-                  <div className="w-10 h-1 bg-gray-800 rounded-full" />
+            {/* Right Content - Phone Mockup / Floating Panels */}
+            <div className="relative flex justify-center items-center lg:col-span-6 xl:col-span-7 h-[650px] w-full mt-12 lg:mt-0 select-none">
+              
+              {/* --- BACKGROUND FLOATING IMAGE PANELS --- */}
+              
+              {/* 1. Classic Administrative University Building (Top-Left) */}
+              <motion.div 
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-[6%] left-[2%] md:left-[8%] lg:left-[10%] xl:left-[12%] w-[170px] md:w-[220px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-10 -rotate-6 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+              >
+                <img 
+                  src="/app-promo/admin_university.png" 
+                  alt="University Administrative Building" 
+                  className="w-full h-full object-cover filter brightness-95"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-2.5">
+                  <span className="text-[8px] font-black text-white uppercase tracking-widest">Institutions</span>
                 </div>
-                
-                {/* Screen Context */}
-                <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden relative flex flex-col items-center pt-20 text-center">
-                  <h3 className="text-2xl font-display font-black tracking-tighter relative z-10 mb-1">
-                    <span className="text-[#E12C2C]">BK Career</span>
-                  </h3>
-                  <p className="text-[9px] font-bold text-dark uppercase tracking-widest max-w-[160px] relative z-10 mb-8 leading-tight">
-                    Your One-Stop Destination for Learning.
-                  </p>
+              </motion.div>
+
+              {/* 2. Motivated Indian Students (Top-Right) */}
+              <motion.div 
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-[2%] right-[2%] md:right-[8%] lg:right-[10%] xl:right-[12%] w-[180px] md:w-[230px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-10 rotate-3 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+              >
+                <img 
+                  src="/app-promo/motivated_students.png" 
+                  alt="Motivated Indian Students" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-2.5">
+                  <span className="text-[8px] font-black text-white uppercase tracking-widest">Aspirants</span>
+                </div>
+              </motion.div>
+
+              {/* 3. Police Marching in Khaki Uniforms (Bottom-Left) */}
+              <motion.div 
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-[10%] left-[0%] md:left-[5%] lg:left-[7%] xl:left-[9%] w-[180px] md:w-[230px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-20 rotate-6 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+              >
+                <img 
+                  src="/app-promo/police_marching.png" 
+                  alt="Indian Police Marching" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-2.5">
+                  <span className="text-[8px] font-black text-white uppercase tracking-widest">Public Service</span>
+                </div>
+              </motion.div>
+
+              {/* 4. Colorful Map of India (Bottom-Right) */}
+              <motion.div 
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-[8%] right-[0%] md:right-[5%] lg:right-[7%] xl:right-[9%] w-[170px] md:w-[220px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.12)] border-4 border-white z-20 -rotate-3 hover:rotate-0 hover:scale-110 hover:z-30 transition-all duration-500 cursor-pointer"
+              >
+                <img 
+                  src="/app-promo/india_map.png" 
+                  alt="Map of India" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-2.5">
+                  <span className="text-[8px] font-black text-white uppercase tracking-widest">National Level</span>
+                </div>
+              </motion.div>
+
+              {/* --- VERTICAL SMARTPHONE MOCKUP --- */}
+              <div className="relative z-25 w-[290px] md:w-[320px] aspect-[9/18.5] bg-[#111111] rounded-[50px] p-[10px] shadow-[0_32px_64px_rgba(0,0,0,0.22)] border-[10px] border-[#1A1A1A] flex flex-col overflow-hidden hover:scale-[1.02] transition-transform duration-500">
+                {/* Dynamic Island / Notch */}
+                <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-45 flex items-center justify-between px-3">
+                  <div className="w-1.5 h-1.5 bg-[#111] rounded-full" />
+                  <div className="w-8 h-1 bg-[#111] rounded-full" />
+                </div>
+
+                {/* Inner Screen */}
+                <div className="flex-1 w-full bg-[#0F0F10] rounded-[38px] overflow-hidden flex flex-col relative select-none border border-white/5">
                   
-                  {/* Circle Image Mockup */}
-                  <div className="w-44 h-44 rounded-full overflow-hidden relative z-10 mb-auto bg-gray-100 flex items-center justify-center shadow-lg border-8 border-gray-50 p-2">
-                     <div className="w-full h-full rounded-full overflow-hidden relative bg-gray-200">
-                       <img src="/home/card1.png" alt="Student Mockup" className="absolute inset-0 w-full h-full object-cover" onError={(e) => e.currentTarget.style.display = 'none'} />
-                     </div>
+                  {/* Status Bar */}
+                  <div className="h-8 w-full flex items-center justify-between px-6 pt-2 z-40 text-white/80">
+                    <span className="text-[9px] font-bold">12:00</span>
+                    <div className="flex items-center gap-1.5">
+                      {/* Signal */}
+                      <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 3c-1.2 0-2.4.2-3.6.7L18.7 14c.5-1.2.7-2.4.7-3.6 0-4-3.3-7.4-7.4-7.4zM3.4 18.7C4.6 19.5 6 20 7.4 20h9.2L3.7 7.4C3.2 8.6 3 10 3 11.4c0 4 3.3 7.3 7.4 7.3z" />
+                      </svg>
+                      {/* Wifi */}
+                      <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 21l-12-12c2.5-2.5 6-4 9.5-4s7 1.5 9.5 4l-12 12zm0-16.5c-2.8 0-5.5 1.1-7.5 3l7.5 7.5 7.5-7.5c-2-1.9-4.7-3-7.5-3z" />
+                      </svg>
+                      {/* Battery */}
+                      <div className="w-4 h-2.5 border border-white/60 rounded-[3px] p-[1px] flex items-center">
+                        <div className="h-full w-full bg-white rounded-[1px]" />
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Mock Play Store Button inside Screen */}
-                  <div className="mt-8 mb-8 w-4/5 bg-[#1A1A1A] rounded-2xl p-3 flex items-center justify-center gap-2 relative z-10 shadow-lg">
-                    <div className="w-5 h-5 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-md flex items-center justify-center p-1">
-                      <svg viewBox="0 0 24 24" fill="white" className="w-full h-full">
-                        <path d="M5 2.5v19l15-9.5-15-9.5z" />
-                      </svg>
+                  {/* App Screen Content */}
+                  <div className="flex-1 overflow-y-auto no-scrollbar pb-6 flex flex-col">
+                    
+                    {/* Top Parliament Banner */}
+                    <div className="relative w-full h-[155px] overflow-hidden">
+                      <img 
+                        src="/app-promo/indian_parliament.png" 
+                        alt="Indian Parliament" 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-[#0F0F10]" />
                     </div>
-                    <div className="text-left">
-                      <span className="block text-[6px] font-bold text-gray-400 uppercase tracking-widest">Get it on</span>
-                      <span className="block text-xs font-display font-black text-white uppercase leading-none tracking-wide">Play Store</span>
+
+                    {/* App Brand Header */}
+                    <div className="text-center px-4 py-3 z-10 -mt-2">
+                      <h3 className="text-xs font-black tracking-tight text-[#FFD700] mb-0.5 font-display uppercase leading-tight">
+                        <span className="text-[#FFC72C] opacity-100 font-extrabold">भारतातील परीक्षांसाठी</span> <span className="text-[#E12C2C]">BK Career</span>
+                      </h3>
+                      <p className="text-[8px] text-gray-400 font-bold uppercase tracking-wider">
+                        शुरुवातीपासून शिखरापर्यंत
+                      </p>
                     </div>
+
+                    {/* Grid of Exam Category Cards */}
+                    <div className="grid grid-cols-2 gap-2.5 px-4.5 mt-2">
+                      
+                      {/* 1. UPSC Card */}
+                      <button 
+                        onClick={() => {
+                          setView('courseDetailUPSC');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="bg-white p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-gray-100/10 hover:scale-[1.05] hover:bg-red-50/50 hover:border-red-100/30 transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="w-8 h-8 bg-red-50 rounded-lg flex items-center justify-center text-[#E12C2C] mb-1.5 shadow-sm">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5 h-5">
+                            <line x1="4" y1="20" x2="20" y2="20" />
+                            <line x1="6" y1="20" x2="6" y2="9" />
+                            <line x1="18" y1="20" x2="18" y2="9" />
+                            <line x1="10" y1="20" x2="10" y2="9" />
+                            <line x1="14" y1="20" x2="14" y2="9" />
+                            <path d="M5 9h14M3 9l9-5 9 5" />
+                          </svg>
+                        </div>
+                        <span className="text-[9px] font-black text-gray-900 uppercase tracking-widest">UPSC</span>
+                      </button>
+
+                      {/* 2. MPSC Card */}
+                      <button 
+                        onClick={() => {
+                          setView('courseDetailMPSC');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="bg-white p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-gray-100/10 hover:scale-[1.05] hover:bg-blue-50/50 hover:border-blue-100/30 transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 mb-1.5 shadow-sm">
+                          {/* Solid Blue Maharashtra Geometric Map without any stars */}
+                          <svg viewBox="0 0 100 100" fill="currentColor" className="w-7 h-7 text-blue-600">
+                            <polygon points="20,42 32,32 50,34 68,26 88,32 84,54 74,64 56,72 42,64 28,58 22,48" />
+                          </svg>
+                        </div>
+                        <span className="text-[9px] font-black text-gray-900 uppercase tracking-widest">MPSC</span>
+                      </button>
+
+                      {/* 3. DEFENSE Card */}
+                      <button 
+                        onClick={() => {
+                          setView('courseDetailPolice');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="bg-white p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-gray-100/10 hover:scale-[1.05] hover:bg-amber-50/50 hover:border-amber-100/30 transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="w-8 h-8 bg-amber-50 rounded-lg flex items-center justify-center text-amber-600 mb-1.5 shadow-sm">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l6 6M15 9l-6 6" />
+                          </svg>
+                        </div>
+                        <span className="text-[9px] font-black text-gray-900 uppercase tracking-widest">DEFENSE</span>
+                      </button>
+
+                      {/* 4. GOVT EXAMS Card */}
+                      <button 
+                        onClick={() => {
+                          setView('courses');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="bg-white p-3 rounded-2xl flex flex-col items-center justify-center text-center shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-gray-100/10 hover:scale-[1.05] hover:bg-emerald-50/50 hover:border-emerald-100/30 transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 mb-1.5 shadow-sm">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20M4 19.5v-13A2.5 2.5 0 016.5 4H20v13H6.5" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M14 6h6v4h-6zM14 4v8" />
+                          </svg>
+                        </div>
+                        <span className="text-[9px] font-black text-gray-900 uppercase tracking-widest">GOVT EXAMS</span>
+                      </button>
+                    </div>
+
+                    {/* Mini App Play Store Button */}
+                    <div className="px-5 mt-auto pt-6 pb-2 flex justify-center w-full">
+                      <a 
+                        href="https://play.google.com/store/apps/details?id=co.lazarus.qzrty&pcampaignid=web_share"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full max-w-[210px] inline-flex items-center justify-center gap-3.5 px-4.5 py-3 bg-[#111111] rounded-xl border border-white/10 shadow-xl hover:scale-[1.05] hover:bg-[#222222] transition-all duration-300"
+                      >
+                        <div className="w-5.5 h-5.5 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-lg flex items-center justify-center p-1 shadow-inner">
+                          <svg viewBox="0 0 24 24" fill="white" className="w-full h-full filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)]">
+                            <path d="M5 2.5v19l15-9.5-15-9.5z" />
+                          </svg>
+                        </div>
+                        <div className="text-left leading-none">
+                          <span className="block text-[6px] text-gray-400 font-bold uppercase tracking-[0.2em] mb-0.5">GET IT ON</span>
+                          <span className="block text-[11px] font-display font-black uppercase text-white tracking-wide">Play Store</span>
+                        </div>
+                      </a>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>

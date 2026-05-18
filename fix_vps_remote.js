@@ -14,7 +14,7 @@ conn.on('ready', () => {
     echo "=== BUILDING FRONTEND ===" &&
     cd frontend && npm install && npm run build &&
     echo "=== RESTARTING BACKEND ===" &&
-    cd ../backend && npm install && node seed_upsc.js && pm2 restart bkacademy-backend
+    cd ../backend && npm install && pm2 restart bkacademy-backend
   `;
   conn.exec(script, (err, stream) => {
     if (err) throw err;

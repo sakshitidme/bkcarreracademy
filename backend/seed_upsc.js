@@ -11,7 +11,6 @@ const upscData = [
     title: 'MPSC Combined Examination',
     instructor: 'MPSC Guidance Team',
     examDate: new Date('2026-04-15'),
-    image: '/mpsc_emblem.png',
     dynamicSections: [
       {
         title: 'Eligibility (पात्रता)',
@@ -36,7 +35,6 @@ const upscData = [
     title: 'Police Bharti 2026',
     instructor: 'Physical Training Dept',
     examDate: new Date('2026-03-20'),
-    image: '/Ashok stambh.png',
     dynamicSections: [
       {
         title: 'Eligibility (पात्रता)',
@@ -60,7 +58,6 @@ const upscData = [
     title: 'Teacher Eligibility Test',
     instructor: 'Education Dept',
     examDate: new Date('2026-06-21'),
-    image: '/tewntysix.jpg',
     dynamicSections: [
       {
         title: 'Eligibility (पात्रता)',
@@ -84,7 +81,6 @@ const upscData = [
     title: 'UPSC Civil Services Examination',
     instructor: 'UPSC Expert Team',
     examDate: new Date('2026-05-31'),
-    image: '/upsc.png',
     dynamicSections: [
       {
         title: 'Eligibility (पात्रता)',
@@ -108,7 +104,6 @@ const upscData = [
     title: 'MBA CET & Management Exams',
     instructor: 'Management Department',
     examDate: new Date('2026-03-15'),
-    image: '/CET.png',
     dynamicSections: [
       {
         title: 'Eligibility (पात्रता)',

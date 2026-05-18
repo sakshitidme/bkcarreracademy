@@ -44,7 +44,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, index, onClick }
           <img 
             src={course.image} 
             alt={course.title}
-            className="w-full h-full object-contain mix-blend-multiply"
+            className="w-full h-full object-contain"
           />
         </div>
       </div>

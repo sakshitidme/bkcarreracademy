@@ -371,7 +371,7 @@ export const GOVT_RESOURCES: ExamResource[] = [
     id: 'mbacet',
     name: 'MBA CET',
     category: 'MANAGEMENT',
-    logo: '/CET MBA.png',
+    logo: '/CET.png',
     description: 'State Common Entrance Test Cell, Maharashtra official portal for MBA/MMS CET notifications, syllabus, hall tickets, and CAP counseling rounds.',
     officialWebsite: 'https://cetcell.mahacet.org/',
     resources: [

@@ -34,12 +34,52 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
   }, []);
   
   return (
-    <section className="relative min-h-[80vh] flex items-center pt-20 lg:pt-24 pb-8 bg-bg overflow-hidden">
+    <section className="relative min-h-[80vh] flex flex-col pt-12 pb-8 bg-bg overflow-hidden">
+      {/* ─── PREMIUM DYNAMIC MOTIVATIONAL QUOTE BAR ─── */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="w-full relative z-30 group"
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FFC72C]/0 via-[#FFC72C]/10 to-[#FFC72C]/0 opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+        <div className="w-full bg-[#0a0a0a]/90 backdrop-blur-xl border-y border-[#FFC72C]/30 py-5 sm:py-6 px-6 md:px-12 shadow-[0_15px_40px_rgba(255,199,44,0.15)] text-center relative overflow-hidden">
+          
+          {/* Animated Shine Effect */}
+          <motion.div 
+            animate={{ x: ['-200%', '300%'] }}
+            transition={{ repeat: Infinity, duration: 3.5, ease: "linear", repeatDelay: 3 }}
+            className="absolute top-0 bottom-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-[#FFC72C]/20 to-transparent -skew-x-12 z-0"
+          />
+
+          <div className="max-w-[1400px] mx-auto relative z-10 flex items-center justify-center">
+            <p className="text-[#FFC72C] font-display font-black text-xs sm:text-sm md:text-base lg:text-[17px] tracking-[0.08em] leading-relaxed uppercase drop-shadow-md">
+              "Motivation only gets you to the starting line. 
+              <span className="text-white font-black underline decoration-white/30 decoration-2 mx-1 transition-all duration-300 hover:text-[#FFC72C] hover:decoration-[#FFC72C] cursor-pointer">Discipline</span> 
+              is what keeps you moving when you want to quit. But 
+              <motion.span 
+                animate={{ 
+                  scale: [1, 1.05, 1], 
+                  boxShadow: ["0px 0px 0px rgba(225,44,44,0)", "0px 0px 25px rgba(225,44,44,0.7)", "0px 0px 0px rgba(225,44,44,0)"] 
+                }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="text-white bg-gradient-to-br from-[#E12C2C] to-[#b31b1b] px-4 py-1.5 rounded-md font-black tracking-[0.15em] text-[11px] md:text-xs shadow-[0_4px_15px_rgba(225,44,44,0.4)] mx-2 inline-block border border-white/20 relative z-20 cursor-default"
+              >
+                OBSESSION
+              </motion.span>
+              ? Obsession builds the 
+              <span className="text-white font-black underline decoration-white/30 decoration-2 mx-1 transition-all duration-300 hover:text-[#FFC72C] hover:decoration-[#FFC72C] cursor-pointer">empire</span> 
+              you were born to rule!"
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 transform translate-x-1/2 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
-      <div className="section-container relative z-10">
+      <div className="section-container relative z-10 my-auto mt-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           
           {/* Content Side */}
