@@ -124,7 +124,7 @@ export const Home: React.FC<HomeProps> = ({
               </p>
             </header>
 
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-2 md:px-0">
               {[...dynamicCourses, {
                 id: 'fallback-banking',
                 title: 'Banking & Financial Services',
@@ -134,7 +134,7 @@ export const Home: React.FC<HomeProps> = ({
                 isRecent: true,
                 isFallback: true
               }].slice(0, 4).map((course, index) => (
-                <div key={course._id || course.id} className="w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]">
+                <div key={course._id || course.id} className="w-[calc(50%-0.375rem)] md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]">
                   <CourseCard 
                     course={course} 
                     index={index} 
