@@ -461,31 +461,31 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* App Promotion Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#FFF9E6] to-white relative overflow-hidden border-y border-gray-100">
+      <section className="py-10 md:py-16 bg-gradient-to-br from-[#FFF9E6] to-white relative overflow-hidden border-y border-gray-100">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 blur-[120px] rounded-full pointer-events-none" />
-        <div className="section-container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="section-container relative z-10 max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             
             {/* Left Content */}
-            <div className="space-y-8 max-w-xl">
-              <div className="inline-flex px-5 py-2 bg-[#E12C2C] rounded-full shadow-lg">
-                <span className="text-[10px] font-black text-white uppercase tracking-widest">BK CAREER ACADEMY APP</span>
+            <div className="space-y-6 max-w-lg mx-auto lg:mx-0">
+              <div className="inline-flex px-4 py-1.5 bg-[#E12C2C] rounded-full shadow-md">
+                <span className="text-[9px] font-black text-white uppercase tracking-widest">BK CAREER ACADEMY APP</span>
               </div>
               
-              <h2 className="text-5xl md:text-7xl font-display font-black text-[#1A1A1A] leading-[1.1] tracking-tighter">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-[#1A1A1A] leading-[1.1] tracking-tighter">
                 BEST EXAM PREP <br />
                 <span className="text-[#E12C2C] text-glow">APP FOR</span>
               </h2>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 {['UPSC', 'MPSC', 'SSC', 'BANKING', 'POLICE'].map((pill) => (
-                  <span key={pill} className="px-5 py-2 bg-white rounded-full text-[10px] font-black text-dark uppercase tracking-widest shadow-sm">
+                  <span key={pill} className="px-4 py-1.5 bg-white rounded-full text-[9px] font-black text-dark uppercase tracking-widest shadow-sm">
                     {pill}
                   </span>
                 ))}
               </div>
 
-              <p className="text-gray-500 font-bold text-sm md:text-base leading-relaxed">
+              <p className="text-gray-500 font-bold text-xs md:text-sm leading-relaxed max-w-md">
                 Download the BK Career Academy App & enhance your exam preparation anytime, anywhere! Get access to live and recorded lectures on your fingertips.
               </p>
 
@@ -493,59 +493,58 @@ export const Home: React.FC<HomeProps> = ({
                 href="https://play.google.com/store/apps/details?id=co.lazarus.qzrty&pcampaignid=web_share"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 px-8 py-4 bg-[#1A1A1A] text-white rounded-2xl hover:bg-primary hover:text-dark transition-all duration-300 shadow-xl group"
+                className="inline-flex items-center gap-3 px-6 py-3 bg-[#1A1A1A] text-white rounded-2xl hover:bg-primary hover:text-dark transition-all duration-300 shadow-lg group"
               >
-                <div className="w-10 h-10 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-lg flex items-center justify-center p-2 group-hover:scale-110 transition-transform">
+                <div className="w-8 h-8 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-lg flex items-center justify-center p-1.5 group-hover:scale-110 transition-transform">
                   <svg viewBox="0 0 24 24" fill="white" className="w-full h-full">
                     <path d="M5 2.5v19l15-9.5-15-9.5z" />
                   </svg>
                 </div>
                 <div className="text-left">
-                  <span className="block text-[8px] font-bold text-gray-400 group-hover:text-dark/70 uppercase tracking-widest mb-0.5">Get it on</span>
-                  <span className="block text-xl font-display font-black uppercase leading-none text-white group-hover:text-dark transition-colors">Play Store</span>
+                  <span className="block text-[7px] font-bold text-gray-400 group-hover:text-dark/70 uppercase tracking-widest mb-0.5">Get it on</span>
+                  <span className="block text-lg font-display font-black uppercase leading-none text-white group-hover:text-dark transition-colors">Play Store</span>
                 </div>
               </a>
             </div>
 
             {/* Right Content - Phone Mockup */}
             <div className="relative flex justify-center lg:justify-end mt-10 lg:mt-0">
-              <div className="w-[300px] h-[600px] bg-[#1A1A1A] rounded-[3rem] p-3 shadow-2xl relative border-[4px] border-gray-800">
+              <div className="w-[260px] h-[520px] bg-[#1A1A1A] rounded-[2.5rem] p-2.5 shadow-2xl relative border-[3px] border-gray-800">
                 {/* Phone Notch */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-32 h-7 bg-[#1A1A1A] rounded-b-3xl z-20 flex justify-center items-center pb-1">
-                  <div className="w-12 h-1.5 bg-gray-800 rounded-full" />
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-28 h-6 bg-[#1A1A1A] rounded-b-2xl z-20 flex justify-center items-center pb-1">
+                  <div className="w-10 h-1 bg-gray-800 rounded-full" />
                 </div>
                 
                 {/* Screen Context */}
-                <div className="w-full h-full bg-white rounded-[2.2rem] overflow-hidden relative flex flex-col items-center pt-24 text-center">
-                  <h3 className="text-3xl font-display font-black tracking-tighter relative z-10 mb-2">
+                <div className="w-full h-full bg-white rounded-[2rem] overflow-hidden relative flex flex-col items-center pt-20 text-center">
+                  <h3 className="text-2xl font-display font-black tracking-tighter relative z-10 mb-1">
                     <span className="text-[#E12C2C]">BK Career</span>
                   </h3>
-                  <p className="text-[10px] font-bold text-dark uppercase tracking-widest max-w-[200px] relative z-10 mb-12">
+                  <p className="text-[9px] font-bold text-dark uppercase tracking-widest max-w-[160px] relative z-10 mb-8 leading-tight">
                     Your One-Stop Destination for Learning.
                   </p>
                   
                   {/* Circle Image Mockup */}
-                  <div className="w-56 h-56 rounded-full overflow-hidden relative z-10 mb-12 bg-gray-100 flex items-center justify-center shadow-lg border-8 border-gray-50 p-2">
+                  <div className="w-44 h-44 rounded-full overflow-hidden relative z-10 mb-auto bg-gray-100 flex items-center justify-center shadow-lg border-8 border-gray-50 p-2">
                      <div className="w-full h-full rounded-full overflow-hidden relative bg-gray-200">
                        <img src="/home/card1.png" alt="Student Mockup" className="absolute inset-0 w-full h-full object-cover" onError={(e) => e.currentTarget.style.display = 'none'} />
                      </div>
                   </div>
 
                   {/* Mock Play Store Button inside Screen */}
-                  <div className="mt-auto mb-10 w-4/5 bg-[#1A1A1A] rounded-2xl p-4 flex items-center justify-center gap-3 relative z-10 shadow-lg">
-                    <div className="w-6 h-6 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-md flex items-center justify-center p-1">
+                  <div className="mt-8 mb-8 w-4/5 bg-[#1A1A1A] rounded-2xl p-3 flex items-center justify-center gap-2 relative z-10 shadow-lg">
+                    <div className="w-5 h-5 bg-gradient-to-tr from-[#28509e] via-[#5b95f9] to-[#80c8ff] rounded-md flex items-center justify-center p-1">
                       <svg viewBox="0 0 24 24" fill="white" className="w-full h-full">
                         <path d="M5 2.5v19l15-9.5-15-9.5z" />
                       </svg>
                     </div>
                     <div className="text-left">
-                      <span className="block text-[7px] font-bold text-gray-400 uppercase tracking-widest">Get it on</span>
-                      <span className="block text-sm font-display font-black text-white uppercase leading-none tracking-wide">Play Store</span>
+                      <span className="block text-[6px] font-bold text-gray-400 uppercase tracking-widest">Get it on</span>
+                      <span className="block text-xs font-display font-black text-white uppercase leading-none tracking-wide">Play Store</span>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
