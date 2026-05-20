@@ -681,30 +681,32 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
         </head>
         <body class="p-8 max-w-4xl mx-auto">
           <!-- Institutional Header -->
-          <div class="grid grid-cols-3 items-start gap-4 border-b-2 border-[#800000]/10 pb-6 mb-8 relative">
+          <div class="grid grid-cols-3 items-start gap-4 border-b-2 border-[#800000]/10 pb-4 mb-6 relative">
+            <!-- Left: Branding -->
             <div class="flex flex-col items-start space-y-2">
-              <h1 class="text-2xl font-black text-[#800000] leading-tight uppercase tracking-tight">BK Educational & Welfare Society</h1>
-              <p class="text-xs font-black text-gray-500 uppercase tracking-widest">BK Group of Education</p>
+              <h1 class="text-xl font-black text-[#800000] leading-tight uppercase tracking-tight"><span class="text-red-600">BK</span> Educational & Welfare Society</h1>
+              <p class="text-xs font-black text-gray-500 uppercase tracking-widest"><span class="text-red-600">BK</span> Group of Education</p>
               <div class="flex items-center gap-1 text-[#800000] font-black mt-2">
                 <span class="text-sm tracking-widest">+91 80801 95558</span>
               </div>
             </div>
-            
+
+            <!-- Center: Logo & Tagline -->
             <div class="flex flex-col items-center text-center">
-              <p class="text-[10px] italic text-gray-800 mb-1">॥ न हि ज्ञानेन सदृशं पवित्रमिह विद्यते ॥</p>
-              <p class="text-[10px] font-black text-[#800000] uppercase tracking-widest mb-2">We Shape Careers...</p>
-              ${logoBase64 ? `<img src="${logoBase64}" class="w-20 h-20 object-contain shadow-lg rounded-xl border border-gray-100 p-2" />` : ''}
+              <p class="text-sm italic text-gray-800 mb-2">॥ न हि ज्ञानेन सदृशं पवित्रमिह विद्यते ॥</p>
+              <p class="text-base font-black text-[#800000] uppercase tracking-widest mb-2">We Shape Careers...</p>
+              ${logoBase64 ? `<img src="${logoBase64}" class="w-28 h-28 object-contain shadow-lg rounded-xl border border-gray-100 p-2" />` : ''}
             </div>
-            
+
+            <!-- Right: Reg No & Address (no label) -->
             <div class="flex flex-col items-end text-right gap-3">
               <div class="bg-[#800000]/5 border border-[#800000]/20 px-3 py-1.5 rounded-lg text-center">
                 <p class="text-[8px] font-black text-[#800000] uppercase tracking-tighter leading-none mb-0.5">Registration No</p>
                 <p class="text-sm font-black text-[#800000] leading-none">${a.registrationNo && a.registrationNo.startsWith('BK') ? `<span class="text-red-600">BK</span>${a.registrationNo.substring(2)}` : (a.registrationNo || '---')}</p>
               </div>
               <div class="max-w-[200px]">
-                <p class="text-[10px] leading-relaxed">
-                  <span class="text-[#800000] font-black uppercase tracking-widest text-[9px]">Address:</span><br/>
-                  <span class="text-gray-900 font-black uppercase tracking-tight leading-tight">2nd Floor, Gajanan Plaza, Gharpure Ghat Road, Ashok Stambh, Nashik, Maharashtra</span>
+                <p class="text-sm font-black text-gray-900 uppercase tracking-tight leading-tight text-right">
+                  2nd Floor, Gajanan Plaza, Gharpure Ghat Road, Ashok Stambh, Nashik, Maharashtra
                 </p>
               </div>
             </div>

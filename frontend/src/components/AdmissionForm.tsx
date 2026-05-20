@@ -117,15 +117,15 @@ const FileField = ({ label, name, onChange, fileName, icon: Icon, description }:
 };
 
 const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
-  <div className="p-6 pr-16 md:p-8 md:pr-20 pb-4 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 items-start gap-6 relative">
+  <div className="institutional-header p-6 pr-16 md:p-8 md:pr-20 pb-4 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 items-start gap-6 relative">
     {/* Left Branding */}
     <div className="flex flex-col items-center md:items-start print:items-start text-center md:text-left print:text-left space-y-3">
       <div>
-        <h1 className="text-2xl md:text-4xl font-serif font-black text-[#800000] leading-tight uppercase tracking-tight">
-          BK Educational & Welfare Society
+        <h1 className="text-xl md:text-3xl font-serif font-black text-[#800000] leading-tight uppercase tracking-tight">
+          <span className="text-red-600">BK</span> Educational & Welfare Society
         </h1>
-        <p className="text-xs md:text-base font-black text-brand-dark/60 uppercase tracking-[0.15em]">
-          BK Group of Education
+        <p className="text-xs md:text-sm font-black text-brand-dark/60 uppercase tracking-[0.15em]">
+          <span className="text-red-600">BK</span> Group of Education
         </p>
       </div>
       
@@ -137,13 +137,13 @@ const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
 
     {/* Center Branding / Logo */}
     <div className="flex flex-col items-center text-center order-first md:order-none print:order-none">
-      <p className="text-[10px] md:text-xs font-serif italic text-brand-dark/80 mb-2">
+      <p className="text-sm md:text-base print:text-base font-serif italic text-brand-dark/80 mb-2">
         ॥ न हि ज्ञानेन सदृशं पवित्रमिह विद्यते ॥
       </p>
-      <p className="text-[10px] md:text-sm font-black text-brand-red uppercase tracking-[0.25em] mb-2">
+      <p className="text-sm md:text-xl print:text-xl font-black text-brand-red uppercase tracking-[0.25em] mb-3">
         We Shape Careers...
       </p>
-      <div className="w-16 h-16 md:w-24 md:h-24 bg-white shadow-xl rounded-2xl p-3 md:p-4 border border-gray-50 group hover:rotate-12 transition-transform duration-500">
+      <div className="w-20 h-20 md:w-28 md:h-28 print:w-28 print:h-28 bg-white shadow-xl rounded-2xl p-3 border border-gray-50">
         <img src="/bk.png" alt="BK Logo" className="w-full h-full object-contain" />
       </div>
     </div>
@@ -157,9 +157,8 @@ const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
         </div>
       )}
       <div className="max-w-[280px]">
-        <p className="text-[10px] md:text-sm leading-relaxed">
-          <span className="text-brand-red font-black uppercase tracking-[0.15em] text-[9px] md:text-[11px]">Address:</span><br/>
-          <span className="text-brand-dark font-black uppercase tracking-tight leading-tight">
+        <p className="text-sm md:text-base leading-relaxed">
+          <span className="text-brand-dark font-black uppercase tracking-tight leading-tight text-sm md:text-base">
             2nd Floor, Gajanan Plaza, Gharpure Ghat Road, Ashok Stambh, Nashik, Maharashtra
           </span>
         </p>
@@ -377,13 +376,41 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
       <div className="min-h-screen bg-[#F0F2F5] py-12 px-4 md:px-6 print:py-0 print:px-0 print:bg-white">
         <style dangerouslySetInnerHTML={{ __html: `
           @media print {
-            html, body { height: auto !important; overflow: visible !important; background: white !important; }
+            html, body {
+              height: auto !important;
+              overflow: visible !important;
+              background: white !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            }
             .print\\:hidden { display: none !important; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            @page { margin: 0; size: A4 portrait; }
+            @page {
+              margin: 0;
+              size: A4 portrait;
+            }
+
+            /* Scale the entire page content to fit A4 */
+            body > * { display: none !important; }
+            .admission-print-root { display: block !important; }
+
+            .admission-print-root {
+              width: 210mm !important;
+              min-height: 297mm !important;
+              max-height: 297mm !important;
+              overflow: hidden !important;
+              transform: scale(0.72) !important;
+              transform-origin: top left !important;
+              position: fixed !important;
+              top: 0 !important;
+              left: 0 !important;
+              background: white !important;
+              padding: 10mm !important;
+              box-sizing: border-box !important;
+            }
           }
         `}} />
-        <div className="max-w-4xl mx-auto print:max-w-none print:w-full">
+        <div className="admission-print-root max-w-4xl mx-auto print:max-w-none print:w-full">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -394,13 +421,13 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
               <InstitutionalHeader regNo={isSuccess ? submittedRegNo : nextRegNo} />
             </div>
 
-            <div className="p-6 md:p-10 print:p-6 relative">
-              <div className="flex flex-col md:flex-row print:flex-row items-center md:items-start print:items-start justify-between gap-8 mb-12 print:mb-6">
+            <div className="content-area p-6 md:p-10 print:p-4 relative">
+              <div className="status-row flex flex-col md:flex-row print:flex-row items-center md:items-start print:items-start justify-between gap-8 mb-12 print:mb-4">
                 <div className="flex flex-col items-center md:items-start print:items-start text-center md:text-left print:text-left">
                   <div className="w-12 h-12 print:w-10 print:h-10 bg-green-50 rounded-full flex items-center justify-center mb-4 print:mb-2">
                     <CheckCircle2 size={24} className="text-green-500" />
                   </div>
-                  <h2 className="text-xl md:text-2xl font-display font-black uppercase text-brand-dark mb-1 tracking-wider">
+                  <h2 className="text-sm md:text-base font-display font-black uppercase text-brand-dark mb-1 tracking-wider">
                     {isSuccess ? "Application Submitted" : "Application Preview"}
                   </h2>
                   <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
@@ -408,23 +435,28 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
                   </p>
                 </div>
 
-                {/* Passport Photo - Positioned alongside status */}
-                {formData.photo && (
-                  <div className="w-28 h-32 bg-gray-50 rounded-xl border-2 border-brand-red/10 overflow-hidden shadow-lg z-10">
-                    <img 
-                      src={URL.createObjectURL(formData.photo)} 
-                      alt="Candidate" 
+                {/* Passport Photo - Always visible */}
+                <div className="photo-box w-36 h-44 bg-gray-50 rounded-xl border-2 border-brand-red/20 overflow-hidden shadow-lg flex-shrink-0">
+                  {formData.photo ? (
+                    <img
+                      src={URL.createObjectURL(formData.photo)}
+                      alt="Candidate"
                       className="w-full h-full object-cover"
                     />
-                  </div>
-                )}
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center text-gray-300">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                      <span className="text-[9px] font-bold uppercase mt-2 tracking-widest text-gray-400">Passport Photo</span>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Data Summary Grid */}
-              <div className="space-y-12 print:space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-x-16 gap-y-10 print:gap-y-6">
+              <div className="data-grid space-y-12 print:space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-x-16 gap-y-10 print:gap-y-4">
                   {/* Column 1: Candidate Info */}
-                  <div className="space-y-6 print:space-y-4">
+                  <div className="data-section space-y-6 print:space-y-3">
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-brand-dark border-b-2 border-brand-dark/10 pb-2">Candidate Information</h4>
                     <div className="space-y-5 print:space-y-3">
                       <SummaryItem label="Full Name" value={`${formData.salutation} ${formData.firstName} ${formData.middleName} ${formData.surname}`} />
@@ -449,7 +481,7 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-8 rounded-[30px] mt-12 print:mt-6 print:p-6">
+                <div className="declaration-box bg-gray-50 p-8 rounded-[30px] mt-12 print:mt-4 print:p-4">
                   <p className="text-[10px] font-bold text-gray-500 leading-relaxed italic text-center">
                     "I hereby declare that all information provided is true to the best of my knowledge. I agree to abide by the rules and regulations of BK Career Academy."
                   </p>
