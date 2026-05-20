@@ -144,7 +144,7 @@ const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
         We Shape Careers...
       </p>
       <div className="w-16 h-16 md:w-24 md:h-24 bg-white shadow-xl rounded-2xl p-3 md:p-4 border border-gray-50 group hover:rotate-12 transition-transform duration-500">
-        <img src="/images/about_logos/bk.png" alt="BK Logo" className="w-full h-full object-contain" />
+        <img src="/bk.png" alt="BK Logo" className="w-full h-full object-contain" />
       </div>
     </div>
 
