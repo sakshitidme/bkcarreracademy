@@ -669,165 +669,116 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
       <html>
         <head>
           <title>Admission - ${a.firstNameLocal || a.firstName} ${a.surnameLocal || a.surname}</title>
+          <script src="https://cdn.tailwindcss.com"></script>
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
           <style>
-            @page { size: A4; margin: 0; }
-            body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f0f0f0; color: #1a1a1a; -webkit-print-color-adjust: exact; }
-            .page { width: 210mm; min-height: 297mm; padding: 10mm 15mm; margin: 10mm auto; background: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; box-sizing: border-box; }
-            @media print { 
-              body { background: white; }
-              .page { margin: 0; box-shadow: none; }
+            body { font-family: 'Inter', sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; background: white; }
+            @page { margin: 0; size: A4 portrait; }
+            @media print {
+              html, body { height: auto !important; overflow: visible !important; background: white !important; }
             }
-            
-            /* Header */
-            .header-container { display: flex; flex-direction: column; align-items: center; border-bottom: 2px solid #1a1a1a; padding-bottom: 10px; margin-bottom: 15px; gap: 5px; }
-            .logo-section { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; }
-            .logo-img { width: 45px; height: 45px; object-fit: contain; }
-            .brand-text h1 { margin: 0; font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0px; color: #800000; line-height: 1.1; }
-            .brand-text h2 { margin: 0; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0px; color: #800000; line-height: 1.1; }
-            .brand-text p { margin: 0; font-size: 13px; font-weight: 900; color: #800000; line-height: 1.1; }
-            .reg-no { font-size: 9px; font-weight: 900; color: #1a1a1a; margin-top: 3px; }
-            .meta-info { text-align: center; width: 100%; display: flex; justify-content: center; gap: 15px; }
-            .meta-box { background: #1a1a1a; color: white; padding: 4px 10px; font-size: 9px; font-weight: 900; margin-bottom: 3px; border-radius: 4px; display: inline-block; }
-            .meta-label { font-size: 7px; color: #888; text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
-            
-            .form-title { text-align: center; font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 15px 0; letter-spacing: 3px; color: #1a1a1a; }
-            
-            /* Visuals */
-            .visuals-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
-            .photo-frame { width: 30mm; height: 38mm; border: 2px solid #1a1a1a; background: #fff; overflow: hidden; position: relative; }
-            .photo-img { width: 100%; height: 100%; object-fit: cover; }
-            .label-small { font-size: 7px; font-weight: 900; text-transform: uppercase; color: #888; margin-top: 2px; }
-
-            /* Sections */
-            .section { margin-bottom: 15px; border: 1px solid #eee; padding: 10px; }
-            .section-title { font-size: 9px; font-weight: 900; text-transform: uppercase; color: #fff; background: #1a1a1a; padding: 3px 8px; margin-left: -10px; margin-top: -10px; margin-bottom: 10px; width: fit-content; display: block; }
-            
-            .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 6px; }
-            .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 6px; }
-            
-            .field { margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 3px; }
-            .field-label { font-size: 7px; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 2px; }
-            .field-value { font-size: 10px; font-weight: 600; color: #1a1a1a; }
-            
-            .courses-container { display: flex; flex-wrap: wrap; gap: 4px; }
-            .course-tag { background: #1a1a1a; color: white; padding: 2px 6px; font-size: 8px; font-weight: 700; border-radius: 3px; }
-
-            .signature-box { text-align: center; border-top: 1px dashed #ccc; pt: 5px; }
-            .signature-img { height: 30px; object-fit: contain; margin-bottom: 3px; }
-
-            .footer { position: absolute; bottom: 10mm; left: 15mm; right: 15mm; border-top: 1px solid #eee; padding-top: 8px; display: flex; justify-content: space-between; font-size: 8px; color: #666; }
-            .contact-info { display: flex; flex-direction: column; gap: 2px; }
-            .contact-info span { font-weight: 700; color: #1a1a1a; }
           </style>
         </head>
-        <body>
-          <div class="page">
-            <div class="header-container">
-              <div class="logo-section">
-                ${logoBase64 ? `<img src="${logoBase64}" class="logo-img" />` : ''}
-                <div class="brand-text" style="text-align: center; flex-grow: 1;">
-                  <h1><span className="text-red-600">बीके</span> एज्युकेशनल अँड वेल्फेअर सोसायटी</h1>
-                  <h2><span className="text-red-600">बीके</span> ग्रुप ऑफ एज्युकेशन</h2>
-                  <p><span className="text-red-600">BK</span> EDUCATIONAL & WELFARE SOCIETY</p>
-                  <p><span className="text-red-600">BK</span> GROUP OF EDUCATION</p>
-                  <div class="reg-no">Reg. No. : F-12121/Nashik/Maharashtra</div>
-                </div>
-              </div>
-              <div class="meta-info">
-                <div>
-                  <div class="meta-label">Registration Number</div>
-                  <div class="meta-box">${a.registrationNo && a.registrationNo.startsWith('BK') ? `<span style="color: #ff0000;">BK</span>${a.registrationNo.substring(2)}` : (a.registrationNo || 'LOADING...')}</div>
-                </div>
-                <div>
-                  <div class="meta-label">Form Number</div>
-                  <div class="meta-box">${a.formNo || 'LOADING...'}</div>
-                </div>
-                <div style="font-size: 9px; font-weight: 900; color: #1a1a1a; display: flex; align-items: center; height: 32px;">DATE: ${new Date(a.createdAt).toISOString().split('T')[0]}</div>
+        <body class="p-8 max-w-4xl mx-auto">
+          <!-- Institutional Header -->
+          <div class="grid grid-cols-3 items-start gap-4 border-b-2 border-[#800000]/10 pb-6 mb-8 relative">
+            <div class="flex flex-col items-start space-y-2">
+              <h1 class="text-2xl font-black text-[#800000] leading-tight uppercase tracking-tight">BK Educational & Welfare Society</h1>
+              <p class="text-xs font-black text-gray-500 uppercase tracking-widest">BK Group of Education</p>
+              <div class="flex items-center gap-1 text-[#800000] font-black mt-2">
+                <span class="text-sm tracking-widest">+91 80801 95558</span>
               </div>
             </div>
-
-            <div class="visuals-row">
-              <div style="flex-grow: 1; margin-bottom: 10px;">
-                <div class="form-title" style="text-align: left; margin: 0; font-size: 22px; border-bottom: 2px solid #1a1a1a; display: inline-block; padding-right: 40px;">Student Admission Record</div>
-                <div style="margin-top: 8px; font-size: 9px; color: #666; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                  Official Academy Copy - Session 2026-27<br/>
-                  Record Fetched from BK Admin Portal
-                </div>
-              </div>
-              <div style="display: flex; flex-direction: column; align-items: center;">
-                <div class="photo-frame">
-                  ${photoBase64 ? `<img src="${photoBase64}" class="photo-img" />` : '<div style="height:100%; display:flex; align-items:center; justify-content:center; color:#ccc; font-size:8px;">PHOTO</div>'}
-                </div>
-                <div class="label-small">Passport Photo</div>
-              </div>
+            
+            <div class="flex flex-col items-center text-center">
+              <p class="text-[10px] italic text-gray-800 mb-1">॥ न हि ज्ञानेन सदृशं पवित्रमिह विद्यते ॥</p>
+              <p class="text-[10px] font-black text-[#800000] uppercase tracking-widest mb-2">We Shape Careers...</p>
+              ${logoBase64 ? `<img src="${logoBase64}" class="w-20 h-20 object-contain shadow-lg rounded-xl border border-gray-100 p-2" />` : ''}
             </div>
-
-            <div class="section">
-              <div class="section-title">Selected Programs</div>
-              <div style="font-weight: 900; font-size: 10px; margin-bottom: 5px; color: #E89C10; text-transform: uppercase;">Category: ${a.examCategory || 'Competitive Exams'}</div>
-              <div class="courses-container">
-                ${courses.map(c => `<span class="course-tag">${c}</span>`).join('')}
+            
+            <div class="flex flex-col items-end text-right gap-3">
+              <div class="bg-[#800000]/5 border border-[#800000]/20 px-3 py-1.5 rounded-lg text-center">
+                <p class="text-[8px] font-black text-[#800000] uppercase tracking-tighter leading-none mb-0.5">Registration No</p>
+                <p class="text-sm font-black text-[#800000] leading-none">${a.registrationNo && a.registrationNo.startsWith('BK') ? `<span class="text-red-600">BK</span>${a.registrationNo.substring(2)}` : (a.registrationNo || '---')}</p>
               </div>
-            </div>
-
-            <div class="section">
-              <div class="section-title">Personal Details</div>
-              <div class="grid-3">
-                <div class="field"><div class="field-label">Surname (Local)</div><div class="field-value">${a.surnameLocal || a.surname || '---'}</div></div>
-                <div class="field"><div class="field-label">First Name (Local)</div><div class="field-value">${a.firstNameLocal || a.firstName || '---'}</div></div>
-                <div class="field"><div class="field-label">Middle Name (Local)</div><div class="field-value">${a.middleNameLocal || a.middleName || '---'}</div></div>
-              </div>
-              <div class="field"><div class="field-label">School / College Name</div><div class="field-value">${a.schoolName}</div></div>
-              <div class="grid-3">
-                <div class="field"><div class="field-label">Father's Name</div><div class="field-value">${a.fatherName}</div></div>
-                <div class="field"><div class="field-label">Mother's Name</div><div class="field-value">${a.motherName}</div></div>
-                <div class="field"><div class="field-label">Mother Tongue</div><div class="field-value">${a.motherTongue}</div></div>
-              </div>
-              <div class="grid-3">
-                <div class="field"><div class="field-label">Date of Birth</div><div class="field-value">${a.dob}</div></div>
-                <div class="field"><div class="field-label">Age</div><div class="field-value">${a.age || '---'}</div></div>
-                <div class="field"><div class="field-label">Gender</div><div class="field-value">${a.gender}</div></div>
-              </div>
-            </div>
-
-            <div class="section">
-              <div class="section-title">Contact & Social Details</div>
-              <div class="grid-2">
-                <div class="field"><div class="field-label">Mobile (Student)</div><div class="field-value">${a.mobileSelf}</div></div>
-                <div class="field"><div class="field-label">Email Address</div><div class="field-value">${a.email}</div></div>
-              </div>
-              <div class="grid-3">
-                <div class="field"><div class="field-label">Social Category</div><div class="field-value">${a.category}</div></div>
-                <div class="field"><div class="field-label">Father's Mobile</div><div class="field-value">${a.fatherMobile || '---'}</div></div>
-                <div class="field"><div class="field-label">Place</div><div class="field-value">${a.place}</div></div>
-              </div>
-            </div>
-
-            <div style="display: flex; justify-content: flex-end; margin-top: 15px; margin-right: 20px;">
-              <div class="signature-box">
-                ${sigBase64 ? `<img src="${sigBase64}" class="signature-img" />` : '<div style="height:30px;"></div>'}
-                <div class="label-small" style="border-top: 1px solid #1a1a1a; padding-top: 5px;">Student Signature</div>
-              </div>
-            </div>
-
-            <div class="footer">
-              <div class="contact-info">
-                <div>OFFICE PH: <span>0253-2313962</span></div>
-                <div>CELL: <span>9890633962</span></div>
-                <div>EMAIL: <span>bkgroupofeducation@gmail.com</span></div>
-              </div>
-              <div style="text-align: right;">
-                <div style="font-weight: 800;">www.bkcareeracademy.in</div>
-                <div style="font-size: 7px; color: #999; margin-top: 3px;">RECORD FETCHED FROM BK ADMIN PORTAL</div>
+              <div class="max-w-[200px]">
+                <p class="text-[10px] leading-relaxed">
+                  <span class="text-[#800000] font-black uppercase tracking-widest text-[9px]">Address:</span><br/>
+                  <span class="text-gray-900 font-black uppercase tracking-tight leading-tight">2nd Floor, Gajanan Plaza, Gharpure Ghat Road, Ashok Stambh, Nashik, Maharashtra</span>
+                </p>
               </div>
             </div>
           </div>
+
+          <!-- Application Status & Photo -->
+          <div class="flex justify-between items-start mb-10">
+            <div>
+              <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center mb-3">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h2 class="text-2xl font-black uppercase text-gray-900 mb-1 tracking-wider">Application Record</h2>
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Official Record Fetched from Admin Portal</p>
+            </div>
+            ${photoBase64 ? `
+              <div class="w-28 h-32 bg-gray-50 rounded-xl border-2 border-[#800000]/10 overflow-hidden shadow-lg">
+                <img src="${photoBase64}" class="w-full h-full object-cover"/>
+              </div>
+            ` : '<div class="w-28 h-32 border-2 border-gray-200 border-dashed rounded-xl flex items-center justify-center text-[8px] text-gray-400 font-bold">PHOTO</div>'}
+          </div>
+
+          <!-- Data Grid -->
+          <div class="grid grid-cols-2 gap-12 mb-10">
+            <!-- Candidate Info -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-black uppercase tracking-widest text-gray-900 border-b-2 border-gray-200 pb-2">Candidate Information</h4>
+              <div class="space-y-3">
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Full Name</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.salutation || ''} ${a.firstNameLocal || a.firstName} ${a.middleNameLocal || a.middleName || ''} ${a.surnameLocal || a.surname}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Date of Birth</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.dob} (${a.age} Years)</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Gender</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.gender || '---'}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">School/College</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.schoolName || '---'}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Phone</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.mobileSelf}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Parent's Phone</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.fatherMobile || a.mobileParents || '---'}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Email</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.email || '---'}</p></div>
+              </div>
+            </div>
+            
+            <!-- Academic Selection -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-black uppercase tracking-widest text-gray-900 border-b-2 border-gray-200 pb-2">Academic Selection</h4>
+              <div class="space-y-3">
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Target Exam</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.examCategory || '---'}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Specific Course</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${courses.join(', ') || '---'}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Learning Mode</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.learningMode || '---'}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Category</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.category || '---'}</p></div>
+                <div><p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">Place</p><p class="font-bold text-gray-900 uppercase tracking-tight text-sm">${a.place || '---'}</p></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Declaration & Signature -->
+          <div class="bg-gray-50 p-6 rounded-[30px]">
+            <p class="text-[10px] font-bold text-gray-500 leading-relaxed italic text-center mb-6">
+              "I hereby declare that all information provided is true to the best of my knowledge. I agree to abide by the rules and regulations of BK Career Academy."
+            </p>
+            <div class="flex justify-between items-end border-t border-gray-200 pt-4">
+              <div>
+                <p class="text-[10px] font-black uppercase text-gray-900 tracking-tighter">Submission Date</p>
+                <p class="text-xs font-bold text-gray-500">${new Date(a.createdAt || new Date()).toLocaleDateString()}</p>
+              </div>
+              <div class="text-center flex flex-col items-center">
+                ${sigBase64 ? `<img src="${sigBase64}" class="h-10 object-contain mb-1" />` : '<div class="h-10 mb-1"></div>'}
+                <div class="w-32 h-0.5 bg-gray-300 mb-2"></div>
+                <p class="text-[9px] font-black uppercase tracking-widest text-gray-900">Candidate Signature</p>
+              </div>
+            </div>
+          </div>
+          
           <script>
             window.onload = () => {
+              // Wait for Tailwind to process
               setTimeout(() => {
                 window.print();
-                // window.close();
-              }, 1000);
+              }, 2000);
             };
           </script>
         </body>
