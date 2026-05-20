@@ -652,7 +652,7 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
     
     let logoBase64 = '';
     try {
-      const response = await fetch('/SanskarLogopage-BuCH7rsc.jpg');
+      const response = await fetch('/images/about_logos/bk.png');
       const blob = await response.blob();
       logoBase64 = await getBase64FromUrl(URL.createObjectURL(blob));
     } catch (e) {}
