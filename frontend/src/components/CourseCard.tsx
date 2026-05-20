@@ -40,7 +40,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, index, onClick }
 
       {/* Image/Logo */}
       <div className="flex justify-center mb-3">
-        <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-50 flex items-center justify-center p-1.5 group-hover:bg-primary/10 transition-colors">
+        <div className="w-36 h-36 md:w-40 md:h-40 flex items-center justify-center overflow-hidden">
           <img 
             src={course.image} 
             alt={course.title}

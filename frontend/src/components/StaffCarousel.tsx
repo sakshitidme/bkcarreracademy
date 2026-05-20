@@ -27,16 +27,20 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
   const totalItems = staff.length;
   
   // Responsive card widths
-  // Mobile: 100% width
-  // MD: 45% (to show 2 cards + portion of 3rd)
+  // Responsive card widths
+  // TV & Large PCs: 30% (3 cards)
+  // MD: 45% (2 cards)
+  // Mobile: 85% (1 card)
   const getCardWidth = () => {
     if (typeof window === 'undefined') return 100;
-    if (window.innerWidth >= 768) return 45; // md: 2 cards + peek
-    return 85; // mobile: 1 card + peek
+    if (window.innerWidth >= 1200) return 30; // lg: 3 cards
+    if (window.innerWidth >= 768) return 45; // md: 2 cards
+    return 85; // mobile: 1 card
   };
 
   const getCenterOffset = () => {
     if (typeof window === 'undefined') return 0;
+    if (window.innerWidth >= 1200) return 5; // lg: (100 - 30*3) / 2 = 5%
     if (window.innerWidth >= 768) return 5; // md: (100 - 45*2) / 2 = 5%
     return 7.5; // mobile: (100 - 85) / 2 = 7.5%
   };
@@ -73,9 +77,9 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
     }
   };
 
-  // Autoplay — slow, non-stop drift (9 s between cards so it feels spacious)
+  // Autoplay — slides every 2 seconds
   useEffect(() => {
-    autoplayRef.current = setInterval(handleNext, 9000);
+    autoplayRef.current = setInterval(handleNext, 2000);
     return () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current);
     };
@@ -83,7 +87,7 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
 
   const resetAutoplay = () => {
     if (autoplayRef.current) clearInterval(autoplayRef.current);
-    autoplayRef.current = setInterval(handleNext, 5000);
+    autoplayRef.current = setInterval(handleNext, 2000);
   };
 
   return (
@@ -139,7 +143,7 @@ export const StaffCarousel: React.FC<StaffCarouselProps> = ({ staff }) => {
         {items.map((member, idx) => {
           // Calculate if this item is the 'centered' one
           // Since currentIndex is the leftmost visible card, the center one depends on visible cards
-          const cardsInView = window.innerWidth >= 768 ? 2 : 1;
+          const cardsInView = window.innerWidth >= 1200 ? 3 : (window.innerWidth >= 768 ? 2 : 1);
           // For 2 cards in view, we consider the one closest to the middle. 
           // For infinite scroll, we compare relative to currentIndex
           const relativeIndex = idx;

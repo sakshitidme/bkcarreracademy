@@ -85,9 +85,9 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
               Empowering students since 2009 with elite coaching for UPSC, MPSC, and other competitive exams. Your success is our primary goal.
             </p>
             <div className="flex gap-4">
-              <SocialIcon Icon={Facebook} href="https://www.facebook.com/profile.php?id=61581568062602" />
-              <SocialIcon Icon={Instagram} href="https://www.instagram.com/bk_groupofeducation/" />
-              <SocialIcon Icon={XIcon} href="https://x.com/BKTimesNews" />
+              <SocialIcon Icon={Facebook} href="https://www.facebook.com/profile.php?id=100068842752945" />
+              <SocialIcon Icon={Instagram} href="https://www.instagram.com/bkcareeracademy/" />
+              <SocialIcon Icon={Linkedin} href="https://www.linkedin.com/company/108667111/admin/dashboard/" />
               <SocialIcon Icon={Youtube} href="https://www.youtube.com/@bkcareeracademy2025" />
             </div>
           </div>

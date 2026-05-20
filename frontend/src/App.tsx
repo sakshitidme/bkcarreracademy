@@ -210,6 +210,13 @@ export default function App() {
     }
   }, [location]);
 
+  // Scroll to absolute top on route/pathname change
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
+
   const handleLeadLogin = (data: any, skip: boolean = false) => {
     localStorage.setItem("bk_authorized_user", JSON.stringify({ ...data, isGuest: skip, ts: new Date().toISOString() }));
     setIsAuthorized(true);

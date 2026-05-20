@@ -166,7 +166,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5 }}
-                    href="https://play.google.com/store/apps/details?id=co.lazarus.qzrty&pcampaignid=web_share"
+                    href="https://play.google.com/store/apps/details?id=co.lazarus.nqvxi"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hidden sm:flex items-center gap-4 p-4 bg-white border border-gray-100 rounded-3xl shadow-xl hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 group min-w-[200px]"

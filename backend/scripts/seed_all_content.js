@@ -118,7 +118,7 @@ async function seed() {
         section: 'courses',
         title: 'UPSC Civil Services (IAS, IPS, IFS)',
         category: 'Civil Services',
-        instructor: 'Dr. Arjun Sharma',
+        instructor: 'Nandakishor Ghuge',
         image: '/home/card1.png',
         isFeatured: true,
         dynamicSections: [
@@ -129,7 +129,7 @@ async function seed() {
         section: 'courses',
         title: 'MPSC Rajyaseva Batch',
         category: 'MPSC',
-        instructor: 'Dnayneshwar Sapkal',
+        instructor: 'Dnyaneshwar Nikalje',
         image: '/mpsc_emblem.png',
         isFeatured: true,
         dynamicSections: [
@@ -140,7 +140,7 @@ async function seed() {
         section: 'courses',
         title: 'Banking & IBPS Mastery',
         category: 'Banking',
-        instructor: 'Meera Deshmukh',
+        instructor: 'Preeti Dube',
         image: '/banking.jpg',
         isFeatured: true,
         dynamicSections: [
@@ -151,7 +151,7 @@ async function seed() {
         section: 'courses',
         title: 'Police Bharti Special',
         category: 'Police',
-        instructor: 'Academy Team',
+        instructor: 'Dnyaneshwar Rathod',
         image: '/Ashok stambh.png',
         isFeatured: true,
         dynamicSections: [

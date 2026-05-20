@@ -6,7 +6,6 @@ import HomeHero from '../components/HomeHero';
 import CourseCard from '../components/CourseCard';
 import SkeletonCard from '../components/SkeletonCard';
 import StaffCarousel from '../components/StaffCarousel';
-import SettingsPanel from '../components/SettingsPanel';
 import { STAFF } from '../data/constants';
 import { Story } from '../data/stories';
 
@@ -42,6 +41,11 @@ const FAQ_DATA = {
     { q: "What is the difference between IBPS PO and Clerk?", a: "PO (Probationary Officer) is a managerial level post with a 2-stage exam + interview, while Clerk is an entry-level post with 2-stage exam and no interview." },
     { q: "How often are banking exams conducted?", a: "Major banking exams like IBPS PO, Clerk, RRB, and SBI PO/Clerk are conducted annually, usually between August and January." },
     { q: "What is the importance of Banking Awareness?", a: "Banking Awareness and General Awareness are crucial for the Mains examination and play a significant role in final selection and interviews." }
+  ],
+  POLICE: [
+    { q: "What is the educational qualification for Police Bharti?", a: "Candidates must have passed 12th standard (HSC) or equivalent from a recognized board in Maharashtra or other states." },
+    { q: "What are the stages of the Police Bharti selection process?", a: "The selection process consists of two stages: a Physical Ground Test (50 marks) and a Written Examination (100 marks). Selection is based on the combined merit score." },
+    { q: "What are the physical standards required for male and female candidates?", a: "For male candidates, the minimum height is 165 cm and chest must be 79 cm (with minimum 5 cm expansion). For female candidates, the minimum height is 155 cm." }
   ]
 };
 
@@ -532,7 +536,7 @@ export const Home: React.FC<HomeProps> = ({
                 </button>
 
                 <a 
-                  href="https://play.google.com/store/apps/details?id=co.lazarus.qzrty&pcampaignid=web_share"
+                  href="https://play.google.com/store/apps/details?id=co.lazarus.nqvxi"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-4 px-6 py-4 bg-[#111111] hover:bg-[#222222] text-white rounded-2xl transition-all duration-300 shadow-[0_12px_24px_rgba(0,0,0,0.1)] hover:shadow-[0_16px_32px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 group border border-white/5"
@@ -749,7 +753,7 @@ export const Home: React.FC<HomeProps> = ({
                     {/* Mini App Play Store Button */}
                     <div className="px-5 mt-auto pt-6 pb-2 flex justify-center w-full">
                       <a 
-                        href="https://play.google.com/store/apps/details?id=co.lazarus.qzrty&pcampaignid=web_share"
+                        href="https://play.google.com/store/apps/details?id=co.lazarus.nqvxi"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full max-w-[210px] inline-flex items-center justify-center gap-3.5 px-4.5 py-3 bg-[#111111] rounded-xl border border-white/10 shadow-xl hover:scale-[1.05] hover:bg-[#222222] transition-all duration-300"
@@ -775,13 +779,6 @@ export const Home: React.FC<HomeProps> = ({
         </div>
       </section>
 
-      {/* System Preferences / Settings Panel */}
-      <section className="py-12 bg-bg border-t border-gray-100 dark:border-white/5">
-        <div className="section-container max-w-4xl">
-          <SettingsPanel />
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="pt-6 pb-8 md:pb-12 bg-bg">
         <div className="section-container max-w-4xl">
@@ -791,7 +788,7 @@ export const Home: React.FC<HomeProps> = ({
             </h2>
             
             <div className="flex flex-wrap justify-center gap-2 mt-8">
-               {['MPSC', 'UPSC', 'SSC', 'BANK'].map(cat => (
+               {['MPSC', 'UPSC', 'SSC', 'BANK', 'POLICE'].map(cat => (
                  <button 
                   key={cat}
                   onClick={() => setFaqCategory(cat)}

@@ -9,7 +9,8 @@ const upscData = [
     category: 'psi',
     subCategory: 'MPSC Combined Group B & C',
     title: 'MPSC Combined Examination',
-    instructor: 'MPSC Guidance Team',
+    instructor: 'Dnyaneshwar Nikalje',
+    image: '/mpsc_emblem.png',
     examDate: new Date('2026-04-15'),
     dynamicSections: [
       {
@@ -33,7 +34,8 @@ const upscData = [
     category: 'police',
     subCategory: 'HSC Level Recruitment',
     title: 'Police Bharti 2026',
-    instructor: 'Physical Training Dept',
+    instructor: 'Dnyaneshwar Rathod',
+    image: '/Ashok stambh.png',
     examDate: new Date('2026-03-20'),
     dynamicSections: [
       {
@@ -56,7 +58,8 @@ const upscData = [
     category: 'tet',
     subCategory: 'MAHA TET / CTET',
     title: 'Teacher Eligibility Test',
-    instructor: 'Education Dept',
+    instructor: 'Preeti Dube',
+    image: '/tewntysix.jpg',
     examDate: new Date('2026-06-21'),
     dynamicSections: [
       {
@@ -79,7 +82,8 @@ const upscData = [
     category: 'UPSC (IAS, IPS, IFS)',
     subCategory: 'UPSC Civil Services',
     title: 'UPSC Civil Services Examination',
-    instructor: 'UPSC Expert Team',
+    instructor: 'Nandakishor Ghuge',
+    image: '/upsc.png',
     examDate: new Date('2026-05-31'),
     dynamicSections: [
       {
@@ -102,7 +106,8 @@ const upscData = [
     category: 'MBA CET & Management Exams',
     subCategory: 'Management Entrance',
     title: 'MBA CET & Management Exams',
-    instructor: 'Management Department',
+    instructor: 'Sushant Dughad',
+    image: '/CET.png',
     examDate: new Date('2026-03-15'),
     dynamicSections: [
       {
