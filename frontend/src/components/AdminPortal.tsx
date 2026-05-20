@@ -672,50 +672,50 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
           <style>
             @page { size: A4; margin: 0; }
             body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f0f0f0; color: #1a1a1a; -webkit-print-color-adjust: exact; }
-            .page { width: 210mm; min-height: 297mm; padding: 15mm; margin: 10mm auto; background: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; box-sizing: border-box; }
+            .page { width: 210mm; min-height: 297mm; padding: 10mm 15mm; margin: 10mm auto; background: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; box-sizing: border-box; }
             @media print { 
               body { background: white; }
               .page { margin: 0; box-shadow: none; }
             }
             
             /* Header */
-            .header-container { display: flex; flex-direction: column; align-items: center; border-bottom: 3px solid #1a1a1a; padding-bottom: 15px; margin-bottom: 20px; gap: 10px; }
-            .logo-section { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
-            .logo-img { width: 50px; height: 50px; object-fit: contain; }
-            .brand-text h1 { margin: 0; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 0px; color: #800000; line-height: 1.2; }
-            .brand-text h2 { margin: 0; font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 0px; color: #800000; line-height: 1.2; }
-            .brand-text p { margin: 0; font-size: 14px; font-weight: 900; color: #800000; line-height: 1.2; }
-            .reg-no { font-size: 10px; font-weight: 900; color: #1a1a1a; margin-top: 5px; }
-            .meta-info { text-align: center; width: 100%; display: flex; justify-content: center; gap: 20px; }
-            .meta-box { background: #1a1a1a; color: white; padding: 5px 12px; font-size: 10px; font-weight: 900; margin-bottom: 5px; border-radius: 4px; display: inline-block; }
+            .header-container { display: flex; flex-direction: column; align-items: center; border-bottom: 2px solid #1a1a1a; padding-bottom: 10px; margin-bottom: 15px; gap: 5px; }
+            .logo-section { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; }
+            .logo-img { width: 45px; height: 45px; object-fit: contain; }
+            .brand-text h1 { margin: 0; font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 0px; color: #800000; line-height: 1.1; }
+            .brand-text h2 { margin: 0; font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0px; color: #800000; line-height: 1.1; }
+            .brand-text p { margin: 0; font-size: 13px; font-weight: 900; color: #800000; line-height: 1.1; }
+            .reg-no { font-size: 9px; font-weight: 900; color: #1a1a1a; margin-top: 3px; }
+            .meta-info { text-align: center; width: 100%; display: flex; justify-content: center; gap: 15px; }
+            .meta-box { background: #1a1a1a; color: white; padding: 4px 10px; font-size: 9px; font-weight: 900; margin-bottom: 3px; border-radius: 4px; display: inline-block; }
             .meta-label { font-size: 7px; color: #888; text-transform: uppercase; margin-bottom: 2px; font-weight: 700; }
             
-            .form-title { text-align: center; font-size: 18px; font-weight: 900; text-transform: uppercase; margin: 20px 0; letter-spacing: 4px; color: #1a1a1a; }
+            .form-title { text-align: center; font-size: 16px; font-weight: 900; text-transform: uppercase; margin: 15px 0; letter-spacing: 3px; color: #1a1a1a; }
             
             /* Visuals */
-            .visuals-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
-            .photo-frame { width: 32mm; height: 42mm; border: 2px solid #1a1a1a; background: #fff; overflow: hidden; position: relative; }
+            .visuals-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
+            .photo-frame { width: 30mm; height: 38mm; border: 2px solid #1a1a1a; background: #fff; overflow: hidden; position: relative; }
             .photo-img { width: 100%; height: 100%; object-fit: cover; }
-            .label-small { font-size: 7px; font-weight: 900; text-transform: uppercase; color: #888; margin-top: 4px; }
+            .label-small { font-size: 7px; font-weight: 900; text-transform: uppercase; color: #888; margin-top: 2px; }
 
             /* Sections */
-            .section { margin-bottom: 20px; border: 1px solid #eee; padding: 12px; }
-            .section-title { font-size: 10px; font-weight: 900; text-transform: uppercase; color: #fff; background: #1a1a1a; padding: 4px 10px; margin-left: -12px; margin-top: -12px; margin-bottom: 15px; width: fit-content; display: block; }
+            .section { margin-bottom: 15px; border: 1px solid #eee; padding: 10px; }
+            .section-title { font-size: 9px; font-weight: 900; text-transform: uppercase; color: #fff; background: #1a1a1a; padding: 3px 8px; margin-left: -10px; margin-top: -10px; margin-bottom: 10px; width: fit-content; display: block; }
             
-            .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 10px; }
-            .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
+            .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 6px; }
+            .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 6px; }
             
-            .field { margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 4px; }
-            .field-label { font-size: 8px; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 2px; }
-            .field-value { font-size: 11px; font-weight: 600; color: #1a1a1a; }
+            .field { margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 3px; }
+            .field-label { font-size: 7px; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 2px; }
+            .field-value { font-size: 10px; font-weight: 600; color: #1a1a1a; }
             
-            .courses-container { display: flex; flex-wrap: wrap; gap: 5px; }
-            .course-tag { background: #1a1a1a; color: white; padding: 3px 8px; font-size: 9px; font-weight: 700; border-radius: 3px; }
+            .courses-container { display: flex; flex-wrap: wrap; gap: 4px; }
+            .course-tag { background: #1a1a1a; color: white; padding: 2px 6px; font-size: 8px; font-weight: 700; border-radius: 3px; }
 
-            .signature-box { text-align: center; border-top: 1px dashed #ccc; pt: 10px; }
-            .signature-img { height: 35px; object-fit: contain; margin-bottom: 5px; }
+            .signature-box { text-align: center; border-top: 1px dashed #ccc; pt: 5px; }
+            .signature-img { height: 30px; object-fit: contain; margin-bottom: 3px; }
 
-            .footer { position: absolute; bottom: 15mm; left: 15mm; right: 15mm; border-top: 1px solid #eee; padding-top: 10px; display: flex; justify-content: space-between; font-size: 9px; color: #666; }
+            .footer { position: absolute; bottom: 10mm; left: 15mm; right: 15mm; border-top: 1px solid #eee; padding-top: 8px; display: flex; justify-content: space-between; font-size: 8px; color: #666; }
             .contact-info { display: flex; flex-direction: column; gap: 2px; }
             .contact-info span { font-weight: 700; color: #1a1a1a; }
           </style>
@@ -803,9 +803,9 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
               </div>
             </div>
 
-            <div style="display: flex; justify-content: flex-end; margin-top: 30px; margin-right: 20px;">
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px; margin-right: 20px;">
               <div class="signature-box">
-                ${sigBase64 ? `<img src="${sigBase64}" class="signature-img" />` : '<div style="height:35px;"></div>'}
+                ${sigBase64 ? `<img src="${sigBase64}" class="signature-img" />` : '<div style="height:30px;"></div>'}
                 <div class="label-small" style="border-top: 1px solid #1a1a1a; padding-top: 5px;">Student Signature</div>
               </div>
             </div>
