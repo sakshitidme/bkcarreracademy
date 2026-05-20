@@ -390,14 +390,14 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
             className="bg-white rounded-[40px] shadow-2xl overflow-hidden border border-white print:rounded-none print:shadow-none print:border-none print:p-8"
           >
             {/* Header in PDF */}
-            <div className="border-b-2 border-brand-red/10 relative pt-16 md:pt-10">
+            <div className="border-b-2 border-brand-red/10 relative pt-16 md:pt-10 print:pt-4">
               <InstitutionalHeader regNo={isSuccess ? submittedRegNo : nextRegNo} />
             </div>
 
-            <div className="p-6 md:p-10 relative">
-              <div className="flex flex-col md:flex-row print:flex-row items-center md:items-start print:items-start justify-between gap-8 mb-12">
+            <div className="p-6 md:p-10 print:p-6 relative">
+              <div className="flex flex-col md:flex-row print:flex-row items-center md:items-start print:items-start justify-between gap-8 mb-12 print:mb-6">
                 <div className="flex flex-col items-center md:items-start print:items-start text-center md:text-left print:text-left">
-                  <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 print:w-10 print:h-10 bg-green-50 rounded-full flex items-center justify-center mb-4 print:mb-2">
                     <CheckCircle2 size={24} className="text-green-500" />
                   </div>
                   <h2 className="text-xl md:text-2xl font-display font-black uppercase text-brand-dark mb-1 tracking-wider">
@@ -421,12 +421,12 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
               </div>
 
               {/* Data Summary Grid */}
-              <div className="space-y-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-x-16 gap-y-10">
+              <div className="space-y-12 print:space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-x-16 gap-y-10 print:gap-y-6">
                   {/* Column 1: Candidate Info */}
-                  <div className="space-y-6">
+                  <div className="space-y-6 print:space-y-4">
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-brand-dark border-b-2 border-brand-dark/10 pb-2">Candidate Information</h4>
-                    <div className="space-y-5">
+                    <div className="space-y-5 print:space-y-3">
                       <SummaryItem label="Full Name" value={`${formData.salutation} ${formData.firstName} ${formData.middleName} ${formData.surname}`} />
                       <SummaryItem label="Date of Birth" value={`${formData.dob} (${formData.age} Years)`} />
                       <SummaryItem label="Gender" value={formData.gender} />
@@ -438,9 +438,9 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
                   </div>
 
                   {/* Column 2: Academic Selection */}
-                  <div className="space-y-6">
+                  <div className="space-y-6 print:space-y-4">
                     <h4 className="text-xs font-black uppercase tracking-[0.2em] text-brand-dark border-b-2 border-brand-dark/10 pb-2">Academic Selection</h4>
-                    <div className="space-y-5">
+                    <div className="space-y-5 print:space-y-3">
                       <SummaryItem label="Target Exam" value={formData.targetExam} />
                       <SummaryItem label="Specific Course" value={formData.subCourse} />
                       <SummaryItem label="Learning Mode" value={formData.learningMode} />
@@ -449,11 +449,11 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
                   </div>
                 </div>
 
-                <div className="bg-gray-50 p-8 rounded-[30px] mt-12">
+                <div className="bg-gray-50 p-8 rounded-[30px] mt-12 print:mt-6 print:p-6">
                   <p className="text-[10px] font-bold text-gray-500 leading-relaxed italic text-center">
                     "I hereby declare that all information provided is true to the best of my knowledge. I agree to abide by the rules and regulations of BK Career Academy."
                   </p>
-                  <div className="mt-10 flex justify-between items-end border-t border-gray-100 pt-6">
+                  <div className="mt-10 flex justify-between items-end border-t border-gray-100 pt-6 print:mt-6 print:pt-4">
                     <div>
                       <p className="text-[10px] font-black uppercase text-brand-dark tracking-tighter">Submission Date</p>
                       <p className="text-xs font-bold text-gray-400">{new Date().toLocaleDateString()}</p>
