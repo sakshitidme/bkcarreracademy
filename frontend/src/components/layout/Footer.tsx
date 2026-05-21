@@ -126,6 +126,14 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
                   Maharashtra 422002
                 </p>
               </div>
+              <div className="flex gap-3 items-start pt-4 border-t border-dashed border-gray-200">
+                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
+                <p className="text-sm text-body leading-relaxed">
+                  <span className="font-bold text-dark">BK Education & Welfare Society</span><br />
+                  Ganeshwadi, Panchavati,<br />
+                  Nashik, Maharashtra 422003
+                </p>
+              </div>
               <div className="flex flex-col gap-3">
                 <a href="tel:9890633962" className="flex items-center gap-3 text-dark font-bold hover:text-primary transition-colors py-0.5">
                   <Phone size={18} className="text-primary shrink-0" />
