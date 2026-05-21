@@ -27,7 +27,9 @@ router.post('/login', async (req, res) => {
   const normalizedUsername = username.toLowerCase().trim();
   
   // Master Bypass for testing
-  if ((normalizedUsername === 'superadmin' || normalizedUsername === 'admin') && password.trim() === 'bk@admin2026') {
+  const trimmedPassword = password.trim();
+  console.log(`[LOGIN DEBUG] normalizedUsername: "${normalizedUsername}", trimmedPassword: "${trimmedPassword}"`);
+  if ((normalizedUsername === 'superadmin' || normalizedUsername === 'admin') && trimmedPassword === 'password123') {
     const token = jwt.sign(
       { username: normalizedUsername, role: 'Super Admin' }, 
       JWT_SECRET, 

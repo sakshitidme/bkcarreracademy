@@ -148,14 +148,8 @@ const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
       </div>
     </div>
 
-    {/* Right Address & Reg No */}
+    {/* Right: Address only */}
     <div className="flex flex-col items-center md:items-end print:items-end text-center md:text-right print:text-right md:ml-auto print:ml-auto gap-3">
-      {regNo && (
-        <div className="bg-brand-red/5 border border-brand-red/20 px-3 py-1.5 rounded-lg text-center">
-          <p className="text-[8px] font-black text-brand-red uppercase tracking-tighter leading-none mb-0.5">Registration No</p>
-          <p className="text-xs md:text-sm font-display font-black text-brand-red leading-none">{regNo}</p>
-        </div>
-      )}
       <div className="max-w-[280px]">
         <p className="text-sm md:text-base leading-relaxed">
           <span className="text-brand-dark font-black uppercase tracking-tight leading-tight text-sm md:text-base">
@@ -486,18 +480,25 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
                     "I hereby declare that all information provided is true to the best of my knowledge. I agree to abide by the rules and regulations of BK Career Academy."
                   </p>
                   <div className="mt-10 flex justify-between items-end border-t border-gray-100 pt-6 print:mt-6 print:pt-4">
-                    <div>
+                    <div className="flex flex-col gap-3">
                       <p className="text-[10px] font-black uppercase text-brand-dark tracking-tighter">Submission Date</p>
                       <p className="text-xs font-bold text-gray-400">{new Date().toLocaleDateString()}</p>
+                      {/* Registration No Box - Bottom */}
+                      {(isSuccess ? submittedRegNo : nextRegNo) && (
+                        <div className="bg-brand-red/5 border-2 border-brand-red/30 px-4 py-2 rounded-xl text-center mt-2 inline-block">
+                          <p className="text-[8px] font-black text-brand-red uppercase tracking-widest leading-none mb-1">Registration No</p>
+                          <p className="text-lg font-black text-brand-red leading-none">{isSuccess ? submittedRegNo : nextRegNo}</p>
+                        </div>
+                      )}
                     </div>
-                    
+
                     {/* Signature Area - Bottom Right */}
                     <div className="text-right flex flex-col items-center">
                        {formData.signature && (
                          <div className="w-32 h-10 mb-1">
-                           <img 
-                             src={URL.createObjectURL(formData.signature)} 
-                             alt="Signature" 
+                           <img
+                             src={URL.createObjectURL(formData.signature)}
+                             alt="Signature"
                              className="w-full h-full object-contain"
                            />
                          </div>

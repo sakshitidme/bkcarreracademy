@@ -167,24 +167,15 @@ export const GOVT_RESOURCES: ExamResource[] = [
       {
         title: 'BANKING RESOURCES',
         items: [
-          { title: 'All Articles', url: 'https://www.mahendras.org/blogs' },
-          { title: 'Cut Off Analysis', url: 'https://www.mahendras.org/blogs/category/cut-off' },
-          { title: 'Exam Analysis', url: 'https://www.mahendras.org/blogs/category/exam-analysis' },
-          { title: 'FAQ', url: 'https://www.mahendras.org/blogs/category/faq' },
-          { title: 'Latest Vacancies', url: 'https://www.mahendras.org/blogs/category/latest-vacancies' },
-          { title: 'News', url: 'https://www.mahendras.org/blogs/category/news' },
-          { 
-            title: 'Previous Year Papers', 
-            isSubmenu: true,
-            children: [
-              { title: 'IBPS Clerk Mains Previous Paper', url: 'https://www.mahendras.org/blogs/category/ibps-clerk-mains-previous-paper-2025-26' },
-              { title: 'IBPS Clerk Prelims Previous Paper', url: 'https://www.mahendras.org/blogs/category/ibps-clerk-prelims-previous-paper-2025-26' },
-              { title: 'IBPS PO Mains Previous Paper', url: 'https://www.mahendras.org/blogs/category/ibps-po-mains-previous-paper-2025-26' },
-              { title: 'IBPS PO Prelims Previous Paper', url: 'https://www.mahendras.org/blogs/category/ibps-po-previous-paper-2025-26' }
-            ]
-          },
-          { title: 'Results', url: 'https://www.mahendras.org/blogs/category/results' },
-          { title: 'Syllabus', url: 'https://tamilnaducareerservices.tn.gov.in/asset/docs/syllabus/ibps.pdf' }
+          { title: 'About Us', url: 'https://www.rbi.org.in/Scripts/AboutUsDisplay.aspx' },
+          { title: 'Notification', url: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx' },
+          { title: 'Press Releases', url: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx' },
+          { title: 'Speeches & Media Interactions', url: 'https://www.rbi.org.in/Scripts/BS_ViewSpeeches.aspx' },
+          { title: 'Publications', url: 'https://www.rbi.org.in/Scripts/Publications.aspx' },
+          { title: 'Legal Framework', url: 'https://www.rbi.org.in/Scripts/Act.aspx' },
+          { title: 'Research', url: 'https://www.rbi.org.in/Scripts/Research.aspx' },
+          { title: 'Statistics', url: 'https://www.rbi.org.in/Scripts/Statistics.aspx' },
+          { title: 'Regulatory Reporting', url: 'https://www.rbi.org.in/scripts/BS_Listofallreturns.aspx' }
         ]
       }
     ]
