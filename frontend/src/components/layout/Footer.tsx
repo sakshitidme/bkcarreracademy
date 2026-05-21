@@ -132,7 +132,7 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
                 </p>
               </a>
               <a 
-                href="https://maps.google.com/?q=BK+Education+%26+Welfare+Society,+Ganeshwadi,+Panchavati,+Nashik,+Maharashtra+422003"
+                href="https://maps.google.com/?q=2Q4W%2B8JH,+Ganeshwadi,+Panchavati,+Nashik,+Maharashtra+422003"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex gap-3 items-start pt-4 border-t border-dashed border-gray-200 hover:text-primary transition-colors group"
