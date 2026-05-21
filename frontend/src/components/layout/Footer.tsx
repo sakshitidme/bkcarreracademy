@@ -118,22 +118,32 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
           <div className="col-span-1 order-3 lg:order-4">
             <h4 className="sub-heading text-sm mb-8 uppercase tracking-widest text-muted">Corporate Office</h4>
             <div className="space-y-6">
-              <div className="flex gap-3 items-start">
-                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
+              <a 
+                href="https://maps.google.com/?q=2nd+Floor,+Gajanan+Plaza,+Gharpura+Ghat+Rd,+Nashik,+Maharashtra+422002"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-3 items-start hover:text-primary transition-colors group"
+              >
+                <MapPin size={18} className="text-primary shrink-0 mt-0.5 group-hover:scale-115 transition-transform" />
                 <p className="text-sm text-body leading-relaxed">
                   2nd Floor, Gajanan Plaza,<br />
                   Gharpura Ghat Rd, Nashik,<br />
                   Maharashtra 422002
                 </p>
-              </div>
-              <div className="flex gap-3 items-start pt-4 border-t border-dashed border-gray-200">
-                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
+              </a>
+              <a 
+                href="https://maps.google.com/?q=BK+Education+%26+Welfare+Society,+Ganeshwadi,+Panchavati,+Nashik,+Maharashtra+422003"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-3 items-start pt-4 border-t border-dashed border-gray-200 hover:text-primary transition-colors group"
+              >
+                <MapPin size={18} className="text-primary shrink-0 mt-0.5 group-hover:scale-115 transition-transform" />
                 <p className="text-sm text-body leading-relaxed">
-                  <span className="font-bold text-dark">BK Education & Welfare Society</span><br />
+                  <span className="font-bold text-dark group-hover:text-primary transition-colors">BK Education & Welfare Society</span><br />
                   Ganeshwadi, Panchavati,<br />
                   Nashik, Maharashtra 422003
                 </p>
-              </div>
+              </a>
               <div className="flex flex-col gap-3">
                 <a href="tel:9890633962" className="flex items-center gap-3 text-dark font-bold hover:text-primary transition-colors py-0.5">
                   <Phone size={18} className="text-primary shrink-0" />
