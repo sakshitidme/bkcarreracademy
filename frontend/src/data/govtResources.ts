@@ -177,6 +177,12 @@ export const GOVT_RESOURCES: ExamResource[] = [
           { title: 'Statistics', url: 'https://www.rbi.org.in/Scripts/Statistics.aspx' },
           { title: 'Regulatory Reporting', url: 'https://www.rbi.org.in/scripts/BS_Listofallreturns.aspx' }
         ]
+      },
+      {
+        title: 'SYLLABUS',
+        items: [
+          { title: 'Syllabus', url: 'https://tamilnaducareerservices.tn.gov.in/asset/docs/syllabus/ibps.pdf' }
+        ]
       }
     ]
   },
