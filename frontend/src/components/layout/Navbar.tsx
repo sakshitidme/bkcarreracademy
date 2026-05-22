@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Home, Circle, Hexagon, Diamond, Search } from 'lucide-react';
@@ -25,14 +25,23 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [activeTickerIndex, setActiveTickerIndex] = useState(0);
 
   const tickerItems = [
-    { text: "Admissions open for 2026 Batch", action: () => navigate('/admission'), highlight: false },
-    { text: "UPSC Prelims Countdown Active", action: () => { navigate('/syllabus'); setSelectedSyllabusId(1); }, highlight: false },
-    { text: "New UPSC CSE 2026 Batches", action: () => { navigate('/courses'); setSelectedCategory(1); }, highlight: true },
-    { text: "Helping 10,000+ students succeed", action: () => navigate('/about'), highlight: false },
-    { text: "Success is a choice, make it today", action: () => navigate('/'), highlight: true }
+    { text: "UPSC (IAS, IPS, IFS)", action: () => { navigate('/courses'); setSelectedCategory(1); } },
+    { text: "MPSC (MAHARASHTRA SERVICES)", action: () => { navigate('/courses'); setSelectedCategory(2); } },
+    { text: "BANKING (IBPS, SBI, RBI)", action: () => { navigate('/courses'); setSelectedCategory(3); } },
+    { text: "POLICE BHARTI 2026", action: () => navigate('/courses') },
+    { text: "TEACHING & EDUCATION", action: () => navigate('/courses') },
+    { text: "MBA CET & MANAGEMENT", action: () => navigate('/courses') }
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTickerIndex((prev) => (prev + 1) % tickerItems.length);
+    }, 2000); // Change highlight every 2 seconds
+    return () => clearInterval(interval);
+  }, [tickerItems.length]);
 
   return (
     <>
@@ -66,7 +75,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button 
                   key={idx}
                   onClick={item.action}
-                  className={`text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:text-primary ${item.highlight ? 'text-primary' : 'text-gray-400'}`}
+                  className={`text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:text-primary ${
+                    idx === activeTickerIndex 
+                      ? 'text-primary drop-shadow-[0_0_8px_rgba(245,166,35,0.6)] font-extrabold' 
+                      : 'text-gray-300'
+                  }`}
                 >
                   {item.text}
                 </button>
