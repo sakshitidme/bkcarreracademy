@@ -116,9 +116,18 @@ app.use('/api/books', bookRoutes);
 app.use('/api/popups', popupRoutes);
 
 
-// Serve static uploads via the /api namespace so Nginx proxies them to the backend
-app.use('/api/uploads', express.static(path.join(__dirname, '../frontend/public/uploads')));
-// Keep the old one just in case local dev relies on it
+// Serve static uploads via explicit route to avoid any Express static mount path bugs
+app.get('/api/uploads/:filename', (req, res) => {
+  const filePath = path.join(__dirname, '../frontend/public/uploads', req.params.filename);
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error(`[Upload Serve Error] Could not serve ${filePath}:`, err.message);
+      res.status(404).json({ success: false, message: 'Image not found on disk' });
+    }
+  });
+});
+
+// Keep the old static one just in case local dev relies on it for other assets
 app.use('/uploads', express.static(path.join(__dirname, '../frontend/public/uploads')));
 
 
