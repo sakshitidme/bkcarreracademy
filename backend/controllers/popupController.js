@@ -21,7 +21,7 @@ exports.getActivePopups = async (req, res) => {
 exports.createPopup = async (req, res) => {
   try {
     if (req.file) {
-      req.body.mediaUrl = `/uploads/${req.file.filename}`;
+      req.body.mediaUrl = `/api/uploads/${req.file.filename}`;
     }
     const popup = await Popup.create(req.body);
     res.status(201).json({ success: true, data: popup });
@@ -33,7 +33,7 @@ exports.createPopup = async (req, res) => {
 exports.updatePopup = async (req, res) => {
   try {
     if (req.file) {
-      req.body.mediaUrl = `/uploads/${req.file.filename}`;
+      req.body.mediaUrl = `/api/uploads/${req.file.filename}`;
     }
     const popup = await Popup.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

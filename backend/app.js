@@ -116,7 +116,9 @@ app.use('/api/books', bookRoutes);
 app.use('/api/popups', popupRoutes);
 
 
-// Serve static uploads
+// Serve static uploads via the /api namespace so Nginx proxies them to the backend
+app.use('/api/uploads', express.static(path.join(__dirname, '../frontend/public/uploads')));
+// Keep the old one just in case local dev relies on it
 app.use('/uploads', express.static(path.join(__dirname, '../frontend/public/uploads')));
 
 

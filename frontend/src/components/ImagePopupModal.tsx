@@ -83,6 +83,13 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
             
             // Generate youtube embed URL if needed
             let youtubeUrl = popup.mediaUrl;
+            
+            // Rewrite legacy /uploads/ paths to /api/uploads/ to bypass Nginx strict static routing
+            let displayMediaUrl = popup.mediaUrl;
+            if (displayMediaUrl && displayMediaUrl.startsWith('/uploads/')) {
+              displayMediaUrl = '/api' + displayMediaUrl;
+            }
+
             if (popup.mediaType === 'youtube' && youtubeUrl) {
               if (youtubeUrl.includes('watch?v=')) {
                 youtubeUrl = youtubeUrl.replace('watch?v=', 'embed/');
@@ -105,6 +112,9 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                   if (popup.isDefault && onImageClick) {
                     onImageClick();
                   } else {
+                    const fullMediaUrl = displayMediaUrl.startsWith('http') 
+                      ? displayMediaUrl 
+                      : `${window.location.origin}${displayMediaUrl}`;
                     const msg = `Hi, I have an inquiry regarding: ${popup.title}${popup.notice ? ` - ${popup.notice}` : ''}`;
                     window.open(`https://wa.me/918080195558?text=${encodeURIComponent(msg)}`, '_blank');
                   }
@@ -121,7 +131,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                     />
                   ) : (
                     <img 
-                      src={popup.mediaUrl} 
+                      src={displayMediaUrl} 
                       alt={popup.title} 
                       className="w-full max-h-[35vh] md:max-h-[65vh] object-contain transition-transform duration-700 group-hover:scale-105"
                     />
