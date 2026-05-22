@@ -209,7 +209,7 @@ export const DynamicExamDetailsPage: React.FC<DynamicExamDetailsPageProps> = ({
       />
       
       {/* Premium Navbar */}
-      <nav className="fixed top-0 left-0 md:left-64 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100 h-20 pl-16 md:pl-0">
+      <nav className="fixed top-12 left-0 md:left-64 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100 h-20 pl-16 md:pl-0">
         <div className="section-container h-full flex items-center justify-between">
           <div 
             className="flex items-center gap-3 cursor-pointer group"
@@ -235,7 +235,7 @@ export const DynamicExamDetailsPage: React.FC<DynamicExamDetailsPageProps> = ({
         </div>
       </nav>
 
-      <header className="pt-20 pb-0 bg-white relative overflow-hidden">
+      <header className="pt-32 pb-0 bg-white relative overflow-hidden">
         <div className="section-container">
           <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 rounded-full mb-1">
             <Sparkles size={14} className="text-primary" />

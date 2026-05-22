@@ -39,7 +39,7 @@ export const MAHATETDetailsPage: React.FC<MAHATETDetailsPageProps> = ({
       className="bg-bg min-h-screen"
     >
       {/* Premium Navbar */}
-      <nav className="fixed top-0 left-0 md:left-64 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100 h-20 pl-16 md:pl-0">
+      <nav className="fixed top-12 left-0 md:left-64 right-0 z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100 h-20 pl-16 md:pl-0">
         <div className="section-container h-full flex items-center justify-between">
           <div 
             className="flex items-center gap-3 cursor-pointer group"
@@ -66,7 +66,7 @@ export const MAHATETDetailsPage: React.FC<MAHATETDetailsPageProps> = ({
       </nav>
 
       {/* Hero Section */}
-      <header className="pt-20 pb-0 bg-white relative overflow-hidden">
+      <header className="pt-32 pb-0 bg-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 skew-x-[-20deg] origin-top translate-x-20" />
         <div className="section-container relative z-10">
           <button 

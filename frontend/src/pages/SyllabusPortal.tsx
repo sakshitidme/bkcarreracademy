@@ -92,17 +92,17 @@ export const SyllabusPortal: React.FC<SyllabusPortalProps> = ({
       {/* Premium Navbar Offset Adjustment handled by App.tsx pt-12 */}
       
       {/* Header Section */}
-      <header className="bg-white border-b border-gray-100 pt-20 pb-8 md:pt-24 md:pb-12 relative overflow-hidden">
+      <header className="bg-white border-b border-gray-100 pt-32 pb-8 md:pt-36 md:pb-12 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 skew-x-[-20deg] origin-top translate-x-20 pointer-events-none" />
         
         <div className="section-container relative z-10">
           <div className="max-w-4xl">
             <button 
               onClick={onBack}
-              className="group flex items-center gap-2 text-muted mb-6 hover:text-primary transition-colors"
+              className="group flex items-center gap-2 text-dark mb-6 hover:text-primary transition-colors"
             >
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-              <span className="text-[9px] font-black uppercase tracking-[0.3em]">Back</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em]">Back</span>
             </button>
 
             <motion.div
@@ -155,7 +155,7 @@ export const SyllabusPortal: React.FC<SyllabusPortalProps> = ({
                   className={`relative px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest border-2 transition-all duration-300 ${
                     activeTab === cat 
                       ? 'bg-primary text-dark border-primary shadow-xl shadow-primary/10' 
-                      : 'bg-white text-muted border-gray-100 hover:border-primary/40 hover:text-dark'
+                      : 'bg-white text-dark border-gray-200 hover:border-primary hover:bg-gray-50'
                   }`}
                 >
                   <span className="relative z-10">{cat}</span>

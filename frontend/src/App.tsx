@@ -86,6 +86,7 @@ export default function App() {
       courseDetailTEACHING: '/teaching',
       courseDetailINSURANCE: '/insurance',
       courseDetailENGINEERING: '/engineering',
+      courseDetailMBACET: '/mbacet',
       adminLogin: '/admin-portal'
     };
     if (paths[v]) navigate(paths[v]);
@@ -478,6 +479,15 @@ export default function App() {
                         <Route path="/engineering" element={
                           <GeneralExamDetailsPage 
                             categoryId="engineering" 
+                            onBack={() => navigate('/courses')} 
+                            onRegister={() => setIsRegistrationModalOpen(true)} 
+                            setView={setView} 
+                            setIsRegistrationModalOpen={setIsRegistrationModalOpen} 
+                          />
+                        } />
+                        <Route path="/mbacet" element={
+                          <GeneralExamDetailsPage 
+                            categoryId="mbacet" 
                             onBack={() => navigate('/courses')} 
                             onRegister={() => setIsRegistrationModalOpen(true)} 
                             setView={setView} 

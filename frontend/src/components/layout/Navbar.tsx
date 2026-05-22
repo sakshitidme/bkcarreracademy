@@ -105,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             { id: 'home', label: 'HOME', icon: <Home size={18} />, path: '/' },
             { id: 'about', label: 'ABOUT US', icon: <Circle size={18} />, path: '/about' },
             { id: 'courses', label: 'EXPLORE GOVT EXAM', icon: <Hexagon size={18} />, path: '/courses' },
-            { id: 'syllabus', label: 'BOOK', icon: <Diamond size={18} />, path: '/syllabus' },
+            { id: 'syllabus', label: 'BOOKS', icon: <Diamond size={18} />, path: '/syllabus' },
           ].map((item) => (
             <Link
               key={item.id}
@@ -116,10 +116,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }
                 setIsMenuOpen(false); 
               }}
-              className={`flex flex-col items-center gap-1 py-3 transition-all duration-300 group ${location.pathname === item.path ? 'text-dark' : 'text-gray-400 hover:text-dark'}`}
+              className={`flex flex-col items-center gap-1 py-3 transition-all duration-300 group text-dark hover:scale-105 ${location.pathname === item.path ? 'scale-105' : ''}`}
             >
-              <span className={`${location.pathname === item.path ? 'text-primary scale-110' : 'text-gray-200 group-hover:text-primary'} transition-all duration-300`}>{item.icon}</span>
-              <span className="font-display font-bold text-[9px] tracking-[0.2em]">{item.label}</span>
+              <span className={`${location.pathname === item.path ? 'text-primary scale-110 drop-shadow-md' : 'text-dark group-hover:text-primary'} transition-all duration-300`}>{item.icon}</span>
+              <span className="font-display font-black text-[11px] font-extrabold tracking-[0.2em] drop-shadow-sm text-dark">{item.label}</span>
               {location.pathname === item.path && (
                 <motion.div 
                   layoutId="nav-indicator"

@@ -69,31 +69,11 @@ export const StaffCard: React.FC<StaffCardProps> = ({ member, index, isCentered 
       >
          <motion.div 
             style={{ transform: "translateZ(80px)" }}
-            animate={isCentered ? { 
-              rotateY: [0, 360],
-              y: [0, -15, 0]
-            } : { 
-              rotateY: 0,
-              y: 0
-            }}
-            transition={{ 
-              duration: isCentered ? 30 : 0.8,
-              repeat: isCentered ? Infinity : 0,
-              ease: "linear"
-            }}
             className="w-64 h-64 rounded-full border-4 border-brand shadow-[0_30px_70px_rgba(245,166,35,0.4)] overflow-hidden transition-all duration-700 group-hover:scale-110 bg-white/10 backdrop-blur-sm"
           >
             <motion.img
               src={member.image}
               alt={`${member.name} at BK Career Academy`}
-              animate={{
-                scale: [1, 1.1, 1]
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
               className="w-full h-full object-cover"
               style={{ 
                 objectPosition: 'center 10%',
@@ -119,11 +99,11 @@ export const StaffCard: React.FC<StaffCardProps> = ({ member, index, isCentered 
           </span>
         </div>
  
-        <h3 className={`text-4xl font-display font-black leading-tight mb-3 uppercase tracking-tighter transition-all duration-700 drop-shadow-2xl ${isCentered ? 'text-brand scale-125' : 'text-white/90 scale-90'}`}>
+        <h3 className="text-2xl md:text-3xl font-display font-black leading-tight mb-3 uppercase tracking-tighter transition-all duration-700 drop-shadow-2xl text-white/90">
           {member.name}
         </h3>
         
-        <p className={`text-base font-body leading-relaxed max-w-sm px-6 transition-all duration-700 drop-shadow-lg ${isCentered ? 'text-white opacity-100' : 'text-white/70 opacity-100'}`}>
+        <p className="text-base font-body leading-relaxed max-w-sm px-6 transition-all duration-700 drop-shadow-lg text-white/80">
           {member.bio}
         </p>
       </div>

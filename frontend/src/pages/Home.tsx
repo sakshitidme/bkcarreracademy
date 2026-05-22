@@ -115,81 +115,6 @@ export const Home: React.FC<HomeProps> = ({
         </div>
       </section>
 
-      {/* Popular Courses */}
-      <section className="pt-12 pb-8 bg-dark relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[120px] rounded-full" />
-        <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto relative z-10">
-          <header className="mb-8 text-center max-w-3xl mx-auto">
-            <p className="text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">Our Curriculum</p>
-            <h2 className="text-4xl md:text-6xl font-display font-black text-white uppercase tracking-tighter leading-none mb-4">
-              Popular <span className="text-primary">Learning Paths</span>
-            </h2>
-            <p className="text-gray-400 font-medium text-sm md:text-base">
-              Structured for success, our courses are designed by experts who have been through the journey themselves. Choose your goal and start today.
-            </p>
-          </header>
-
-          <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-2 md:px-0">
-            {!dynamicCourses || dynamicCourses.length === 0 ? (
-              /* Skeleton Loading State */
-              [1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-[calc(50%-0.375rem)] md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]">
-                  <SkeletonCard className="h-full bg-white/5 border-white/10" />
-                </div>
-              ))
-            ) : (
-              /* Actual Dynamic Courses */
-              [...dynamicCourses, {
-                id: 'fallback-banking',
-                title: 'Banking & Financial Services',
-                category: 'Banking (IBPS/SBI)',
-                instructor: 'BK Expert Team',
-                image: '/home/card4.png',
-                isRecent: true,
-                isFallback: true
-              }].slice(0, 4).map((course, index) => (
-                <div key={course._id || course.id} className="w-[calc(50%-0.375rem)] md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] max-w-[360px]">
-                  <CourseCard 
-                    course={course} 
-                    index={index} 
-                    onClick={() => {
-                      if (course.isFallback) {
-                        setView('courseDetailBANKING');
-                        return;
-                      }
-                      const title = (course.title || "").toLowerCase();
-                      if (course.id === 100 || title.includes('police')) {
-                        setView('courseDetailPolice');
-                      } else if (title.includes('mpsc')) {
-                        setView('courseDetailMPSC');
-                      } else if (title.includes('tet') || title.includes('teaching')) {
-                        setView('courseDetailMAHATET');
-                      } else if (course._id) {
-                        setSelectedExamName(course.subCategory || course.title);
-                        setView('dynamicExamDetail');
-                      } else {
-                        setSelectedCategory(course.id);
-                        setView('courses');
-                      }
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                  />
-                </div>
-              ))
-            )}
-          </div>
-
-          <div className="mt-10 text-center">
-            <button 
-              onClick={() => setView('courses')}
-              className="btn-outline-new px-10 py-4 text-white border-primary/40 hover:text-primary hover:border-primary"
-            >
-              View All Programs
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* Strategic Insights Section - Senior UI/UX Implementation */}
       <section className="py-16 bg-[#F9F9F9] relative overflow-hidden">
         <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto relative z-10">
@@ -280,8 +205,7 @@ export const Home: React.FC<HomeProps> = ({
                       else if (selectedTab === 'police') setView('courseDetailPolice');
                       else if (selectedTab === 'tet') setView('courseDetailMAHATET');
                       else if (selectedTab === 'mbacet') {
-                        setSelectedExamName('MBA CET & Management Exams');
-                        setView('dynamicExamDetail');
+                        setView('courseDetailMBACET');
                       }
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
@@ -356,7 +280,7 @@ export const Home: React.FC<HomeProps> = ({
                     <ul className="space-y-5">
                       {(selectedTab === 'upsc' ? [
                         "Stage 1: Preliminary Exam (400 Marks)",
-                        "Stage 2: Main Examination (1750 Marks)",
+                        "Stage 2: Mains Examination (1750 Marks)",
                         "Stage 3: Personality Test (275 Marks)",
                         "Negative Marking: 1/3rd (0.33) per wrong answer"
                       ] : selectedTab === 'mpsc' ? [
@@ -402,77 +326,7 @@ export const Home: React.FC<HomeProps> = ({
         </div>
       </section>
 
-      {/* Staff Section */}
-      <section id="faculty-section" className="pt-8 pb-6 bg-dark w-full overflow-hidden relative">
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 blur-[120px] rounded-full" />
-        <div className="max-w-[1600px] mx-auto relative z-10">
-          <header className="mb-4 text-center px-6">
-            <p className="text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">Our Faculty</p>
-            <h2 className="text-4xl md:text-5xl font-display font-black text-white uppercase tracking-tighter leading-none mb-4 relative inline-block">
-              <span className="absolute -left-12 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20 hidden md:block"></span>
-              Meet Our <span className="text-primary">Expert Mentors</span>
-              <span className="absolute -right-12 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20 hidden md:block"></span>
-            </h2>
-            <p className="text-white/60 font-medium text-sm md:text-base max-w-2xl mx-auto">
-              Learn from the best. Our faculty includes former officers and industry veterans with years of experience.
-            </p>
-          </header>
-          <div className="mt-2">
-            <StaffCarousel staff={STAFF} />
-          </div>
-        </div>
-      </section>
 
-      {/* Resources */}
-      <section className="pt-12 pb-4 md:pb-6 bg-white relative">
-        <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto">
-          <header className="mb-0 text-center max-w-3xl mx-auto">
-            <p className="label-text mb-1">Learning Hub</p>
-            <h2 className="section-heading">
-              Important <span className="text-primary">Resources</span>
-            </h2>
-          </header>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            {[
-              { name: "THE HINDU", url: "https://www.thehindu.com", img: "/images/resources/the-hindu-new.webp" },
-              { name: "PIB INDIA", url: "https://pib.gov.in", img: "/images/resources/press-information-bureau.webp" },
-              { name: "THE INDIAN EXPRESS", url: "https://indianexpress.com", img: "/images/resources/the-indian-express.webp" },
-              { name: "LOKSATTA", url: "https://www.loksatta.com", img: "/images/resources/loksatta.png" },
-              { name: "UPSC", url: "https://www.upsc.gov.in", img: "/images/resources/upscs.jpeg" },
-              { name: "MPSC", url: "https://mpsc.gov.in", img: "/images/resources/mpsc-logo.webp" },
-              { name: "SSC", url: "https://ssc.nic.in", img: "/images/resources/ssc-resc-logo.webp" },
-              { name: "RBI", url: "https://www.rbi.org.in", img: "/images/resources/download.jpg" },
-              { name: "INDIAN RAILWAYS", url: "https://indianrailways.gov.in", img: "/images/resources/railways-logo.webp" },
-              { name: "MAHARASHTRA TIMES", url: "https://maharashtratimes.com", img: "/images/resources/maharashtra-times.webp" },
-              { name: "MY GOV", url: "https://www.mygov.in", img: "/images/resources/my-gov.webp" },
-              { name: "AAPLE SARKAR", url: "https://aaplesarkar.mahaonline.gov.in", img: "/images/resources/aaple-sarkar.webp" },
-            ].map((res, i) => (
-              <a 
-                key={res.name}
-                href={res.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-white rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 aspect-square border border-gray-100"
-              >
-                <div className="h-20 w-full flex items-center justify-center mb-4">
-                  <img 
-                    src={res.img} 
-                    alt={res.name}
-                    className="max-w-[85%] max-h-full object-contain transition-all duration-500 group-hover:scale-110 filter brightness-100 contrast-100"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/80?text=' + res.name;
-                    }}
-                  />
-                </div>
-                <div>
-                  <span className="text-[10px] font-black text-dark/80 uppercase tracking-[0.15em] leading-tight block px-2">{res.name}</span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* App Promotion Section */}
       <section className="pt-8 md:pt-10 pb-6 md:pb-8 bg-gradient-to-br from-[#FCF9F2] via-[#FAF6EE] to-white relative overflow-hidden border-none">
@@ -804,6 +658,77 @@ export const Home: React.FC<HomeProps> = ({
              {FAQ_DATA[faqCategory as keyof typeof FAQ_DATA]?.map((faq, i) => (
                <FAQItem key={i + faqCategory} question={faq.q} answer={faq.a} />
              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Resources */}
+      <section className="pt-12 pb-4 md:pb-6 bg-white relative">
+        <div className="max-w-[1600px] px-6 md:px-12 lg:px-16 mx-auto">
+          <header className="mb-0 text-center max-w-3xl mx-auto">
+            <p className="label-text mb-1">Learning Hub</p>
+            <h2 className="section-heading">
+              Important <span className="text-primary">Resources</span>
+            </h2>
+          </header>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+            {[
+              { name: "THE HINDU", url: "https://www.thehindu.com", img: "/images/resources/the-hindu-new.webp" },
+              { name: "PIB INDIA", url: "https://pib.gov.in", img: "/images/resources/press-information-bureau.webp" },
+              { name: "THE INDIAN EXPRESS", url: "https://indianexpress.com", img: "/images/resources/the-indian-express.webp" },
+              { name: "LOKSATTA", url: "https://www.loksatta.com", img: "/images/resources/loksatta.png" },
+              { name: "UPSC", url: "https://www.upsc.gov.in", img: "/images/resources/upscs.jpeg" },
+              { name: "MPSC", url: "https://mpsc.gov.in", img: "/images/resources/mpsc-logo.webp" },
+              { name: "SSC", url: "https://ssc.nic.in", img: "/images/resources/ssc-resc-logo.webp" },
+              { name: "RBI", url: "https://www.rbi.org.in", img: "/images/resources/download.jpg" },
+              { name: "INDIAN RAILWAYS", url: "https://indianrailways.gov.in", img: "/images/resources/railways-logo.webp" },
+              { name: "MAHARASHTRA TIMES", url: "https://maharashtratimes.com", img: "/images/resources/maharashtra-times.webp" },
+              { name: "MY GOV", url: "https://www.mygov.in", img: "/images/resources/my-gov.webp" },
+              { name: "AAPLE SARKAR", url: "https://aaplesarkar.mahaonline.gov.in", img: "/images/resources/aaple-sarkar.webp" },
+            ].map((res, i) => (
+              <a 
+                key={res.name}
+                href={res.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white rounded-3xl p-6 flex flex-col items-center justify-center text-center shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 aspect-square border border-gray-100"
+              >
+                <div className="h-20 w-full flex items-center justify-center mb-4">
+                  <img 
+                    src={res.img} 
+                    alt={res.name}
+                    className="max-w-[85%] max-h-full object-contain transition-all duration-500 group-hover:scale-110 filter brightness-100 contrast-100"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/80?text=' + res.name;
+                    }}
+                  />
+                </div>
+                <div>
+                  <span className="text-[10px] font-black text-dark/80 uppercase tracking-[0.15em] leading-tight block px-2">{res.name}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* Staff Section */}
+      <section id="faculty-section" className="pt-8 pb-6 bg-dark w-full overflow-hidden relative">
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 blur-[120px] rounded-full" />
+        <div className="max-w-[1600px] mx-auto relative z-10">
+          <header className="mb-4 text-center px-6">
+            <p className="text-primary font-black text-[10px] uppercase tracking-[0.2em] mb-4">Our Faculty</p>
+            <h2 className="text-4xl md:text-5xl font-display font-black text-white uppercase tracking-tighter leading-none mb-4 relative inline-block">
+              <span className="absolute -left-12 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20 hidden md:block"></span>
+              Meet Our <span className="text-primary">Expert Mentors</span>
+              <span className="absolute -right-12 top-1/2 -translate-y-1/2 w-8 h-px bg-white/20 hidden md:block"></span>
+            </h2>
+            <p className="text-white/60 font-medium text-sm md:text-base max-w-2xl mx-auto">
+              Learn from the best. Our faculty includes former officers and industry veterans with years of experience.
+            </p>
+          </header>
+          <div className="mt-2">
+            <StaffCarousel staff={STAFF} />
           </div>
         </div>
       </section>

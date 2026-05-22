@@ -62,6 +62,18 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
     ]
   });
 
+  const [popupsList, setPopupsList] = useState<any[]>([]);
+  const [popupForm, setPopupForm] = useState({
+    title: '',
+    mediaUrl: '',
+    mediaType: 'image' as 'image' | 'youtube',
+    image: null as File | null,
+    notice: '',
+    link: '',
+    isActive: true,
+    order: 0
+  });
+
 
 
 
@@ -93,6 +105,7 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
       fetchCourses();
       fetchExams();
       fetchHero();
+      fetchPopups();
       fetchCounselingLeads();
       const poll = setInterval(() => {
         fetchTickets();
@@ -537,6 +550,16 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
     } catch (err) { console.error('Failed to fetch hero content'); }
   };
 
+  const fetchPopups = async () => {
+    try {
+      const resp = await fetch('/api/popups', { headers: { 'Authorization': `Bearer ${token}` } });
+      const data = await resp.json();
+      if (data.success) {
+        setPopupsList(data.data || []);
+      }
+    } catch (err) { console.error('Failed to fetch popups'); }
+  };
+
   const handleUpdateHero = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -913,7 +936,8 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
             { id: 'counseling', icon: GraduationCap, label: 'Counseling' },
             { id: 'courses', icon: GraduationCap, label: 'Courses' },
             { id: 'exams', icon: Globe, label: 'Government Exams' },
-            { id: 'hero', icon: Layout, label: 'Hero Section' }
+            { id: 'hero', icon: Layout, label: 'Hero Section' },
+            { id: 'popups', icon: ImageIcon, label: 'Popup Manager' }
           ].map(item => (
             <button key={item.id} onClick={() => { 
                 setActiveTab(item.id as any); 
@@ -926,6 +950,7 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
                 if (item.id === 'courses') fetchCourses();
                 if (item.id === 'exams') fetchExams();
                 if (item.id === 'hero') fetchHero();
+                if (item.id === 'popups') fetchPopups();
                 if (item.id === 'counseling') fetchCounselingLeads();
             }} className={`flex items-center gap-4 p-6 border-b border-ink/5 ${activeTab === item.id ? 'bg-brand text-ink border-l-[12px] border-ink' : 'text-ink/40'}`}>
               <item.icon size={20} />
@@ -1905,6 +1930,159 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
 
                 <div className="p-6 bg-yellow-50 border-4 border-yellow-200 text-yellow-800 font-body text-xs italic">
                   Note: The Hero section is now optimized for the new clean, premium v4 layout. Changes will reflect instantly on the homepage after saving.
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'popups' && (
+              <div className="space-y-8 max-w-4xl">
+                <div className="flex items-center gap-4">
+                  <h2 className="text-3xl font-display font-black uppercase">Popup Manager</h2>
+                  <span className="bg-brand text-ink px-3 py-1 text-[10px] font-black uppercase border-2 border-ink">Marketing</span>
+                </div>
+
+                <div className="bg-white border-4 border-ink p-8 shadow-[12px_12px_0_0_#1A1A1A]">
+                  <h3 className="text-xl font-display font-black uppercase mb-6">Add New Popup</h3>
+                  <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    setLoading(true);
+                    try {
+                      let bodyData: any;
+                      let headers: any = { 'Authorization': `Bearer ${token}` };
+
+                      if (popupForm.mediaType === 'image' && popupForm.image) {
+                        const formData = new FormData();
+                        formData.append('title', popupForm.title);
+                        formData.append('mediaType', popupForm.mediaType);
+                        formData.append('notice', popupForm.notice);
+                        formData.append('link', popupForm.link);
+                        formData.append('isActive', String(popupForm.isActive));
+                        formData.append('order', String(popupForm.order));
+                        formData.append('image', popupForm.image);
+                        bodyData = formData;
+                      } else {
+                        headers['Content-Type'] = 'application/json';
+                        bodyData = JSON.stringify(popupForm);
+                      }
+
+                      const res = await fetch('/api/popups', {
+                        method: 'POST',
+                        headers,
+                        body: bodyData
+                      });
+                      if (res.ok) {
+                        setPopupForm({ title: '', mediaUrl: '', mediaType: 'image', image: null, notice: '', link: '', isActive: true, order: 0 });
+                        fetchPopups();
+                      } else {
+                        const errData = await res.json();
+                        alert(`Error adding popup: ${errData.error || errData.message}`);
+                      }
+                    } catch (err) { alert('Error adding popup'); }
+                    setLoading(false);
+                  }} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-ink/40">Popup Title (Internal)</label>
+                        <input required type="text" value={popupForm.title} onChange={e => setPopupForm({...popupForm, title: e.target.value})} className="w-full border-4 border-ink p-4 font-display font-bold text-lg bg-ink/5" />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-ink/40">Media Type</label>
+                        <select value={popupForm.mediaType} onChange={e => setPopupForm({...popupForm, mediaType: e.target.value as any, mediaUrl: '', image: null})} className="w-full border-4 border-ink p-4 font-mono text-sm bg-ink/5 uppercase">
+                          <option value="image">Upload Image</option>
+                          <option value="youtube">YouTube Video Link</option>
+                        </select>
+                      </div>
+                      
+                      {popupForm.mediaType === 'youtube' ? (
+                        <div className="space-y-2 md:col-span-2">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-ink/40">YouTube URL</label>
+                          <input required type="text" value={popupForm.mediaUrl} onChange={e => setPopupForm({...popupForm, mediaUrl: e.target.value})} placeholder="https://youtube.com/watch?v=..." className="w-full border-4 border-ink p-4 font-mono text-sm bg-ink/5" />
+                        </div>
+                      ) : (
+                        <div className="space-y-2 md:col-span-2">
+                          <label className="text-[10px] font-black uppercase tracking-widest text-ink/40">Upload Image File</label>
+                          <input 
+                            required 
+                            type="file" 
+                            accept="image/*"
+                            onChange={e => {
+                              if (e.target.files && e.target.files[0]) {
+                                setPopupForm({...popupForm, image: e.target.files[0]});
+                              }
+                            }} 
+                            className="w-full border-4 border-ink p-4 font-mono text-sm bg-ink/5" 
+                          />
+                        </div>
+                      )}
+
+                      <div className="space-y-2 md:col-span-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-ink/40">One Line Notice (Optional Banner Text)</label>
+                        <input type="text" value={popupForm.notice} onChange={e => setPopupForm({...popupForm, notice: e.target.value})} className="w-full border-4 border-ink p-4 font-display font-bold text-lg bg-ink/5" placeholder="e.g. Special Announcement for 10th & 12th Students!" />
+                      </div>
+                      <div className="space-y-2 md:col-span-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-ink/40">Button Action Link (Optional)</label>
+                        <input type="url" value={popupForm.link} onChange={e => setPopupForm({...popupForm, link: e.target.value})} className="w-full border-4 border-ink p-4 font-mono text-sm bg-ink/5" placeholder="https://forms.gle/..." />
+                      </div>
+                    </div>
+
+                    <button disabled={loading} type="submit" className="w-full bg-ink text-brand font-display font-black text-xl py-4 uppercase hover:bg-brand hover:text-ink transition-all shadow-[8px_8px_0_0_#ccc] active:translate-y-1 active:shadow-none">
+                      {loading ? 'Adding...' : 'Add Popup'}
+                    </button>
+                  </form>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-display font-black uppercase">Active & Inactive Popups</h3>
+                  {popupsList.length === 0 ? (
+                    <div className="p-8 text-center border-4 border-dashed border-ink/20 opacity-50 uppercase font-mono text-xs">No popups created yet.</div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {popupsList.map((popup) => (
+                        <div key={popup._id} className={`bg-white border-4 border-ink p-6 relative ${popup.isActive ? '' : 'opacity-60 grayscale'}`}>
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <h4 className="font-black text-xl uppercase tracking-tighter">{popup.title}</h4>
+                              <span className={`text-[10px] font-bold uppercase tracking-widest ${popup.isActive ? 'text-green-600' : 'text-red-600'}`}>
+                                {popup.isActive ? '● Live' : '○ Hidden'}
+                              </span>
+                            </div>
+                            <div className="flex gap-2">
+                              <button 
+                                onClick={async () => {
+                                  await fetch(`/api/popups/${popup._id}`, {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                                    body: JSON.stringify({ isActive: !popup.isActive })
+                                  });
+                                  fetchPopups();
+                                }}
+                                className="p-2 border-2 border-ink hover:bg-ink hover:text-white transition-colors"
+                              >
+                                {popup.isActive ? <EyeOff size={16} /> : <Eye size={16} />}
+                              </button>
+                              <button 
+                                onClick={async () => {
+                                  if (window.confirm('Delete popup?')) {
+                                    await fetch(`/api/popups/${popup._id}`, {
+                                      method: 'DELETE',
+                                      headers: { 'Authorization': `Bearer ${token}` }
+                                    });
+                                    fetchPopups();
+                                  }
+                                }}
+                                className="p-2 border-2 border-ink bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-colors"
+                              >
+                                <Trash2 size={16} />
+                              </button>
+                            </div>
+                          </div>
+                          <div className="text-xs font-mono mb-2 truncate">Media: {popup.mediaUrl}</div>
+                          {popup.notice && <div className="text-sm bg-brand/10 p-2 font-bold mb-2">Notice: {popup.notice}</div>}
+                          {popup.link && <div className="text-xs text-blue-600 underline truncate">Link: {popup.link}</div>}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}

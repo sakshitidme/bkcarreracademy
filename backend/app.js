@@ -104,7 +104,7 @@ const systemRoutes = require('./routes/system');
 const contentRoutes = require('./routes/content');
 const bookRoutes = require('./routes/book');
 const paymentRoutes = require('./routes/payment');
-
+const popupRoutes = require('./routes/popupRoutes');
 
 // Mount Routes
 app.use('/api/payment', paymentRoutes);
@@ -113,6 +113,7 @@ app.use('/api/registration', registrationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/books', bookRoutes);
+app.use('/api/popups', popupRoutes);
 
 
 // Serve static uploads
