@@ -394,17 +394,13 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
             .print\\:hidden, .print\\:hidden * { display: none !important; visibility: hidden !important; }
 
             .admission-print-root {
-              width: 210mm !important;
-              min-height: 297mm !important;
-              max-height: 297mm !important;
-              overflow: hidden !important;
-              transform: scale(0.72) !important;
-              transform-origin: top left !important;
+              width: 100% !important;
+              min-height: 100vh !important;
               position: absolute !important;
               top: 0 !important;
               left: 0 !important;
               background: white !important;
-              padding: 10mm !important;
+              padding: 15mm !important;
               box-sizing: border-box !important;
               margin: 0 !important;
             }
