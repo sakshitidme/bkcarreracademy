@@ -18,7 +18,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
     return res.status(404).json({ success: false, message: 'Admission record not found' });
   }
 
-  const amount = 10 * 100; // ₹10 in paise
+  const amount = 199 * 100; // ₹199 in paise
   const options = {
     amount,
     currency: 'INR',

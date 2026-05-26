@@ -351,11 +351,75 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
       console.log("Submission Result:", result);
 
       if (result.success) {
-        // Razorpay temporarily disabled
-        setSubmittedRegNo(result.data.regNo);
-        setIsSuccess(true);
-        // Trigger auto download after a short delay (optional, keeping it since they liked auto download)
-        setTimeout(() => handleDownload(), 1000);
+        // --- RAZORPAY INTEGRATION ---
+        const orderRes = await fetch('/api/payment/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ admissionId: result.data.id })
+        });
+        const orderData = await orderRes.json();
+        
+        if (!orderData.success) {
+          setIsSubmitting(false);
+          return alert("Failed to initialize payment. Please contact support.");
+        }
+
+        const options = {
+          key: orderData.key,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: "BK Career Academy",
+          description: "Application Fee",
+          order_id: orderData.orderId,
+          handler: async function (response: any) {
+            try {
+              const verifyRes = await fetch('/api/payment/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                  admissionId: result.data.id
+                })
+              });
+              const verifyData = await verifyRes.json();
+              
+              if (verifyData.success) {
+                setSubmittedRegNo(result.data.regNo);
+                setIsSuccess(true);
+                // Trigger auto download after a short delay
+                setTimeout(() => handleDownload(), 1000);
+              } else {
+                alert("Payment verification failed. Your form is saved but unpaid.");
+                setIsSubmitting(false);
+              }
+            } catch (err) {
+              console.error(err);
+              alert("Error verifying payment.");
+              setIsSubmitting(false);
+            }
+          },
+          prefill: {
+            name: `${formData.firstName} ${formData.surname}`,
+            email: formData.email,
+            contact: formData.phone
+          },
+          theme: { color: "#800000" },
+          modal: {
+            ondismiss: function() {
+              setIsSubmitting(false);
+            }
+          }
+        };
+
+        const rzp = new (window as any).Razorpay(options);
+        rzp.on('payment.failed', function (response: any) {
+          alert("Payment unsuccessful. Please try again.");
+        });
+        rzp.open();
+        // Do not set isSubmitting(false) here, let modal.ondismiss handle it if closed
+        return; 
       } else {
         const errorMsg = result.message || (result.error && result.error.join(', ')) || "Submission failed";
         alert(errorMsg);
@@ -395,14 +459,16 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
 
             .admission-print-root {
               width: 100% !important;
-              min-height: 100vh !important;
+              height: 100vh !important;
               position: absolute !important;
               top: 0 !important;
               left: 0 !important;
               background: white !important;
-              padding: 15mm !important;
+              padding: 10mm !important;
               box-sizing: border-box !important;
               margin: 0 !important;
+              display: flex !important;
+              flex-direction: column !important;
             }
           }
         `}} />
@@ -410,15 +476,15 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-[40px] shadow-2xl overflow-hidden border border-white print:rounded-none print:shadow-none print:border-none print:p-8"
+            className="bg-white rounded-[40px] shadow-2xl overflow-hidden border border-white print:rounded-none print:shadow-none print:border-none print:p-0 print:flex print:flex-col print:flex-grow"
           >
             {/* Header in PDF */}
-            <div className="border-b-2 border-brand-red/10 relative pt-16 md:pt-10 print:pt-4">
+            <div className="border-b-2 border-brand-red/10 relative pt-16 md:pt-10 print:pt-0">
               <InstitutionalHeader regNo={isSuccess ? submittedRegNo : nextRegNo} />
             </div>
 
-            <div className="content-area p-6 md:p-10 print:p-4 relative">
-              <div className="status-row flex flex-col md:flex-row print:flex-row items-center md:items-start print:items-start justify-between gap-8 mb-12 print:mb-4">
+            <div className="content-area p-6 md:p-10 print:p-2 relative print:flex print:flex-col print:flex-grow">
+              <div className="status-row flex flex-col md:flex-row print:flex-row items-center md:items-start print:items-start justify-between gap-8 mb-12 print:mb-6">
                 <div className="flex flex-col items-center md:items-start print:items-start text-center md:text-left print:text-left">
                   <div className="w-12 h-12 print:w-10 print:h-10 bg-green-50 rounded-full flex items-center justify-center mb-4 print:mb-2">
                     <CheckCircle2 size={24} className="text-green-500" />
@@ -449,7 +515,7 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
               </div>
 
               {/* Data Summary Grid */}
-              <div className="data-grid space-y-12 print:space-y-4">
+              <div className="data-grid space-y-12 print:space-y-4 print:flex-grow">
                 <div className="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-x-16 gap-y-10 print:gap-y-4">
                   {/* Column 1: Candidate Info */}
                   <div className="data-section space-y-6 print:space-y-3">
@@ -477,7 +543,7 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
                   </div>
                 </div>
 
-                <div className="declaration-box bg-gray-50 p-8 rounded-[30px] mt-12 print:mt-4 print:p-4">
+                <div className="declaration-box bg-gray-50 p-8 rounded-[30px] mt-12 print:mt-auto print:p-6 border border-gray-100 print:bg-white print:border-gray-200">
                   <p className="text-[10px] font-bold text-gray-500 leading-relaxed italic text-center">
                     "I hereby declare that all information provided is true to the best of my knowledge. I agree to abide by the rules and regulations of BK Career Academy."
                   </p>
