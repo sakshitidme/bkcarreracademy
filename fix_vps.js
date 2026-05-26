@@ -12,8 +12,8 @@ conn.on('ready', () => {
     echo "PORT=3001" > .env
     echo "MONGODB_URI=mongodb://localhost:27017/integrated_portal_db" >> .env
     echo "JWT_SECRET=super_secret_jwt_key_2026" >> .env
-    echo "RAZORPAY_KEY_ID=dummy" >> .env
-    echo "RAZORPAY_KEY_SECRET=dummy" >> .env
+    echo "RAZORPAY_KEY_ID=rzp_live_SUYpNkNbUNgC9A" >> .env
+    echo "RAZORPAY_KEY_SECRET=AKRGkSxjRvogqGHf2hT1gKZy" >> .env
 
     # Delete the old 'backend' if it points to wrong path
     pm2 delete backend || true

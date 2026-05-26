@@ -167,15 +167,11 @@ export const GOVT_RESOURCES: ExamResource[] = [
       {
         title: 'BANKING RESOURCES',
         items: [
-          { title: 'About Us', url: 'https://www.rbi.org.in/Scripts/AboutUsDisplay.aspx' },
-          { title: 'Notification', url: 'https://www.rbi.org.in/Scripts/NotificationUser.aspx' },
-          { title: 'Press Releases', url: 'https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx' },
-          { title: 'Speeches & Media Interactions', url: 'https://www.rbi.org.in/Scripts/BS_ViewSpeeches.aspx' },
-          { title: 'Publications', url: 'https://www.rbi.org.in/Scripts/Publications.aspx' },
-          { title: 'Legal Framework', url: 'https://www.rbi.org.in/Scripts/Act.aspx' },
-          { title: 'Research', url: 'https://www.rbi.org.in/Scripts/Research.aspx' },
-          { title: 'Statistics', url: 'https://www.rbi.org.in/Scripts/Statistics.aspx' },
-          { title: 'Regulatory Reporting', url: 'https://www.rbi.org.in/scripts/BS_Listofallreturns.aspx' }
+          { title: 'IBPS Official Website', url: 'https://www.ibps.in/' },
+          { title: 'CRP PO/MT (Probationary Officers)', url: 'https://www.ibps.in/index.php/management-trainees/' },
+          { title: 'CRP Clerical Cadre', url: 'https://www.ibps.in/index.php/clerical-cadre/' },
+          { title: 'CRP Specialist Officers', url: 'https://www.ibps.in/index.php/specialist-officers/' },
+          { title: 'CRP RRBs (Regional Rural Banks)', url: 'https://www.ibps.in/index.php/regional-rural-bank/' }
         ]
       },
       {
