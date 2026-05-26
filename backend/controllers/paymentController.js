@@ -18,7 +18,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
     return res.status(404).json({ success: false, message: 'Admission record not found' });
   }
 
-  const amount = 199 * 100; // ₹199 in paise
+  const amount = 10 * 100; // ₹10 in paise
   const options = {
     amount,
     currency: 'INR',
@@ -37,7 +37,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
-      key: razorpay.key_id
+      key: process.env.RAZORPAY_KEY_ID || 'rzp_live_SUYpNkNbUNgC9A'
     });
   } catch (error) {
     console.error('Razorpay Order Error:', error);

@@ -351,18 +351,86 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
       console.log("Submission Result:", result);
 
       if (result.success) {
-        setSubmittedRegNo(result.data.regNo);
-        setIsSuccess(true);
+        // --- RAZORPAY INTEGRATION ---
+        const orderRes = await fetch('/api/payment/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ admissionId: result.data.id })
+        });
+        const orderData = await orderRes.json();
+        
+        if (!orderData.success) {
+          setIsSubmitting(false);
+          return alert("Failed to initialize payment. Please contact support.");
+        }
+
+        const options = {
+          key: orderData.key,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: "BK Career Academy",
+          description: "Application Fee",
+          order_id: orderData.orderId,
+          handler: async function (response: any) {
+            try {
+              const verifyRes = await fetch('/api/payment/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                  admissionId: result.data.id
+                })
+              });
+              const verifyData = await verifyRes.json();
+              
+              if (verifyData.success) {
+                setSubmittedRegNo(result.data.regNo);
+                setIsSuccess(true);
+                // Trigger auto download after a short delay
+                setTimeout(() => handleDownload(), 1000);
+              } else {
+                alert("Payment verification failed. Your form is saved but unpaid.");
+                setIsSubmitting(false);
+              }
+            } catch (err) {
+              console.error(err);
+              alert("Error verifying payment.");
+              setIsSubmitting(false);
+            }
+          },
+          prefill: {
+            name: `${formData.firstName} ${formData.surname}`,
+            email: formData.email,
+            contact: formData.phone
+          },
+          theme: { color: "#800000" },
+          modal: {
+            ondismiss: function() {
+              setIsSubmitting(false);
+            }
+          }
+        };
+
+        const rzp = new (window as any).Razorpay(options);
+        rzp.on('payment.failed', function (response: any) {
+          alert("Payment unsuccessful. Please try again.");
+        });
+        rzp.open();
+        // Do not set isSubmitting(false) here, let modal.ondismiss handle it if closed
+        return; 
       } else {
-      const errorMsg = result.message || (result.error && result.error.join(', ')) || "Submission failed";
+        const errorMsg = result.message || (result.error && result.error.join(', ')) || "Submission failed";
         alert(errorMsg);
+        setIsSubmitting(false);
       }
     } catch (err) {
       console.error("Submission Error:", err);
       alert("A network error occurred. Please try again.");
-    } finally {
       setIsSubmitting(false);
     }
+    // Removed the finally block so that isSubmitting remains true while Razorpay is open
   };
 
   if (isSuccess || isPreview) {
@@ -385,8 +453,9 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
             }
 
             /* Scale the entire page content to fit A4 */
-            body > * { display: none !important; }
-            .admission-print-root { display: block !important; }
+            body * { visibility: hidden; }
+            .admission-print-root, .admission-print-root * { visibility: visible; }
+            .print\\:hidden, .print\\:hidden * { display: none !important; visibility: hidden !important; }
 
             .admission-print-root {
               width: 210mm !important;
@@ -395,12 +464,13 @@ export default function AdmissionForm({ onBackHome }: { onBackHome?: () => void 
               overflow: hidden !important;
               transform: scale(0.72) !important;
               transform-origin: top left !important;
-              position: fixed !important;
+              position: absolute !important;
               top: 0 !important;
               left: 0 !important;
               background: white !important;
               padding: 10mm !important;
               box-sizing: border-box !important;
+              margin: 0 !important;
             }
           }
         `}} />
