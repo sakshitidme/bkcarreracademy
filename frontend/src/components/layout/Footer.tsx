@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Linkedin, Youtube, Users, Phone, Mail, MapPin } from 'lucide-react';
 import { SocialIcon } from '../common/SocialIcon';
+import { AnimatedCounter } from '../common/AnimatedCounter';
 
 interface FooterProps {
   setView: (view: any) => void;
@@ -11,7 +12,7 @@ interface FooterProps {
 }
 
 const VisitorCounter = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(12096);
   
   React.useEffect(() => {
     fetch('/api/visitor-count')
@@ -38,7 +39,7 @@ const VisitorCounter = () => {
         </div>
         <div>
           <p className="text-xl font-display font-bold text-dark leading-none">
-            {count.toLocaleString()}
+            <AnimatedCounter value={count} />
           </p>
           <p className="text-[10px] font-bold text-muted uppercase tracking-widest mt-1">
             Students Mentored

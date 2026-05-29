@@ -3,7 +3,7 @@ const { Client } = require('ssh2');
 const conn = new Client();
 conn.on('ready', () => {
   console.log('Client :: ready');
-  conn.exec('cd /var/www/bkcarreracademy && git fetch origin && git reset --hard origin/main && cd frontend && npm install && npm run build && cd .. && pm2 restart bkacademy-backend', (err, stream) => {
+  conn.exec('cd /var/www/bkcarreracademy && git fetch origin && git reset --hard origin/main && cd frontend && npm install && npm run build && chmod -R 755 /var/www/bkcarreracademy/frontend/dist && cd .. && pm2 restart bkacademy-backend', (err, stream) => {
     if (err) throw err;
     let out = '';
     stream.on('close', (code, signal) => {

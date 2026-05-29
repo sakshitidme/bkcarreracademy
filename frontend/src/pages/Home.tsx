@@ -8,6 +8,7 @@ import SkeletonCard from '../components/SkeletonCard';
 import StaffCarousel from '../components/StaffCarousel';
 import { STAFF } from '../data/constants';
 import { Story } from '../data/stories';
+import { AnimatedCounter } from '../components/common/AnimatedCounter';
 
 interface HomeProps {
   setView: (view: any) => void;
@@ -107,7 +108,9 @@ export const Home: React.FC<HomeProps> = ({
                 <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-4">
                   <stat.icon size={24} />
                 </div>
-                <h3 className="text-3xl font-display font-black text-dark">{stat.value}</h3>
+                <h3 className="text-3xl font-display font-black text-dark">
+                  <AnimatedCounter value={stat.value} />
+                </h3>
                 <p className="label-text text-[10px] mt-1">{stat.label}</p>
               </div>
             ))}
