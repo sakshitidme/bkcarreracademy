@@ -74,13 +74,12 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
 
       {/* Main Container */}
       <div className="relative w-full max-w-6xl z-10 flex flex-col items-center max-h-screen justify-center">
-        {/* Single-item Carousel Container */}
-        <div className="relative w-full max-w-md mx-auto">
+        {/* Dynamic Multi-item Container (Up to 3 side-by-side) */}
+        <div className="relative w-full max-w-6xl mx-auto flex justify-center">
           <div 
-            className="flex overflow-x-auto snap-x snap-mandatory items-center w-full hide-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className={`flex flex-col md:flex-row justify-center gap-4 md:gap-6 w-full max-w-[95vw] ${popups.length > 2 ? 'md:justify-between' : 'md:justify-center'}`}
           >
-            {popups.map((popup) => {
+            {popups.slice(0, 3).map((popup) => {
               const isClickable = true;
               
               // Generate youtube embed URL if needed
@@ -109,7 +108,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
               return (
                 <div 
                   key={popup._id} 
-                  className={`relative w-full shrink-0 snap-center bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
+                  className={`relative w-full md:flex-1 ${popups.length === 1 ? 'max-w-[450px]' : popups.length === 2 ? 'max-w-[400px]' : 'max-w-[350px]'} bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
                   onClick={() => {
                     if (popup.isDefault && onImageClick) {
                       onImageClick();
@@ -141,7 +140,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                           target.onerror = null;
                           target.src = '/bk.png';
                         }}
-                        className="w-full h-auto max-h-[50vh] md:max-h-[70vh] object-contain transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-auto max-h-[50vh] md:max-h-[60vh] object-contain transition-transform duration-700 group-hover:scale-105"
                       />
                     )}
                   </div>
@@ -149,7 +148,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                   {/* Notice & Link Action */}
                   <div className="bg-white p-3 md:p-5 text-center flex flex-col gap-2 md:gap-3">
                     {popup.notice && (
-                      <p className="text-dark font-semibold text-[11px] md:text-[15px] leading-tight line-clamp-2">
+                      <p className="text-dark font-semibold text-[11px] md:text-[14px] leading-tight line-clamp-2">
                         {popup.notice}
                       </p>
                     )}
@@ -164,15 +163,6 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
               );
             })}
           </div>
-          
-          {/* Simple dot indicators if multiple popups exist */}
-          {popups.length > 1 && (
-            <div className="flex justify-center gap-2 mt-4">
-              {popups.map((_, i) => (
-                <div key={i} className="w-2 h-2 rounded-full bg-white/50" />
-              ))}
-            </div>
-          )}
         </div>
       </div>
       
