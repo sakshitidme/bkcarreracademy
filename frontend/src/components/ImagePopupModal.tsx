@@ -36,10 +36,11 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
       fetch('/api/popups/active')
         .then(res => res.json())
         .then(data => {
-          if (data.success) {
-            // Always prepend the default free counseling popup
-            setPopups([defaultPopup, ...data.data]);
+          if (data.success && data.data && data.data.length > 0) {
+            // Use only the popups from the database if they exist
+            setPopups(data.data);
           } else {
+            // Fallback to default if database is empty
             setPopups([defaultPopup]);
           }
           setLoading(false);
