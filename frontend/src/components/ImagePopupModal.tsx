@@ -121,12 +121,12 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                 }}
               >
                 {/* Media Container */}
-                <div className="w-full relative bg-gray-50 flex items-center justify-center overflow-hidden">
+                <div className="w-full aspect-[4/5] relative bg-gray-50 flex items-center justify-center overflow-hidden">
                   {popup.mediaType === 'youtube' ? (
                     <iframe 
                       src={youtubeUrl} 
                       title={popup.title}
-                      className="w-full aspect-[4/5] object-cover"
+                      className="w-full h-full object-cover"
                       allowFullScreen
                     />
                   ) : (
@@ -134,13 +134,11 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                       src={displayMediaUrl} 
                       alt={popup.title} 
                       onError={(e) => {
-                        console.error('Popup Image Failed to Load:', displayMediaUrl);
                         const target = e.target as HTMLImageElement;
-                        target.onerror = null; // Prevent infinite loop
-                        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f3f4f6"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#6b7280">Image not uploaded</text><text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9ca3af">Please re-upload on live site</text></svg>`;
-                        target.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+                        target.onerror = null;
+                        target.src = '/logo.png';
                       }}
-                      className="w-full h-auto max-h-[50vh] md:max-h-[70vh] object-contain transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
                     />
                   )}
                 </div>
