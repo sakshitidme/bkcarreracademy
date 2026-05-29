@@ -137,7 +137,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
-                        target.src = '/logo.png';
+                        target.src = '/bk.png';
                       }}
                       className="w-full h-auto max-h-[50vh] md:max-h-[65vh] object-contain transition-transform duration-700 group-hover:scale-105"
                     />
