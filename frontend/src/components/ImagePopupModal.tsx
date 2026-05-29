@@ -75,9 +75,11 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
       <div className="relative w-full max-w-6xl z-10 flex flex-col items-center max-h-screen justify-center">
         {/* Horizontal Scrollable Row */}
         <div 
-          className={`flex gap-4 md:gap-6 overflow-x-auto w-full snap-x snap-mandatory pb-8 pt-4 px-4 items-center ${popups.length === 1 ? 'justify-center' : 'justify-start md:justify-center'}`} 
+          className="flex gap-4 md:gap-6 overflow-x-auto w-full snap-x snap-mandatory pb-8 pt-4 items-center" 
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
+          {/* Left Spacer to perfectly center the first popup */}
+          <div className="w-[7.5vw] md:w-[calc(50vw-225px)] shrink-0" />
           {popups.map((popup) => {
             const isClickable = true;
             
@@ -161,6 +163,9 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
               </div>
             );
           })}
+          
+          {/* Right Spacer to perfectly center the last popup */}
+          <div className="w-[7.5vw] md:w-[calc(50vw-225px)] shrink-0" />
         </div>
       </div>
       
