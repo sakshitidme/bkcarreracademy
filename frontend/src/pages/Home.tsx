@@ -700,7 +700,9 @@ export const Home: React.FC<HomeProps> = ({
                     alt={res.name}
                     className="max-w-[85%] max-h-full object-contain transition-all duration-500 group-hover:scale-110 filter brightness-100 contrast-100"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://via.placeholder.com/80?text=' + res.name;
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = '/bk.png';
                     }}
                   />
                 </div>
