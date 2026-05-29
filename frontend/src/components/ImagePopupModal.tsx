@@ -73,99 +73,105 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
 
       {/* Main Container */}
       <div className="relative w-full max-w-6xl z-10 flex flex-col items-center max-h-screen justify-center">
-        {/* Horizontal Scrollable Row */}
-        <div 
-          className="flex gap-4 md:gap-6 overflow-x-auto w-full snap-x snap-mandatory pb-8 pt-4 items-center" 
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {/* Left Spacer to perfectly center the first popup */}
-          <div className="w-[7.5vw] md:w-[calc(50vw-225px)] shrink-0" />
-          {popups.map((popup) => {
-            const isClickable = true;
-            
-            // Generate youtube embed URL if needed
-            let youtubeUrl = popup.mediaUrl;
-            
-            // Rewrite legacy /uploads/ paths to /api/uploads/ to bypass Nginx strict static routing
-            let displayMediaUrl = popup.mediaUrl;
-            if (displayMediaUrl && displayMediaUrl.startsWith('/uploads/')) {
-              displayMediaUrl = '/api' + displayMediaUrl;
-            }
-
-            if (popup.mediaType === 'youtube' && youtubeUrl) {
-              if (youtubeUrl.includes('watch?v=')) {
-                youtubeUrl = youtubeUrl.replace('watch?v=', 'embed/');
-                const ampersandPos = youtubeUrl.indexOf('&');
-                if (ampersandPos !== -1) {
-                  youtubeUrl = youtubeUrl.substring(0, ampersandPos);
-                }
-              } else if (youtubeUrl.includes('youtu.be/')) {
-                youtubeUrl = youtubeUrl.replace('youtu.be/', 'youtube.com/embed/');
-              } else if (youtubeUrl.includes('/shorts/')) {
-                youtubeUrl = youtubeUrl.replace('/shorts/', '/embed/');
+        {/* Single-item Carousel Container */}
+        <div className="relative w-full max-w-md mx-auto">
+          <div 
+            className="flex overflow-x-auto snap-x snap-mandatory items-center w-full hide-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {popups.map((popup) => {
+              const isClickable = true;
+              
+              // Generate youtube embed URL if needed
+              let youtubeUrl = popup.mediaUrl;
+              
+              // Rewrite legacy /uploads/ paths to /api/uploads/ to bypass Nginx strict static routing
+              let displayMediaUrl = popup.mediaUrl;
+              if (displayMediaUrl && displayMediaUrl.startsWith('/uploads/')) {
+                displayMediaUrl = '/api' + displayMediaUrl;
               }
-            }
 
-            return (
-              <div 
-                key={popup._id} 
-                className={`relative w-[85vw] max-w-[320px] md:max-w-[450px] shrink-0 snap-center bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
-                onClick={() => {
-                  if (popup.isDefault && onImageClick) {
-                    onImageClick();
-                  } else {
-                    const fullMediaUrl = displayMediaUrl.startsWith('http') 
-                      ? displayMediaUrl 
-                      : `${window.location.origin}${displayMediaUrl}`;
-                    const msg = `Hi, I have an inquiry regarding: ${popup.title}${popup.notice ? ` - ${popup.notice}` : ''}`;
-                    window.open(`https://wa.me/918080195558?text=${encodeURIComponent(msg)}`, '_blank');
+              if (popup.mediaType === 'youtube' && youtubeUrl) {
+                if (youtubeUrl.includes('watch?v=')) {
+                  youtubeUrl = youtubeUrl.replace('watch?v=', 'embed/');
+                  const ampersandPos = youtubeUrl.indexOf('&');
+                  if (ampersandPos !== -1) {
+                    youtubeUrl = youtubeUrl.substring(0, ampersandPos);
                   }
-                }}
-              >
-                {/* Media Container */}
-                <div className="w-full relative bg-gray-50 flex items-center justify-center overflow-hidden min-h-[150px] md:min-h-[200px]">
-                  {popup.mediaType === 'youtube' ? (
-                    <iframe 
-                      src={youtubeUrl} 
-                      title={popup.title}
-                      className="w-full aspect-video object-cover"
-                      allowFullScreen
-                    />
-                  ) : (
-                    <img 
-                      src={displayMediaUrl} 
-                      alt={popup.title} 
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = '/bk.png';
-                      }}
-                      className="w-full h-auto max-h-[50vh] md:max-h-[65vh] object-contain transition-transform duration-700 group-hover:scale-105"
-                    />
-                  )}
-                </div>
-                
-                {/* Notice & Link Action */}
-                <div className="bg-white p-2 md:p-5 text-center flex flex-col gap-1.5 md:gap-3">
-                  {popup.notice && (
-                    <p className="text-dark font-semibold text-[10px] md:text-[15px] leading-tight">
-                      {popup.notice}
-                    </p>
-                  )}
-                  {isClickable && (
-                      <div className="mx-auto bg-primary text-dark px-3 py-1.5 md:px-6 md:py-2.5 rounded-full font-display font-black uppercase text-[8px] md:text-[11px] tracking-widest flex items-center gap-1 md:gap-2 shadow-md w-fit transition-transform group-hover:scale-105">
-                        {popup.isDefault ? "Inquiry" : "Inquiry"}
-                        <ArrowRight size={10} className="md:w-[14px] md:h-[14px]" />
-                      </div>
+                } else if (youtubeUrl.includes('youtu.be/')) {
+                  youtubeUrl = youtubeUrl.replace('youtu.be/', 'youtube.com/embed/');
+                } else if (youtubeUrl.includes('/shorts/')) {
+                  youtubeUrl = youtubeUrl.replace('/shorts/', '/embed/');
+                }
+              }
+
+              return (
+                <div 
+                  key={popup._id} 
+                  className={`relative w-full shrink-0 snap-center bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
+                  onClick={() => {
+                    if (popup.isDefault && onImageClick) {
+                      onImageClick();
+                    } else {
+                      const fullMediaUrl = displayMediaUrl.startsWith('http') 
+                        ? displayMediaUrl 
+                        : `${window.location.origin}${displayMediaUrl}`;
+                      const msg = `Hi, I have an inquiry regarding: ${popup.title}${popup.notice ? ` - ${popup.notice}` : ''}`;
+                      window.open(`https://wa.me/918080195558?text=${encodeURIComponent(msg)}`, '_blank');
+                    }
+                  }}
+                >
+                  {/* Media Container */}
+                  <div className="w-full relative bg-gray-50 flex items-center justify-center overflow-hidden min-h-[150px] md:min-h-[200px]">
+                    {popup.mediaType === 'youtube' ? (
+                      <iframe 
+                        src={youtubeUrl} 
+                        title={popup.title}
+                        className="w-full aspect-video object-cover"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <img 
+                        src={displayMediaUrl} 
+                        alt={popup.title} 
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = '/bk.png';
+                        }}
+                        className="w-full h-auto max-h-[50vh] md:max-h-[70vh] object-contain transition-transform duration-700 group-hover:scale-105"
+                      />
                     )}
                   </div>
-              </div>
-            );
-          })}
+                  
+                  {/* Notice & Link Action */}
+                  <div className="bg-white p-3 md:p-5 text-center flex flex-col gap-2 md:gap-3">
+                    {popup.notice && (
+                      <p className="text-dark font-semibold text-[11px] md:text-[15px] leading-tight line-clamp-2">
+                        {popup.notice}
+                      </p>
+                    )}
+                    {isClickable && (
+                        <div className="mx-auto bg-primary text-dark px-4 py-2 md:px-6 md:py-2.5 rounded-full font-display font-black uppercase text-[9px] md:text-[11px] tracking-widest flex items-center gap-1.5 md:gap-2 shadow-md w-fit transition-transform group-hover:scale-105 mt-auto">
+                          {popup.isDefault ? "Inquiry" : "Inquiry"}
+                          <ArrowRight size={12} className="md:w-[14px] md:h-[14px]" />
+                        </div>
+                      )}
+                    </div>
+                </div>
+              );
+            })}
+          </div>
           
-          {/* Right Spacer to perfectly center the last popup */}
-          <div className="w-[7.5vw] md:w-[calc(50vw-225px)] shrink-0" />
+          {/* Simple dot indicators if multiple popups exist */}
+          {popups.length > 1 && (
+            <div className="flex justify-center gap-2 mt-4">
+              {popups.map((_, i) => (
+                <div key={i} className="w-2 h-2 rounded-full bg-white/50" />
+              ))}
+            </div>
+          )}
         </div>
       </div>
       
