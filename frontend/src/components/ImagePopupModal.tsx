@@ -28,7 +28,8 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
     mediaUrl: "/123.jpeg",
     mediaType: "image",
     notice: "आजच योग्य दिशा निवडा, यशाची निश्चिती करा!",
-    isDefault: true
+    isDefault: true,
+    link: "https://www.youtube.com/shorts/g5lbpTuDU-g"
   };
 
   useEffect(() => {
@@ -114,7 +115,9 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                   className={`relative w-[85vw] shrink-0 snap-center md:w-full md:flex-1 ${popups.length === 1 ? 'max-w-[450px]' : popups.length === 2 ? 'max-w-[400px]' : 'max-w-[350px]'} bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
                   onClick={() => {
                     // Overall Card Click Logic
-                    if (popup.isDefault && onImageClick) {
+                    if (popup.isDefault && popup.link) {
+                      window.open(popup.link, '_blank');
+                    } else if (popup.isDefault && onImageClick) {
                       onImageClick();
                     } else if (popup.link) {
                       // Open the provided YouTube or external link
@@ -157,7 +160,9 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                           className="mx-auto bg-primary text-dark px-4 py-2 md:px-6 md:py-2.5 rounded-full font-display font-black uppercase text-[9px] md:text-[11px] tracking-widest flex items-center gap-1.5 md:gap-2 shadow-md w-fit transition-transform hover:scale-110 mt-auto cursor-pointer border-none"
                           onClick={(e) => {
                             e.stopPropagation(); // Prevent card click
-                            if (popup.isDefault && onImageClick) {
+                            if (popup.isDefault && popup.link) {
+                              window.open(popup.link, '_blank');
+                            } else if (popup.isDefault && onImageClick) {
                               onImageClick();
                             } else {
                               // Inquiry button ALWAYS goes to WhatsApp
