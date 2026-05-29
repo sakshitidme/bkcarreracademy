@@ -11,7 +11,7 @@ interface FooterProps {
 }
 
 const VisitorCounter = () => {
-  const [count, setCount] = React.useState(125432);
+  const [count, setCount] = React.useState(0);
   
   React.useEffect(() => {
     fetch('/api/visitor-count')

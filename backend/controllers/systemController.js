@@ -57,10 +57,10 @@ exports.getVisitorCount = async (req, res) => {
     );
     
     const realIncrement = result && result.count ? result.count : 0;
-    const baseCount = 125432; 
+    const baseCount = 0; 
     res.json({ success: true, count: baseCount + realIncrement });
   } catch (err) {
-    res.status(500).json({ success: false, count: 125432 });
+    res.status(500).json({ success: false, count: 0 });
   }
 };
 
