@@ -1,3 +1,4 @@
+import ReactGA from "react-ga4";
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "motion/react";
@@ -48,6 +49,20 @@ export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Initialize GA4 (Runs once on mount)
+  useEffect(() => {
+    ReactGA.initialize("G-MT8DKTKEHJ");
+  }, []);
+
+  // Track Page Views automatically whenever the route changes
+  useEffect(() => {
+    ReactGA.send({ 
+      hitType: "pageview", 
+      page: location.pathname + location.search,
+      title: document.title 
+    });
+  }, [location]);
   
   // Map current location to a view string for legacy components if needed
   const getViewFromPath = (path: string) => {

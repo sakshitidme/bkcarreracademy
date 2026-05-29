@@ -90,6 +90,7 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
               <SocialIcon Icon={Linkedin} href="https://www.linkedin.com/company/108667111/admin/dashboard/" />
               <SocialIcon Icon={Youtube} href="https://www.youtube.com/@bkcareeracademy2025" />
             </div>
+            <VisitorCounter />
           </div>
 
           {/* Programs */}

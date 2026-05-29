@@ -75,7 +75,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
       <div className="relative w-full max-w-6xl z-10 flex flex-col items-center max-h-screen justify-center">
         {/* Horizontal Scrollable Row */}
         <div 
-          className="flex gap-4 md:gap-6 overflow-x-auto w-full snap-x snap-mandatory pb-8 pt-4 px-4 items-center justify-start" 
+          className={`flex gap-4 md:gap-6 overflow-x-auto w-full snap-x snap-mandatory pb-8 pt-4 px-4 items-center ${popups.length === 1 ? 'justify-center' : 'justify-start md:justify-center'}`} 
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {popups.map((popup) => {
@@ -107,7 +107,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
             return (
               <div 
                 key={popup._id} 
-                className={`relative w-[55vw] max-w-[200px] md:w-[85vw] md:max-w-md shrink-0 snap-center bg-white rounded-[0.75rem] md:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col ${popups.length === 1 ? 'mx-auto' : ''} ${isClickable ? 'cursor-pointer group' : ''}`}
+                className={`relative w-[85vw] max-w-[320px] md:max-w-[450px] shrink-0 snap-center bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
                 onClick={() => {
                   if (popup.isDefault && onImageClick) {
                     onImageClick();
@@ -140,7 +140,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f3f4f6"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#6b7280">Image not uploaded</text><text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9ca3af">Please re-upload on live site</text></svg>`;
                         target.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
                       }}
-                      className="w-full max-h-[35vh] md:max-h-[65vh] object-contain transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-auto max-h-[50vh] md:max-h-[70vh] object-contain transition-transform duration-700 group-hover:scale-105"
                     />
                   )}
                 </div>
