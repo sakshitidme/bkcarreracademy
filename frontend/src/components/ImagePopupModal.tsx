@@ -73,11 +73,15 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
 
       {/* Main Container */}
       <div className="relative w-full max-w-6xl z-10 flex flex-col items-center max-h-screen justify-center">
-        {/* Dynamic Multi-item Container (Up to 3 side-by-side) */}
-        <div className="relative w-full max-w-6xl mx-auto flex justify-center">
+        {/* Dynamic Multi-item Container (Swipeable on mobile, side-by-side on desktop) */}
+        <div className="relative w-full max-w-6xl mx-auto flex justify-center max-h-[95vh]">
           <div 
-            className={`flex flex-col md:flex-row justify-center gap-4 md:gap-6 w-full max-w-[95vw] ${popups.length > 2 ? 'md:justify-between' : 'md:justify-center'}`}
+            className={`flex flex-row overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 w-full max-w-[95vw] pb-6 pt-4 hide-scrollbar items-center ${popups.length > 2 ? 'justify-start lg:justify-between' : 'justify-center'}`}
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
+            {/* Left Spacer for mobile centering if needed */}
+            <div className="w-[4vw] md:hidden shrink-0" />
+            
             {popups.slice(0, 3).map((popup) => {
               const isClickable = true;
               
@@ -107,7 +111,7 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
               return (
                 <div 
                   key={popup._id} 
-                  className={`relative w-full md:flex-1 ${popups.length === 1 ? 'max-w-[450px]' : popups.length === 2 ? 'max-w-[400px]' : 'max-w-[350px]'} bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
+                  className={`relative w-[85vw] shrink-0 snap-center md:w-full md:flex-1 ${popups.length === 1 ? 'max-w-[450px]' : popups.length === 2 ? 'max-w-[400px]' : 'max-w-[350px]'} bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
                   onClick={() => {
                     // Overall Card Click Logic
                     if (popup.isDefault && onImageClick) {
@@ -175,6 +179,9 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                 </div>
               );
             })}
+            
+            {/* Right Spacer for mobile centering if needed */}
+            <div className="w-[4vw] md:hidden shrink-0" />
           </div>
         </div>
       </div>
