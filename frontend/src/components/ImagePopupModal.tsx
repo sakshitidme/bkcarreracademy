@@ -140,11 +140,6 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                         src={displayMediaUrl} 
                         alt={popup.title} 
                         loading="lazy"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.onerror = null;
-                          target.src = '/bk.png';
-                        }}
                         className="w-full h-auto max-h-[50vh] md:max-h-[60vh] object-contain transition-transform duration-700 group-hover:scale-105"
                       />
                     )}
