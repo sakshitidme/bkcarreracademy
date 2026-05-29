@@ -109,12 +109,14 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                   key={popup._id} 
                   className={`relative w-full md:flex-1 ${popups.length === 1 ? 'max-w-[450px]' : popups.length === 2 ? 'max-w-[400px]' : 'max-w-[350px]'} bg-white rounded-[1rem] md:rounded-[1.5rem] overflow-hidden shadow-2xl flex flex-col ${isClickable ? 'cursor-pointer group' : ''}`}
                   onClick={() => {
+                    // Overall Card Click Logic
                     if (popup.isDefault && onImageClick) {
                       onImageClick();
+                    } else if (popup.link) {
+                      // Open the provided YouTube or external link
+                      window.open(popup.link, '_blank');
                     } else {
-                      const fullMediaUrl = displayMediaUrl.startsWith('http') 
-                        ? displayMediaUrl 
-                        : `${window.location.origin}${displayMediaUrl}`;
+                      // Fallback to WhatsApp if no link provided
                       const msg = `Hi, I have an inquiry regarding: ${popup.title}${popup.notice ? ` - ${popup.notice}` : ''}`;
                       window.open(`https://wa.me/918080195558?text=${encodeURIComponent(msg)}`, '_blank');
                     }
@@ -152,10 +154,22 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                       </p>
                     )}
                     {isClickable && (
-                        <div className="mx-auto bg-primary text-dark px-4 py-2 md:px-6 md:py-2.5 rounded-full font-display font-black uppercase text-[9px] md:text-[11px] tracking-widest flex items-center gap-1.5 md:gap-2 shadow-md w-fit transition-transform group-hover:scale-105 mt-auto">
+                        <button 
+                          className="mx-auto bg-primary text-dark px-4 py-2 md:px-6 md:py-2.5 rounded-full font-display font-black uppercase text-[9px] md:text-[11px] tracking-widest flex items-center gap-1.5 md:gap-2 shadow-md w-fit transition-transform hover:scale-110 mt-auto cursor-pointer border-none"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent card click
+                            if (popup.isDefault && onImageClick) {
+                              onImageClick();
+                            } else {
+                              // Inquiry button ALWAYS goes to WhatsApp
+                              const msg = `Hi, I have an inquiry regarding: ${popup.title}${popup.notice ? ` - ${popup.notice}` : ''}`;
+                              window.open(`https://wa.me/918080195558?text=${encodeURIComponent(msg)}`, '_blank');
+                            }
+                          }}
+                        >
                           {popup.isDefault ? "Inquiry" : "Inquiry"}
                           <ArrowRight size={12} className="md:w-[14px] md:h-[14px]" />
-                        </div>
+                        </button>
                       )}
                     </div>
                 </div>
