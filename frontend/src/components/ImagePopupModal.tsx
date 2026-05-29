@@ -121,24 +121,25 @@ export default function ImagePopupModal({ isOpen, onClose, onImageClick }: Image
                 }}
               >
                 {/* Media Container */}
-                <div className="w-full aspect-[4/5] relative bg-gray-50 flex items-center justify-center overflow-hidden">
+                <div className="w-full relative bg-gray-50 flex items-center justify-center overflow-hidden min-h-[150px] md:min-h-[200px]">
                   {popup.mediaType === 'youtube' ? (
                     <iframe 
                       src={youtubeUrl} 
                       title={popup.title}
-                      className="w-full h-full object-cover"
+                      className="w-full aspect-video object-cover"
                       allowFullScreen
                     />
                   ) : (
                     <img 
                       src={displayMediaUrl} 
                       alt={popup.title} 
+                      loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
                         target.src = '/logo.png';
                       }}
-                      className="w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-auto max-h-[50vh] md:max-h-[65vh] object-contain transition-transform duration-700 group-hover:scale-105"
                     />
                   )}
                 </div>
