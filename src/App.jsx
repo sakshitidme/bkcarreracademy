@@ -1016,28 +1016,28 @@ export default function App() {
               </div>
               <div className="flex items-center gap-3">
                 <a
-                  href="https://github.com/rohan-dusane"
+                  href="https://github.com/rohan20004"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-[#0b0b0b] hover:bg-white text-white hover:text-black border border-[#222222] hover:border-white flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer btn-click-pop"
+                  className="w-11 h-11 rounded-xl bg-[#0b0b0b] hover:bg-white text-white hover:text-black border border-[#222222] hover:border-white flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer btn-click-pop group"
                   title="GitHub"
                 >
                   <GithubIcon className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/rohan-dusane"
+                  href="https://www.linkedin.com/in/rohan-dusane-3b49723a2/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-[#0b0b0b] hover:bg-[#0A66C2] text-white border border-[#222222] hover:border-[#0A66C2] flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer btn-click-pop"
+                  className="w-11 h-11 rounded-xl bg-[#0b0b0b] hover:bg-white text-white hover:text-black border border-[#222222] hover:border-white flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer btn-click-pop group"
                   title="LinkedIn"
                 >
                   <LinkedinIcon className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/rohan__dusane/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-xl bg-[#0b0b0b] hover:bg-[#E4405F] text-white border border-[#222222] hover:border-[#E4405F] flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer btn-click-pop"
+                  className="w-11 h-11 rounded-xl bg-[#0b0b0b] hover:bg-white text-white hover:text-black border border-[#222222] hover:border-white flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer btn-click-pop group"
                   title="Instagram"
                 >
                   <InstagramIcon className="w-5 h-5" />

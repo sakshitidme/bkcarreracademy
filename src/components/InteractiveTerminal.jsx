@@ -244,8 +244,8 @@ function MatrixRainCanvas() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
-    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789';
-    const alphabet = katakana.split('');
+    const chars = '01';
+    const alphabet = chars.split('');
     
     const fontSize = 12;
     const columns = canvas.width / fontSize;
@@ -276,7 +276,7 @@ function MatrixRainCanvas() {
       }
     };
     
-    const interval = setInterval(draw, 33);
+    const interval = setInterval(draw, 75);
     
     return () => {
       clearInterval(interval);
