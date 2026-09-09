@@ -93,7 +93,7 @@ export const PoliciesPage: React.FC<PoliciesPageProps> = ({ initialTab = 'privac
               <h4 className="text-[10px] font-black text-muted uppercase tracking-[0.3em]">Corporate Contact</h4>
               <div className="flex items-start gap-3 text-xs text-body">
                 <MapPin size={16} className="text-primary shrink-0 mt-0.5" />
-                <span>2nd Floor, Gajanan Plaza, Gharpura Ghat Rd, Nashik, Maharashtra 422002</span>
+                <span>1st Floor, Woodland Tower 'A' Wing, Old Gangapur Naka, Gangapur Road, Nashik</span>
               </div>
               <div className="flex items-center gap-3 text-xs text-body">
                 <Phone size={16} className="text-primary shrink-0" />

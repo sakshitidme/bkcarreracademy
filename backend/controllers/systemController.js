@@ -7,7 +7,7 @@ const axios = require('axios');
 // Knowledge Base for the Assistant
 const ACADEMY_KNOWLEDGE = {
   name: "BK Career Academy (Education & Welfare Society)",
-  location: "2nd Floor, Gajanan Plaza, Gharpura Ghat Rd, Nashik, Maharashtra 422002",
+  location: "1st Floor, Woodland Tower 'A' Wing, Old Gangapur Naka, Gangapur Road, Nashik",
   phone: "0253-2313962 / 9890633962",
   email: "bkgroupofeducation@gmail.com",
   vision: "To be the most trusted platform for civil services preparation, nurturing future leaders with integrity.",

@@ -153,7 +153,7 @@ const InstitutionalHeader = ({ regNo }: { regNo?: string }) => (
       <div className="max-w-[280px]">
         <p className="text-sm md:text-base leading-relaxed">
           <span className="text-brand-dark font-black uppercase tracking-tight leading-tight text-sm md:text-base">
-            2nd Floor, Gajanan Plaza, Gharpure Ghat Road, Ashok Stambh, Nashik, Maharashtra
+            1st Floor, Woodland Tower 'A' Wing, Old Gangapur Naka, Gangapur Road, Nashik
           </span>
         </p>
       </div>

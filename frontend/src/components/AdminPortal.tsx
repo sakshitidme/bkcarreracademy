@@ -742,7 +742,7 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
               </div>
               <div class="max-w-[200px]">
                 <p class="text-sm font-black text-gray-900 uppercase tracking-tight leading-tight text-right">
-                  2nd Floor, Gajanan Plaza, Gharpure Ghat Road, Ashok Stambh, Nashik, Maharashtra
+                  1st Floor, Woodland Tower 'A' Wing, Old Gangapur Naka, Gangapur Road, Nashik
                 </p>
               </div>
             </div>

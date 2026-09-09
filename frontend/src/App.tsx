@@ -298,7 +298,7 @@ export default function App() {
                                 "description": "Nashik's leading coaching institute for UPSC, MPSC, and Banking exams.",
                                 "address": {
                                   "@type": "PostalAddress",
-                                  "streetAddress": "2nd Floor, Gajanan Plaza, Gharpura Ghat Rd",
+                                  "streetAddress": "1st Floor, Woodland Tower 'A' Wing, Old Gangapur Naka, Gangapur Road",
                                   "addressLocality": "Nashik",
                                   "addressRegion": "Maharashtra",
                                   "postalCode": "422002",

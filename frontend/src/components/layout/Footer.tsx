@@ -121,29 +121,16 @@ export const Footer: React.FC<FooterProps> = ({ setView, setSelectedCategory, se
             <h4 className="sub-heading text-sm mb-8 uppercase tracking-widest text-muted">Corporate Office</h4>
             <div className="space-y-6">
               <a 
-                href="https://maps.google.com/?q=2nd+Floor,+Gajanan+Plaza,+Gharpura+Ghat+Rd,+Nashik,+Maharashtra+422002"
+                href="https://maps.google.com/?q=1st+Floor,+Woodland+Tower+'A'+Wing,+Old+Gangapur+Naka,+Gangapur+Road,+Nashik"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex gap-3 items-start hover:text-primary transition-colors group"
               >
                 <MapPin size={18} className="text-primary shrink-0 mt-0.5 group-hover:scale-115 transition-transform" />
                 <p className="text-sm text-body leading-relaxed">
-                  2nd Floor, Gajanan Plaza,<br />
-                  Gharpura Ghat Rd, Nashik,<br />
-                  Maharashtra 422002
-                </p>
-              </a>
-              <a 
-                href="https://maps.google.com/?q=2Q4W%2B8JH,+Ganeshwadi,+Panchavati,+Nashik,+Maharashtra+422003"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex gap-3 items-start pt-4 border-t border-dashed border-gray-200 hover:text-primary transition-colors group"
-              >
-                <MapPin size={18} className="text-primary shrink-0 mt-0.5 group-hover:scale-115 transition-transform" />
-                <p className="text-sm text-body leading-relaxed">
-                  <span className="font-bold text-dark group-hover:text-primary transition-colors">BK Education & Welfare Society</span><br />
-                  Ganeshwadi, Panchavati,<br />
-                  Nashik, Maharashtra 422003
+                  1st Floor, Woodland Tower 'A' Wing,<br />
+                  Old Gangapur Naka, Gangapur Road,<br />
+                  Nashik
                 </p>
               </a>
               <div className="flex flex-col gap-3">
