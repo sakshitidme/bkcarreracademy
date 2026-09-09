@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-bebas {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+  .font-sans {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom Depth Layer Styling & Grunge Texture */
+:root {
+  --bg-pitch-black: #000000;
+  --text-pure-white: #ffffff;
+  --text-slate-gray: #888888;
+  --border-dark-gray: #222222;
+}
+
+html, body, #root {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-pitch-black);
+  color: var(--text-pure-white);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+/* Layer 1 Vignette & Lighting */
+.dark-vignette {
+  background: radial-gradient(circle at 50% 50%, rgba(15, 15, 15, 0.4) 0%, rgba(0, 0, 0, 0.75) 60%, #000000 100%);
+  pointer-events: none;
+}
+
+/* Grunge / Stone Texture Effect on Text */
+.grunge-text {
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 40%, #aaaaaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+/* Grunge Texture Mask Overlay */
+.grunge-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15' mix-blend-mode='overlay'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Styled Sleek Dark Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* Custom Glass & Cyber Glow Utilities */
+.glass-panel {
+  background: rgba(17, 17, 17, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(25, 25, 25, 0.85);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.8);
+}
+
+/* Custom Animations */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+.animate-subtle-pulse {
+  animation: subtlePulse 8s ease-in-out infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scanline {
+  animation: scanline 12s linear infinite;
+}
+
+/* Subtle Pop Animation for click/toggle transitions */
+@keyframes pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.05); } /* Subtle 5% increase */
+  100% { transform: scale(1); }    /* Smooth return to original */
+}
+
+.animate-pop {
+  animation: pop 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-click-pop {
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-click-pop:active {
+  animation: pop 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
