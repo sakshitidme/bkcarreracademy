@@ -1,0 +1,64 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT || 22 }}
+          script: |
+            echo "=== Starting Automated BK Education VPS Deployment ==="
+
+            # 1. FIXED: Pointing to the true folder path on your server
+            cd /var/www/bkcarreracademy || { echo "❌ Directory not found!"; exit 1; }
+
+            echo "📥 Pulling latest code from GitHub..."
+            git fetch --all
+            git reset --hard origin/main
+
+            echo "📦 Installing Frontend Dependencies & Building Vite Bundle..."
+            cd frontend
+            npm install --legacy-peer-deps
+            npm run build
+
+            echo "⚙️ Installing Backend Dependencies..."
+            cd ../backend
+            npm install --legacy-peer-deps
+
+            # 2. ISOLATE PM2 PROCESS
+            echo "🚀 Managing Isolated PM2 Process..."
+            if pm2 describe bkacademy-backend > /dev/null 2>&1; then
+              echo "🔄 PM2 process 'bkacademy-backend' found, restarting safely..."
+              pm2 restart bkacademy-backend --update-env
+            else
+              echo "🚀 PM2 process 'bkacademy-backend' not found, starting fresh..."
+              pm2 start server.js --name "bkacademy-backend" --update-env
+            fi
+
+            # Clean up generic naming leaks safely without affecting other projects
+            pm2 delete backend || true
+            pm2 save --force
+
+            echo "🌐 Restarting Nginx Web Server..."
+            sudo systemctl restart nginx
+
+            echo "✅ Education Deployment Completed Successfully!"

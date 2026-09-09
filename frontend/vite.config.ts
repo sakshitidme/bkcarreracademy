@@ -1,0 +1,35 @@
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import compression from 'vite-plugin-compression';
+import path from 'path';
+import {defineConfig, loadEnv} from 'vite';
+
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, '.', '');
+  return {
+    base: '/',
+    build: { outDir: 'dist' },
+    plugins: [react(), tailwindcss(), compression()],
+    define: {
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
+    },
+    server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modify—file watching is disabled to prevent flickering during agent edits.
+      hmr: process.env.DISABLE_HMR !== 'true',
+      allowedHosts: ["localhost", "127.0.0.1", "lethally-tartarous-fermin.ngrok-free.dev"],
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:3001',
+          changeOrigin: true,
+          secure: false,
+        }
+      }
+    },
+  };
+});
