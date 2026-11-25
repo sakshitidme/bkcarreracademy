@@ -2027,12 +2027,16 @@ export default function AdminPortal({ onBack, onUpdate }: AdminPortalProps) {
                       if (res.ok) {
                         setPopupForm({ title: '', mediaUrl: '', mediaType: 'image', image: null, notice: '', link: '', isActive: true, order: 0 });
                         fetchPopups();
+                        alert('Popup added successfully!');
                       } else {
-                        const errData = await res.json();
-                        alert(`Error adding popup: ${errData.error || errData.message}`);
+                        const errData = await res.json().catch(() => ({}));
+                        alert(`Error adding popup: ${errData.error || errData.message || 'Unknown server error'}`);
                       }
-                    } catch (err) { alert('Error adding popup'); }
-                    setLoading(false);
+                    } catch (err) {
+                      alert('Error adding popup: Network or server error. Please try again.');
+                    } finally {
+                      setLoading(false);
+                    }
                   }} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">

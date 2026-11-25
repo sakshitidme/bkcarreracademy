@@ -1,9 +1,19 @@
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+
+// Always resolve to an absolute path so it works regardless of CWD
+const UPLOADS_DIR = path.resolve(__dirname, '../../frontend/public/uploads');
+
+// Auto-create the uploads directory if it doesn't exist (prevents Multer crash on first run)
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  console.log(`[UPLOAD] Created uploads directory: ${UPLOADS_DIR}`);
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '../frontend/public/uploads/');
+    cb(null, UPLOADS_DIR);
   },
   filename: (req, file, cb) => {
     cb(null, `doc-${Date.now()}${path.extname(file.originalname)}`);
